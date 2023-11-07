@@ -4,16 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Necklase"
-        android:gravity="center"
-        android:textSize="30dp"
-        >
-    </TextView>
+    tools:context=".register_view">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
