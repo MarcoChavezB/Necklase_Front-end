@@ -293,6 +293,7 @@
                     android:layout_width="170dp"
                     android:layout_height="50dp"
                     android:text="Sing up"
+                    android:background="@drawable/button_outline_white"
                     >
                 </Button>
 
