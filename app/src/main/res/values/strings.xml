@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Necklase</string>
+    <string name="font_regular">fonts/Roboto-Regular.ttf</string>
 </resources>
