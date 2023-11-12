@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Necklase"
         tools:targetApi="31">
         <activity
+            android:name=".Main_acept_permisos"
+            android:exported="false" />
+        <activity
             android:name=".register_view"
             android:exported="false" />
         <activity

@@ -16,4 +16,8 @@
     <color name="bk_g">#07DF9A</color>
     <color name="bk_b">#000000</color>
     <color name="bk_y">#FFC727</color>
+
+    <color name="linked">#4282ff</color>
+
+    <color name="backgroundYe">#ffb901</color>
 </resources>
