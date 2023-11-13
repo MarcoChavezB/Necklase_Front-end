@@ -7,12 +7,12 @@ import android.os.CountDownTimer;
 
 import com.example.necklase.Router.Router;
 
-public class Main_acept_permisos extends AppCompatActivity {
+public class Collar_managment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_acept_permisos);
+        setContentView(R.layout.activity_collar_managment);
 
         CountDownTimer count = new CountDownTimer(1000, 1000) {
             @Override
@@ -22,7 +22,7 @@ public class Main_acept_permisos extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Router.redirectTo(Main_acept_permisos.this, Collar_managment.class);
+                Router.redirectTo(Collar_managment.this, Menu_Personal.class);
             }
         };
         count.start();
