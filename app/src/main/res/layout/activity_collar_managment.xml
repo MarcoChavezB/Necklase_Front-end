@@ -224,7 +224,8 @@
                                 android:gravity="start|center"
                                 android:text="On / Off"
                                 android:textColor="@color/black"
-                                android:textSize="17dp"></TextView>
+                                android:textSize="17dp">
+                            </TextView>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -232,16 +233,11 @@
                                 android:layout_weight="1"
                                 android:gravity="center">
 
-                                <Button
+                                <Switch
                                     android:layout_width="80dp"
                                     android:layout_height="30dp"
-                                    android:background="@drawable/button_outline_black"
-                                    android:backgroundTint="#333333"
-                                    android:text="Turn On"
-                                    android:textColor="@color/white"
-                                    android:textSize="13dp">
-
-                                </Button>
+                                    android:textSize="13sp">
+                                </Switch>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
