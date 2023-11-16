@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
+                Router.redirectTo(MainActivity.this, navbar.class);
             }
         };
         count.start();
