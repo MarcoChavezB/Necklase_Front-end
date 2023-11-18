@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".analytics"
+    android:background="@color/Globalbackground"
+    >
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/arroy_left_foreground"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/font_black"
+                        android:text="Dashboard"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/select_foreground"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/selectItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHeight_default="spread"
+                    app:layout_constraintBottom_toTopOf="@id/dogInfo">
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:id="@+id/timeButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="start|center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Actividades del dia de hoy"
+                            android:gravity="center"
+                            android:textColor="@color/font_black"
+                            android:textSize="15dp"
+                            android:background="@drawable/rounder_view"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/dogInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    app:layout_constraintTop_toBottomOf="@id/selectItem"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHeight_default="spread"
+                    app:layout_constraintBottom_toTopOf="@id/statistics"
+                    android:background="@drawable/rounder_view"
+                    >
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        >
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@mipmap/dog_collar_foreground"
+                            android:background="@drawable/bg_rounder_yellow"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="start|bottom"
+                            android:textSize="30dp"
+                            android:textColor="@color/font_black"
+                            android:text="Tommy"
+                            />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="15dp"
+                            android:textColor="@color/font_black"
+                            android:text="Last update 1 min ago"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/statistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toBottomOf="@id/dogInfo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHeight_default="spread"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/card1"
+                            android:layout_width="180dp"
+                            android:layout_height="150dp"
+                            app:layout_constraintEnd_toStartOf="@id/card2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="@drawable/rounder_view"
+                            app:layout_constraintBottom_toTopOf="@id/card3"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/resting_foreground"
+                                        />
+                                    <TextView
+                                        android:gravity="start|center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textStyle="bold"
+                                        android:text="Resting Time"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_weight="0.4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/card2"
+                            android:layout_width="180dp"
+                            android:layout_height="150dp"
+                            app:layout_constraintStart_toEndOf="@id/card1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="@drawable/rounder_view"
+                            app:layout_constraintBottom_toTopOf="@id/card4"
+                            >
+                            <LinearLayout
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/resting_foreground"
+                                        />
+                                    <TextView
+                                        android:gravity="start|center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textStyle="bold"
+                                        android:text="Active Time"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_weight="0.4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/card3"
+                            android:layout_width="180dp"
+                            android:layout_height="150dp"
+                            app:layout_constraintTop_toBottomOf="@id/card1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/card4"
+                            android:background="@drawable/rounder_view"
+                            app:layout_constraintBottom_toTopOf="@id/card5"
+                            >
+                            <LinearLayout
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/resting_foreground"
+                                        />
+                                    <TextView
+                                        android:gravity="start|center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textStyle="bold"
+                                        android:text="Emocional"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_weight="0.4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/card4"
+                            android:layout_width="180dp"
+                            android:layout_height="150dp"
+                            app:layout_constraintStart_toEndOf="@id/card3"
+                            app:layout_constraintTop_toBottomOf="@id/card2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:background="@drawable/rounder_view"
+                            app:layout_constraintBottom_toTopOf="@id/card5"
+                            >
+                            <LinearLayout
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/resting_foreground"
+                                        />
+                                    <TextView
+                                        android:gravity="start|center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textStyle="bold"
+                                        android:text="Air Status"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_weight="0.4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/card5"
+                            android:layout_width="0dp"
+                            android:layout_height="150dp"
+                            app:layout_constraintStart_toStartOf="@id/card3"
+                            app:layout_constraintEnd_toEndOf="@id/card4"
+                            app:layout_constraintTop_toBottomOf="@id/card3"
+                            android:background="@drawable/rounder_view"
+                            >
+                            <LinearLayout
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/resting_foreground"
+                                        />
+                                    <TextView
+                                        android:gravity="start|center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textStyle="bold"
+                                        android:text="Temperature"
+                                        />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_weight="0.4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -20,7 +20,6 @@
     <color name="linked">#4282ff</color>
 
     <color name="backgroundYe">#ffb901</color>
-    <color name="Globalbackground">#f6f8fa</color>
 
     <color name="bg_premium">#e7f6ee</color>
     <color name="txt_premium">#3ab56e</color>
@@ -28,5 +27,9 @@
     <color name="bg_premium_red">#fff0d4</color>
     <color name="bg_warning">#f55c05</color>
     <color name="bg_yellow">#f1ce8c</color>
+
+    <color name="Globalbackground">#181818</color>
+    <color name="font_black">#888888</color>
+    <color name="bg_black_view">#242324</color>
 
 </resources>

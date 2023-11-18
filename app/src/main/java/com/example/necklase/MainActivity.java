@@ -2,6 +2,7 @@ package com.example.necklase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Router.redirectTo(MainActivity.this, navbar.class);
+                Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
             }
         };
         count.start();

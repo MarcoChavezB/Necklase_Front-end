@@ -227,7 +227,7 @@
                         android:backgroundTint="@color/black"
                         android:text="Register"
                         android:textColor="@color/white"
-                        app:layout_constraintBottom_toTopOf="@id/signuptxt"
+                        app:layout_constraintBottom_toTopOf="@id/signintxt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
@@ -236,7 +236,7 @@
                     </Button>
 
                     <TextView
-                        android:id="@+id/signuptxt"
+                        android:id="@+id/signintxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

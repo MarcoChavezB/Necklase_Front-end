@@ -23,7 +23,7 @@ public class navbar extends AppCompatActivity {
             if (item.getItemId() == R.id.location) {
                 replaceFragment(new collar_managment());
             } else if (item.getItemId() == R.id.statistics) {
-                replaceFragment(new collar_managment());
+                replaceFragment(new analytics());
             } else if (item.getItemId() == R.id.home) {
                 replaceFragment(new collar_managment());
             } else if (item.getItemId() == R.id.personal) {

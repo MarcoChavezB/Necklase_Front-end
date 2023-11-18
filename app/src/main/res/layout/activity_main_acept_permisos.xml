@@ -97,8 +97,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Para que la aplicacion funcione correctamente se necesitan una serie de permisos esenciales, como lo son: Ubicacion, Camara, Telefono etc..."
-                    android:textColor="@color/black"></TextView>
+                    android:text="Para que la aplicacion funcione como es esperado se necesecita el permiso de localizacion, bluetooth y notificaciones"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    >
+
+                </TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -108,6 +112,7 @@
                 android:gravity="center">
 
                 <Button
+                    android:id="@+id/aceptar"
                     android:layout_width="170dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="20dp"
@@ -117,6 +122,7 @@
                     android:textColor="@color/white"></Button>
 
                 <Button
+                    android:id="@+id/denegar"
                     android:layout_width="170dp"
                     android:layout_height="50dp"
                     android:background="@drawable/button_outline_white"

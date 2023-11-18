@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:top="8dp">
         <shape android:shape="rectangle">
-            <solid android:color="#FFFF" /> <!-- Color de fondo -->
-            <corners android:topLeftRadius="35dp" android:topRightRadius="35dp" /> <!-- Radio de borde en la parte superior -->
+            <solid android:color="@color/bg_black_view" /> <!-- Color de fondo -->
+            <corners android:radius="10dp"/> <!-- Radio de borde en la parte superior -->
         </shape>
     </item>
 </layer-list>
