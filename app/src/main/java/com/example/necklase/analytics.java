@@ -65,7 +65,6 @@ public class analytics extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_analytics, container, false);
 
         dogStatus = view.findViewById(R.id.dogStatus);
-
         dogStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

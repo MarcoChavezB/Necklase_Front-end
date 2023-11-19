@@ -33,5 +33,6 @@
     <color name="bg_black_view">#242324</color>
 
     <color name="bg_blue">#232937</color>
+    <color name="good_status">#acfdb1</color>
 
 </resources>
