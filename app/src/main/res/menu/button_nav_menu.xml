@@ -4,25 +4,27 @@
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="location"
         android:id="@+id/location"
         android:icon="@mipmap/locationmenu_foreground"/>
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="statistics"
         android:id="@+id/statistics"
         android:icon="@mipmap/statistics_foreground"/>
+
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Home"
+        android:id="@+id/add"
+        android:icon="@mipmap/add_foreground"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/home"
         android:icon="@mipmap/menu_foreground"/>
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Personal"
         android:id="@+id/personal"
         android:icon="@mipmap/person_foreground"/>
 </menu>

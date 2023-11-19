@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
  */
 public class personal_data extends Fragment {
 
+    LinearLayout goBack;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,8 +61,17 @@ public class personal_data extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_personal_data, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
 
+        goBack = view.findViewById(R.id.goBack);
 
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame, new personal_menu()).commit();
+            }
+        });
+
+        return view;
     }
 }
