@@ -8,16 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link personal_menu#newInstance} factory method to
+ * Use the {@link personal_data#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class personal_menu extends Fragment {
-    LinearLayout personal_data;
-
+public class personal_data extends Fragment {
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -29,7 +26,7 @@ public class personal_menu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public personal_menu() {
+    public personal_data() {
         // Required empty public constructor
     }
 
@@ -39,11 +36,11 @@ public class personal_menu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment personal_menu.
+     * @return A new instance of fragment personal_data.
      */
     // TODO: Rename and change types and number of parameters
-    public static personal_menu newInstance(String param1, String param2) {
-        personal_menu fragment = new personal_menu();
+    public static personal_data newInstance(String param1, String param2) {
+        personal_data fragment = new personal_data();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,18 +58,10 @@ public class personal_menu extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personal_menu, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_personal_data, container, false);
 
-        personal_data = view.findViewById(R.id.personal);
 
-        personal_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, new personal_data()).commit();
-            }
-        });
-
-        return view;
     }
 }
