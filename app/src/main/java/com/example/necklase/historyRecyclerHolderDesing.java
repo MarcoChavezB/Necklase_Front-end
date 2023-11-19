@@ -1,0 +1,13 @@
+package com.example.necklase;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class historyRecyclerHolderDesing extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_history_recycler_holder_desing);
+    }
+}

@@ -58,6 +58,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/selectDevice"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/select_foreground"/>

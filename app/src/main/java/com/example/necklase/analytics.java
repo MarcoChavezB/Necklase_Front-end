@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 /**
@@ -58,6 +59,8 @@ public class analytics extends Fragment {
         }
     }
 
+    ImageView selectDevice;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,6 +72,14 @@ public class analytics extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.frame,new dogStatus()).commit();
+            }
+        });
+
+        selectDevice = view.findViewById(R.id.selectDevice);
+        selectDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame,new selectDevice()).commit();
             }
         });
 

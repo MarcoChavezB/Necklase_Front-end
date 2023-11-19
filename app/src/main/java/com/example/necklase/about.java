@@ -7,18 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link personal_menu#newInstance} factory method to
+ * Use the {@link about#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class personal_menu extends Fragment {
-    LinearLayout personal_data, suport;
-
-
+public class about extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +24,7 @@ public class personal_menu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public personal_menu() {
+    public about() {
         // Required empty public constructor
     }
 
@@ -39,11 +34,11 @@ public class personal_menu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment personal_menu.
+     * @return A new instance of fragment about.
      */
     // TODO: Rename and change types and number of parameters
-    public static personal_menu newInstance(String param1, String param2) {
-        personal_menu fragment = new personal_menu();
+    public static about newInstance(String param1, String param2) {
+        about fragment = new about();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,25 +56,9 @@ public class personal_menu extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personal_menu, container, false);
-
-        personal_data = view.findViewById(R.id.personal);
-        personal_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, new personal_data()).commit();
-            }
-        });
-
-        suport = view.findViewById(R.id.suport);
-        suport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, new about()).commit();
-            }
-        });
-
-        return view;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
 }
