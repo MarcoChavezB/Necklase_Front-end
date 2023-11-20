@@ -3,7 +3,7 @@
     <item android:top="8dp">
         <shape android:shape="rectangle">
             <solid android:color="#FFFF" /> <!-- Color de fondo -->
-            <corners android:topLeftRadius="50dp" android:topRightRadius="50dp" /> <!-- Radio de borde en la parte superior -->
+            <corners android:topLeftRadius="20dp" android:topRightRadius="20dp" /> <!-- Radio de borde en la parte superior -->
         </shape>
     </item>
 </layer-list>
