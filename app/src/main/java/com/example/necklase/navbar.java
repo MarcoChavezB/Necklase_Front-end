@@ -25,14 +25,13 @@ public class navbar extends AppCompatActivity {
             } else if (item.getItemId() == R.id.statistics) {
                 replaceFragment(new analytics());
             } else if (item.getItemId() == R.id.home) {
-                replaceFragment(new collar_managment());
+                replaceFragment(new activity_home());
             } else if (item.getItemId() == R.id.personal) {
                 replaceFragment(new personal_menu());
-            } else if (item.getItemId() == R.id.home){
-
+            } else if (item.getItemId() == R.id.add){
                 // aqui remplazas el fragmento por el que quieras en el else if R.id.home esta parte es el
                 // id del item que esta en el archivo menu/button_nav_menu
-                replaceFragment(new collar_managment());
+                replaceFragment(new activity_device());
             }
 
             return true;

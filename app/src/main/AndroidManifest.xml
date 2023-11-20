@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Necklase"
         tools:targetApi="31">
         <activity
+            android:name=".Login_or_sign"
+            android:exported="false" />
+        <activity
             android:name=".DispositivoRecyclerHolder"
             android:exported="false" />
         <activity
