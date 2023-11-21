@@ -3,10 +3,18 @@ package com.example.necklase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.necklase.Model.Device;
+import com.example.necklase.Model.DeviceAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +63,25 @@ public class selectDevice extends Fragment {
         }
     }
 
+    RecyclerView recyclerV;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_device, container, false);
+        View view = inflater.inflate(R.layout.fragment_select_device, container, false);
+        recyclerV = view.findViewById(R.id.recyclerV);
+
+        List<Device> devices = new ArrayList<>();
+
+        devices.add(new Device("Device 1"));
+        devices.add(new Device("Device 2"));
+        devices.add(new Device("Device 3"));
+        devices.add(new Device("Device 4"));
+
+        DeviceAdapter adapter = new DeviceAdapter(devices);
+        recyclerV.setAdapter(adapter);
+
+        recyclerV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerV.setHasFixedSize(true);
+        return view;
     }
 }
