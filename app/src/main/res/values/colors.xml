@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="gray">#1B1B1B</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="bkbt_b">#071B26</color>
-    <color name="bkbt_p">#23040D</color>
-    <color name="bkbt_g">#192600</color>
-    <color name="bkbt_br">#4C3C0C</color>
+    <color name="bkbt_b">#3100A5FF</color>
+    <color name="bkbt_p">#31FF004A</color>
+    <color name="bkbt_g">#37A8FF00</color>
+    <color name="bkbt_br">#32FFBF00</color>
 
-    <color name="tx_b">#2DB2F9</color>
-    <color name="tx_r">#E01A53</color>
-    <color name="tx_y">#FFD82B</color>
-    <color name="tx_g">#90D400</color>
+    <color name="tx_b">#00A6FF</color>
+    <color name="tx_r">#FF0049</color>
+    <color name="tx_y">#FFD000</color>
+    <color name="tx_g">#ADFF00</color>
 
     <color name="bk_g">#07DF9A</color>
     <color name="bk_b">#000000</color>
@@ -34,5 +35,10 @@
 
     <color name="bg_blue">#232937</color>
     <color name="good_status">#acfdb1</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 
 </resources>

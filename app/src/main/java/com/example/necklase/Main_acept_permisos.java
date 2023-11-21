@@ -28,7 +28,7 @@ public class Main_acept_permisos extends AppCompatActivity {
 
         aceptar.setOnClickListener(v -> {
             if (solicitarPermisos()){
-                Router.redirectTo(Main_acept_permisos.this, login_view.class);
+                Router.redirectTo(Main_acept_permisos.this, Login_or_sign.class);
             }
         });
 
