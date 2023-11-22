@@ -18,16 +18,16 @@
         android:theme="@style/Theme.Necklase"
         tools:targetApi="31">
         <activity
-            android:name=".Login_or_sign"
+            android:name=".View.Login_or_sign"
             android:exported="false" />
         <activity
-            android:name=".DispositivoRecyclerHolder"
+            android:name=".View.DispositivoRecyclerHolder"
             android:exported="false" />
         <activity
             android:name=".dispositivo_seleccion"
             android:exported="false" />
         <activity
-            android:name=".historyRecyclerHolderDesing"
+            android:name=".View.historyRecyclerHolderDesing"
             android:exported="false" />
         <activity
             android:name=".historyRecyclerHolder"
@@ -35,7 +35,7 @@
             android:label="@string/title_activity_history_recycler_holder"
             android:theme="@style/Theme.Necklase" />
         <activity
-            android:name=".navbar"
+            android:name=".View.navbar"
             android:exported="false" />
         <activity
             android:name=".Collar_managment"
@@ -44,16 +44,16 @@
             android:name=".Menu_Personal"
             android:exported="false" />
         <activity
-            android:name=".Main_acept_permisos"
+            android:name=".View.Main_acept_permisos"
             android:exported="false" />
         <activity
-            android:name=".register_view"
+            android:name=".View.register_view"
             android:exported="false" />
         <activity
-            android:name=".login_view"
+            android:name=".View.login_view"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

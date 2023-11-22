@@ -1,10 +1,8 @@
-package com.example.necklase;
-
+package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.example.necklase.databinding.ActivityMainBinding;
+import com.example.necklase.R;
 import com.example.necklase.databinding.ActivityNavbarBinding;
 
 import android.os.Bundle;
@@ -28,15 +26,10 @@ public class navbar extends AppCompatActivity {
                 replaceFragment(new activity_home());
             } else if (item.getItemId() == R.id.personal) {
                 replaceFragment(new personal_menu());
-<<<<<<< HEAD
             } else if (item.getItemId() == R.id.home){
                 replaceFragment(new collar_managment());
-=======
             } else if (item.getItemId() == R.id.add){
-                // aqui remplazas el fragmento por el que quieras en el else if R.id.home esta parte es el
-                // id del item que esta en el archivo menu/button_nav_menu
                 replaceFragment(new activity_device());
->>>>>>> f7a5b816b0150ab509b53b72dc3f83c3fd8c00e9
             }
 
             return true;

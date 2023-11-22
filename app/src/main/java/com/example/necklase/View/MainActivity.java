@@ -1,12 +1,11 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 
 public class MainActivity extends AppCompatActivity {

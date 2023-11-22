@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/captura_de_pantalla_2023_11_19_231819"
-    tools:context=".Login_or_sign">
+    tools:context=".View.Login_or_sign">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

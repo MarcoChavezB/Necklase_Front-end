@@ -1,4 +1,4 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import android.os.Bundle;
 
@@ -7,13 +7,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import com.example.necklase.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link collar_managment#newInstance} factory method to
+ * Use the {@link personal_data#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class collar_managment extends Fragment {
+public class personal_data extends Fragment {
+
+    LinearLayout goBack;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +29,7 @@ public class collar_managment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public collar_managment() {
+    public personal_data() {
         // Required empty public constructor
     }
 
@@ -34,11 +39,11 @@ public class collar_managment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment collar_managment.
+     * @return A new instance of fragment personal_data.
      */
     // TODO: Rename and change types and number of parameters
-    public static collar_managment newInstance(String param1, String param2) {
-        collar_managment fragment = new collar_managment();
+    public static personal_data newInstance(String param1, String param2) {
+        personal_data fragment = new personal_data();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,7 +63,17 @@ public class collar_managment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_collar_managment, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
+
+        goBack = view.findViewById(R.id.goBack);
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame, new personal_menu()).commit();
+            }
+        });
+
+        return view;
     }
 }

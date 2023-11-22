@@ -1,4 +1,4 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.necklase.R;
 
 public class Login_or_sign extends AppCompatActivity implements View.OnClickListener {
 

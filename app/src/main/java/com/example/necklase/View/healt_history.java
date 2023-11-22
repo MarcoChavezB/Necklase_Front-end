@@ -1,4 +1,4 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import android.os.Bundle;
 
@@ -9,19 +9,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.example.necklase.Model.Device;
-import com.example.necklase.Model.DeviceAdapter;
+import com.example.necklase.Model.history;
+import com.example.necklase.R;
+import com.example.necklase.View.Adapter.historyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link selectDevice#newInstance} factory method to
+ * Use the {@link healt_history#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class selectDevice extends Fragment {
+public class healt_history extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +34,7 @@ public class selectDevice extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public selectDevice() {
+    public healt_history() {
         // Required empty public constructor
     }
 
@@ -42,11 +44,11 @@ public class selectDevice extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment selectDevice.
+     * @return A new instance of fragment healt_history.
      */
     // TODO: Rename and change types and number of parameters
-    public static selectDevice newInstance(String param1, String param2) {
-        selectDevice fragment = new selectDevice();
+    public static healt_history newInstance(String param1, String param2) {
+        healt_history fragment = new healt_history();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,24 +66,33 @@ public class selectDevice extends Fragment {
     }
 
     RecyclerView recyclerV;
+    ImageView goBack;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_select_device, container, false);
-        recyclerV = view.findViewById(R.id.recyclerV);
+        View view =  inflater.inflate(R.layout.fragment_healt_history, container, false);
 
-        List<Device> devices = new ArrayList<>();
+        goBack = view.findViewById(R.id.goBack);
+        goBack.setOnClickListener(v -> {
+            getFragmentManager().beginTransaction().replace(R.id.frame, new dogStatus()).commit();
+        });
 
-        devices.add(new Device("Device 1"));
-        devices.add(new Device("Device 2"));
-        devices.add(new Device("Device 3"));
-        devices.add(new Device("Device 4"));
+        recyclerV = view.findViewById(R.id.recycler);
+        List<history> historyList = new ArrayList<>();
 
-        DeviceAdapter adapter = new DeviceAdapter(devices);
+        historyList.add(new history("Vacuna", "2020-10-10"));
+        historyList.add(new history("Vacuna", "2020-10-10"));
+        historyList.add(new history("Vacuna", "2020-10-10"));
+        historyList.add(new history("Vacuna", "2020-10-10"));
+        historyList.add(new history("Vacuna", "2020-10-10"));
+        historyList.add(new history("Vacuna", "2020-10-10"));
+
+        historyAdapter adapter = new historyAdapter(historyList);
         recyclerV.setAdapter(adapter);
 
         recyclerV.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerV.setHasFixedSize(true);
+
         return view;
     }
 }

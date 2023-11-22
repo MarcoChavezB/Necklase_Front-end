@@ -1,4 +1,4 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 
 public class login_view extends AppCompatActivity {

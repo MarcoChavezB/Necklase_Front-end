@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundYe"
-    tools:context=".Main_acept_permisos">
+    tools:context=".View.Main_acept_permisos">
 
     <LinearLayout
         android:layout_width="match_parent"

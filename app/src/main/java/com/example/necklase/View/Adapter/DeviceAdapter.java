@@ -1,4 +1,4 @@
-package com.example.necklase.Model;
+package com.example.necklase.View.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.necklase.Model.Device;
 import com.example.necklase.R;
 
 import java.util.List;

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".collar_managment"
+    tools:context=".View.collar_managment"
     android:background="@color/Globalbackground"
     >
 

@@ -1,7 +1,9 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.necklase.R;
 
 public class historyRecyclerHolderDesing extends AppCompatActivity {
 

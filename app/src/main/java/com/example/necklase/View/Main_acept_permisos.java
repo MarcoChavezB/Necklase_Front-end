@@ -1,4 +1,4 @@
-package com.example.necklase;
+package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -6,9 +6,9 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.widget.Button;
 
+import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 
 import java.util.ArrayList;
