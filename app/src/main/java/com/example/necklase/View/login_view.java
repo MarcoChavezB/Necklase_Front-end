@@ -47,8 +47,11 @@ public class login_view extends AppCompatActivity {
 
 
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+
                 String email1 = email.getText().toString();
                 String password1 = password.getText().toString();
 
@@ -57,7 +60,7 @@ public class login_view extends AppCompatActivity {
                     return;
                 }
 
-                RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+                RetrofitApiModel retrofitApiModel = new RetrofitApiModel(login_view.this);
                 Retrofit retrofit = retrofitApiModel.provideRetrofit();
                 LoginManagment loginManagment = new LoginManagment(retrofit);
                 loginManagment.postData(email1, password1, new Callback<LoginPostModel>() {
@@ -80,7 +83,6 @@ public class login_view extends AppCompatActivity {
                             }
                             Router.redirectTo(login_view.this, navbar.class);
                         }
-
                         else{
                             Toast.makeText(login_view.this, "Login failed", Toast.LENGTH_SHORT).show();
                         }

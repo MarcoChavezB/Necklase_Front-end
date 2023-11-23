@@ -220,6 +220,7 @@
                         >
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="200dp"
+                            android:id="@+id/contenedor"
                             android:layout_height="match_parent"
                             tools:ignore="MissingConstraints">
 
@@ -256,6 +257,9 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             tools:layout_editor_absoluteX="213dp"
@@ -265,7 +269,10 @@
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="25dp"
-                                android:id="@+id/linea"
+                                android:id="@+id/estado"
+                                app:layout_constraintBaseline_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 >
                                 <TextView
                                     android:id="@+id/devicestatus"
@@ -288,7 +295,6 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.612"
-
                                     app:layout_constraintStart_toStartOf="parent">
 
                                 </androidx.appcompat.widget.SwitchCompat>
@@ -300,8 +306,10 @@
                                 android:layout_marginTop="24dp"
                                 android:contentDescription="IMG PERRO"
                                 android:src="@mipmap/collar_icon"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,11 +73,6 @@ public class selectDevice extends Fragment {
 
         List<Device> devices = new ArrayList<>();
 
-        devices.add(new Device("Device 1"));
-        devices.add(new Device("Device 2"));
-        devices.add(new Device("Device 3"));
-        devices.add(new Device("Device 4"));
-
         DeviceAdapter adapter = new DeviceAdapter(devices);
         recyclerV.setAdapter(adapter);
 

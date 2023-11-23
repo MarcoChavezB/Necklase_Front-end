@@ -47,7 +47,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         }
 
         public void setData(Device device){
-            name.setText(device.getName());
+            name.setText(device.getModelo());
         }
     }
 }
