@@ -12,7 +12,7 @@ public class RegisterPostModel {
     @SerializedName("apellido")
     private String lastName ;
 
-    @SerializedName("contraseña")
+    @SerializedName("password")
     private String password ;
 
 

@@ -61,13 +61,10 @@ public class register_view extends AppCompatActivity{
                 registerManagment.postData(name1, lastName1, email1, password1, new Callback<RegisterPostModel>() {
                     @Override
                     public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
-                        name.setText(response.body().toString());
-                        name.setText("sokaoksoakos");
                     }
 
                     @Override
                     public void onFailure(Call<RegisterPostModel> call, Throwable t) {
-                        name.setText(t.getMessage());
                     }
                 });
 
