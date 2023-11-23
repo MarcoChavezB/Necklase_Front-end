@@ -104,10 +104,10 @@
                                 android:layout_weight="1"
                                 android:gravity="center">
                                 <TextView
+                                    android:id="@+id/nameText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/font_black"
-                                    android:text="Marco"
                                     />
                             </LinearLayout>
                         </LinearLayout>
@@ -161,10 +161,10 @@
                                 android:layout_weight="1"
                                 android:gravity="center">
                                 <TextView
+                                    android:id="@+id/lastNameText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/font_black"
-                                    android:text="Chavez"
                                     />
                             </LinearLayout>
                         </LinearLayout>
@@ -218,10 +218,10 @@
                                 android:layout_weight="1"
                                 android:gravity="center">
                                 <TextView
+                                    android:id="@+id/emailText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/font_black"
-                                    android:text="example@gmail.com"
                                     />
                             </LinearLayout>
                         </LinearLayout>
@@ -332,10 +332,10 @@
                                 android:layout_weight="1"
                                 android:gravity="center">
                                 <TextView
+                                    android:id="@+id/collaresText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/font_black"
-                                    android:text="3"
                                     />
                             </LinearLayout>
                         </LinearLayout>

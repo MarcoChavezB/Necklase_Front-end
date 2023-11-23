@@ -62,7 +62,6 @@ public class register_view extends AppCompatActivity{
 
                 RetrofitApiModel retrofitApiModel = new RetrofitApiModel(register_view.this);
                 Retrofit retrofit = retrofitApiModel.provideRetrofit();
-
                 RegisterManagment registerManagment = new RegisterManagment(retrofit);
 
                 registerManagment.postData(name1, lastName1, email1, password1, new Callback<RegisterPostModel>() {

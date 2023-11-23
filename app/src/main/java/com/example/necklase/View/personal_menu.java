@@ -1,5 +1,6 @@
 package com.example.necklase.View;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.Post.LogoutManagment;
+import com.example.necklase.Model.Post.LogoutPostModel;
+import com.example.necklase.Model.Post.PersonalDataManagment;
+import com.example.necklase.Model.Post.PersonalDataPostModel;
+import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+import com.example.necklase.Router.Router;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,11 +76,74 @@ public class personal_menu extends Fragment {
         }
     }
 
+    LinearLayout logout, pet;
+    TextView test, namePerson, emailPerson;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_menu, container, false);
 
+        pet = view.findViewById(R.id.pet);
+        logout = view.findViewById(R.id.logout);
         personal_data = view.findViewById(R.id.personal);
+        test = view.findViewById(R.id.test);
+        namePerson = view.findViewById(R.id.namePerson);
+        emailPerson = view.findViewById(R.id.emailPerson);
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        DecodedJWT decodedJWT = JwtUtils.decode(token);
+        String userId =  decodedJWT.getSubject();
+
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+        Retrofit retrofit = retrofitApiModel.provideRetrofit();
+        PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
+
+        personalDataManagment.getData(userId, new Callback<PersonalDataPostModel>() {
+            @Override
+            public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    PersonalDataPostModel personalData = response.body();
+                    namePerson.setText(personalData.getNombre());
+                    emailPerson.setText(personalData.getEmail());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PersonalDataPostModel> call, Throwable t) {
+
+            }
+        });
+
+        pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RetrofitApiModel retro = new RetrofitApiModel();
+                Retrofit retrofit = retro.provideRetrofit();
+                LogoutManagment logoutManagment = new LogoutManagment(retrofit);
+
+                logoutManagment.postData(userId, new Callback<LogoutPostModel>() {
+                    @Override
+                    public void onResponse(Call<LogoutPostModel> call, Response<LogoutPostModel> response) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.remove("token");
+                        editor.apply();
+                        Router.redirectTo(getActivity(), login_view.class);
+                    }
+                    @Override
+                    public void onFailure(Call<LogoutPostModel> call, Throwable t) {}
+                });
+            }
+        });
+
         personal_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
