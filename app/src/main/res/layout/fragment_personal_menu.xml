@@ -160,6 +160,7 @@
                             android:layout_weight="1">
 
                             <TextView
+                                android:id="@+id/test"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
@@ -411,6 +412,7 @@
 
 
                         <LinearLayout
+                            android:id="@+id/logout"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"

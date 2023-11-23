@@ -1,5 +1,6 @@
 package com.example.necklase.View;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.Post.PersonalDataManagment;
+import com.example.necklase.Model.Post.PersonalDataPostModel;
+import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.RetrofitInterfaces.PersonalDataInterface;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,12 +73,55 @@ public class personal_data extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
+    TextView nombreText, apellidoText, emailText, collaresText;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
+        nombreText = view.findViewById(R.id.nameText);
+        apellidoText = view.findViewById(R.id.lastNameText);
+        emailText = view.findViewById(R.id.emailText);
+        collaresText = view.findViewById(R.id.collaresText);
         goBack = view.findViewById(R.id.goBack);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        String userId = JwtUtils.decode(token).getSubject();
+
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+        Retrofit retrofit = retrofitApiModel.provideRetrofit();
+        PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
+
+        personalDataManagment.getData(userId, new Callback<PersonalDataPostModel>() {
+            @Override
+            public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    PersonalDataPostModel personalData = response.body();
+                    nombreText.setText(personalData.getNombre());
+                    apellidoText.setText(personalData.getApellido());
+                    emailText.setText(personalData.getEmail());
+                    collaresText.setText(personalData.getNSensores());
+
+                } else {
+                    nombreText.setText("kodskdo");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PersonalDataPostModel> call, Throwable t) {
+                nombreText.setText("no se pudo");
+            }
+        });
+
+
+
+
+
+
+
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,5 +131,12 @@ public class personal_data extends Fragment {
         });
 
         return view;
+    }
+
+    public void actualizarInformacion(String nombre, String apellido, String email, String numeroDispositivos) {
+        nombreText.setText(nombre);
+        apellidoText.setText(apellido);
+        emailText.setText(email);
+        collaresText.setText(numeroDispositivos);
     }
 }

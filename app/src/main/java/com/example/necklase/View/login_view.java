@@ -60,6 +60,8 @@ public class login_view extends AppCompatActivity {
                 RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
                 Retrofit retrofit = retrofitApiModel.provideRetrofit();
                 LoginManagment loginManagment = new LoginManagment(retrofit);
+
+
                 loginManagment.postData(email1, password1, new Callback<LoginPostModel>() {
                     @Override
                     public void onResponse(Call<LoginPostModel> call, Response<LoginPostModel> response) {
@@ -72,6 +74,7 @@ public class login_view extends AppCompatActivity {
 
                             SharedPreferences prefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
                             String token = prefs.getString("token", null);
+
                             if(token != null){
                                 DecodedJWT decodedJWT = JwtUtils.decode(token);
                                 if(decodedJWT != null){
@@ -80,12 +83,10 @@ public class login_view extends AppCompatActivity {
                             }
                             Router.redirectTo(login_view.this, navbar.class);
                         }
-
                         else{
                             Toast.makeText(login_view.this, "Login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<LoginPostModel> call, Throwable t) {
                         email.setText("Failure");
