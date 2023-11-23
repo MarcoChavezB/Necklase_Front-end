@@ -70,24 +70,23 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/namePerson"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:fontFamily="@font/quicksand_variablefont_wght"
                             android:gravity="start|bottom"
-                            android:text="Example Name"
                             android:textColor="@color/font_black"
                             android:textSize="17dp"
                             android:textStyle="bold"></TextView>
 
                         <TextView
+                            android:id="@+id/emailPerson"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:fontFamily="@font/quicksand_variablefont_wght"
                             android:gravity="center|start"
-
-                            android:text="marco1102004@gmail.com"
                             android:textColor="@color/font_black"
                             android:textStyle="bold"></TextView>
 

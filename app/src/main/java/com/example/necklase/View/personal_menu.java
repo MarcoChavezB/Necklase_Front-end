@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.Post.LogoutManagment;
 import com.example.necklase.Model.Post.LogoutPostModel;
+import com.example.necklase.Model.Post.PersonalDataManagment;
+import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
@@ -75,7 +77,7 @@ public class personal_menu extends Fragment {
     }
 
     LinearLayout logout, pet;
-    TextView test;
+    TextView test, namePerson, emailPerson;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,12 +87,34 @@ public class personal_menu extends Fragment {
         logout = view.findViewById(R.id.logout);
         personal_data = view.findViewById(R.id.personal);
         test = view.findViewById(R.id.test);
+        namePerson = view.findViewById(R.id.namePerson);
+        emailPerson = view.findViewById(R.id.emailPerson);
 
 
         SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = prefs.getString("token", null);
         DecodedJWT decodedJWT = JwtUtils.decode(token);
         String userId =  decodedJWT.getSubject();
+
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+        Retrofit retrofit = retrofitApiModel.provideRetrofit();
+        PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
+
+        personalDataManagment.getData(userId, new Callback<PersonalDataPostModel>() {
+            @Override
+            public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    PersonalDataPostModel personalData = response.body();
+                    namePerson.setText(personalData.getNombre());
+                    emailPerson.setText(personalData.getEmail());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PersonalDataPostModel> call, Throwable t) {
+
+            }
+        });
 
         pet.setOnClickListener(new View.OnClickListener() {
             @Override
