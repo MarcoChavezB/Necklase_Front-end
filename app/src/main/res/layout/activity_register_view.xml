@@ -62,7 +62,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/form"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="570dp"
                 android:background="@drawable/rounder_top_left_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +100,7 @@
                             android:text="First name"></TextView>
 
                         <EditText
+                            android:id="@+id/name"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
@@ -125,6 +126,7 @@
                             android:text="Last name"></TextView>
 
                         <EditText
+                            android:id="@+id/last_name"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
@@ -134,7 +136,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/email"
+                        android:id="@+id/correo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -147,19 +149,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"></TextView>
+                            android:text="correo"></TextView>
 
                         <EditText
+                            android:id="@+id/email"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
-                            android:hint="email"
+                            android:hint="eamil"
                             android:textSize="13dp"
                             android:paddingStart="8dp"></EditText>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/password"
+                        android:id="@+id/contraseña"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -172,9 +175,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Password"></TextView>
+                            android:text="contraseña"></TextView>
 
                         <EditText
+                            android:id="@+id/password"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
@@ -200,6 +204,7 @@
                             android:text="Confirm password"></TextView>
 
                         <EditText
+                            android:id="@+id/passwordConfirm"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
