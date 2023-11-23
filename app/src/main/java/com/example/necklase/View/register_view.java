@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.necklase.Extras.EmailValidator;
 import com.example.necklase.Model.Post.RegisterManagment;
 import com.example.necklase.Model.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterPostModel;
@@ -53,6 +55,11 @@ public class register_view extends AppCompatActivity{
                 String password1 = password.getText().toString();
                 String lastName1 = lastName.getText().toString();
 
+                if(EmailValidator.isValidEmail(email1) == false){
+                    Toast.makeText(register_view.this, "Email is not valid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
                 Retrofit retrofit = retrofitApiModel.provideRetrofit();
 
@@ -61,6 +68,11 @@ public class register_view extends AppCompatActivity{
                 registerManagment.postData(name1, lastName1, email1, password1, new Callback<RegisterPostModel>() {
                     @Override
                     public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(register_view.this, "Register successful", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(register_view.this, "Register failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

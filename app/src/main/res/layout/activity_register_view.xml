@@ -184,7 +184,8 @@
                             android:background="@drawable/input_style_sencillo"
                             android:hint="password"
                             android:textSize="13dp"
-                            android:paddingStart="8dp"></EditText>
+                            android:paddingStart="8dp"
+                            android:inputType="textPassword"></EditText>
                     </LinearLayout>
 
                     <LinearLayout
@@ -210,7 +211,8 @@
                             android:background="@drawable/input_style_sencillo"
                             android:hint="password"
                             android:textSize="13dp"
-                            android:paddingStart="8dp"></EditText>
+                            android:paddingStart="8dp"
+                            android:inputType="textPassword"></EditText>
                     </LinearLayout>
 
                 </LinearLayout>

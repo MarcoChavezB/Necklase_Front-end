@@ -146,6 +146,7 @@
                             android:layout_height="45dp"
                             android:background="@drawable/input_style_sencillo"
                             android:paddingStart="8dp"
+                            android:inputType="textPassword"
                             ></EditText>
                     </LinearLayout>
 
