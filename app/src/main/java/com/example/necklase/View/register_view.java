@@ -60,7 +60,7 @@ public class register_view extends AppCompatActivity{
                     return;
                 }
 
-                RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+                RetrofitApiModel retrofitApiModel = new RetrofitApiModel(register_view.this);
                 Retrofit retrofit = retrofitApiModel.provideRetrofit();
                 RegisterManagment registerManagment = new RegisterManagment(retrofit);
 

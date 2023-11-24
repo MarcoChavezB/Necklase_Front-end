@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +41,7 @@ public class personal_data extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Context context;
 
     public personal_data() {
         // Required empty public constructor
@@ -90,7 +91,7 @@ public class personal_data extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(context);
         Retrofit retrofit = retrofitApiModel.provideRetrofit();
         PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
 

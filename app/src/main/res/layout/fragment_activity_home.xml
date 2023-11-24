@@ -158,6 +158,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_height="match_parent"
                     tools:layout_editor_absoluteX="213dp"
                     tools:layout_editor_absoluteY="0dp"
@@ -201,7 +204,12 @@
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="150dp"
+                    android:id="@+id/infodelperro"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:ignore="MissingConstraints">
 
                     <TextView
@@ -236,16 +244,23 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/estadisticas"
                     android:layout_width="220dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_height="match_parent"
                     tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="152dp"
-                    tools:layout_editor_absoluteY="0dp">
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="110dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         android:layout_height="match_parent"
                         tools:ignore="MissingConstraints"
+                        android:id="@+id/infoiz"
                         >
 
                         <androidx.cardview.widget.CardView
@@ -254,8 +269,11 @@
                             app:cardCornerRadius="25dp"
                             app:cardBackgroundColor="@color/bkbt_br"
                             app:cardElevation="10dp"
-                            tools:layout_editor_absoluteX="10dp"
-                            tools:layout_editor_absoluteY="16dp">
+                            android:layout_marginTop="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            >
 
                             <ImageView
                                 android:layout_marginTop="5dp"
@@ -289,8 +307,11 @@
                             app:cardBackgroundColor="@color/bkbt_b"
                             app:cardCornerRadius="25dp"
                             app:cardElevation="10dp"
-                            tools:layout_editor_absoluteX="10dp"
-                            tools:layout_editor_absoluteY="68dp">
+                            android:layout_marginBottom="12dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            >
 
                             <ImageView
                                 android:layout_width="35dp"
@@ -319,11 +340,15 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/infoder"
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
                         tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteX="110dp"
-                        tools:layout_editor_absoluteY="0dp">
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="110dp"
@@ -337,8 +362,10 @@
                                 app:cardCornerRadius="25dp"
                                 app:cardBackgroundColor="@color/bkbt_p"
                                 app:cardElevation="10dp"
-                                tools:layout_editor_absoluteX="2dp"
-                                tools:layout_editor_absoluteY="16dp">
+                                android:layout_marginTop="12dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
                                     android:layout_marginTop="5dp"
@@ -371,8 +398,11 @@
                                 app:cardBackgroundColor="@color/bkbt_g"
                                 app:cardCornerRadius="25dp"
                                 app:cardElevation="10dp"
-                                tools:layout_editor_absoluteX="2dp"
-                                tools:layout_editor_absoluteY="68dp">
+                                android:layout_marginBottom="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                >
 
                                 <ImageView
                                     android:layout_width="35dp"
@@ -442,7 +472,7 @@
             android:id="@+id/recyclerViewWalkers"
             android:layout_width="0dp"
             android:background="@color/gray"
-            android:layout_height="wrap_content"
+            android:layout_height="230dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
