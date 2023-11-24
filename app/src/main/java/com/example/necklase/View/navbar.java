@@ -15,7 +15,7 @@ public class navbar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityNavbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new collar_managment());
+        replaceFragment(new activity_home());
 
         binding.navBar.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.location) {
@@ -31,10 +31,8 @@ public class navbar extends AppCompatActivity {
             } else if (item.getItemId() == R.id.add){
                 replaceFragment(new activity_device());
             }
-
             return true;
         });
-
     }
 
     private void replaceFragment(Fragment fragment){

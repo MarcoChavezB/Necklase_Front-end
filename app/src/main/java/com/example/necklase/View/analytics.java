@@ -90,7 +90,7 @@ public class analytics extends Fragment {
 
         dogName = view.findViewById(R.id.dogName);
 
-        RetrofitApiModel retro = new RetrofitApiModel();
+        RetrofitApiModel retro = new RetrofitApiModel(getContext());
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 

@@ -91,7 +91,7 @@ public class personal_data extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(context);
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(getContext());
         Retrofit retrofit = retrofitApiModel.provideRetrofit();
         PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
 

@@ -1,5 +1,6 @@
 package com.example.necklase.View;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.necklase.Model.Post.MyPetManagment;
+import com.example.necklase.Model.Post.MyPetPostModel;
+import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +68,36 @@ public class activity_home extends Fragment {
         }
     }
 
+    TextView nombredeperro;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_activity_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
+
+        nombredeperro = view.findViewById(R.id.nombredeperro);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        String userId = JwtUtils.decode(token).getSubject();
+
+        RetrofitApiModel retro = new RetrofitApiModel(getContext());
+        Retrofit retrofit = retro.provideRetrofit();
+        MyPetManagment myPetManagment = new MyPetManagment(retrofit);
+
+        myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
+            @Override
+            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
+                nombredeperro.setText(response.body().getNombre());
+            }
+            @Override
+            public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
+        });
+
+
+
+        return view;
     }
 }

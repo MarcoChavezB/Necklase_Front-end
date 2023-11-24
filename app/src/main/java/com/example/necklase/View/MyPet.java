@@ -89,7 +89,7 @@ public class MyPet extends Fragment {
         String userId = JwtUtils.decode(token).getSubject();
 
 
-        RetrofitApiModel retro = new RetrofitApiModel();
+        RetrofitApiModel retro = new RetrofitApiModel(getContext());
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 
