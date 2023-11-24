@@ -96,7 +96,7 @@ public class personal_menu extends Fragment {
         DecodedJWT decodedJWT = JwtUtils.decode(token);
         String userId =  decodedJWT.getSubject();
 
-        RetrofitApiModel retrofitApiModel = new RetrofitApiModel();
+        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(getContext());
         Retrofit retrofit = retrofitApiModel.provideRetrofit();
         PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
 
@@ -126,7 +126,7 @@ public class personal_menu extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RetrofitApiModel retro = new RetrofitApiModel();
+                RetrofitApiModel retro = new RetrofitApiModel(getContext());
                 Retrofit retrofit = retro.provideRetrofit();
                 LogoutManagment logoutManagment = new LogoutManagment(retrofit);
 
