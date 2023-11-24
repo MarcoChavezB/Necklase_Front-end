@@ -79,6 +79,15 @@ public class login_view extends AppCompatActivity {
                                 DecodedJWT decodedJWT = JwtUtils.decode(token);
                                 if(decodedJWT != null){
                                     String userId = decodedJWT.getSubject();
+
+                                    // aqui se va a chechar si redireccionar al seleccionador de
+                                    // dispositivos o a la pantalla de statistics
+
+
+
+
+
+
                                 }
                             }
                             Router.redirectTo(login_view.this, navbar.class);

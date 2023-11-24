@@ -179,6 +179,7 @@
                         android:gravity="center">
 
                         <ImageView
+                            android:id="@+id/goDogInfo"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/bg_rounder_yellow"
@@ -192,11 +193,11 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/dogName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="start|bottom"
-                            android:text="Tommy"
                             android:textColor="@color/font_black"
                             android:textSize="30dp" />
 

@@ -105,8 +105,6 @@ public class personal_data extends Fragment {
                     emailText.setText(personalData.getEmail());
                     collaresText.setText(personalData.getNSensores());
 
-                } else {
-                    nombreText.setText("kodskdo");
                 }
             }
 

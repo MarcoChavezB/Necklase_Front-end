@@ -8,18 +8,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
-import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
-
-import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,12 +24,10 @@ import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link analytics#newInstance} factory method to
+ * Use the {@link MyPet#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class analytics extends Fragment {
-
-    LinearLayout dogStatus;
+public class MyPet extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +38,7 @@ public class analytics extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public analytics() {
+    public MyPet() {
         // Required empty public constructor
     }
 
@@ -54,11 +48,11 @@ public class analytics extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment analytics.
+     * @return A new instance of fragment MyPet.
      */
     // TODO: Rename and change types and number of parameters
-    public static analytics newInstance(String param1, String param2) {
-        analytics fragment = new analytics();
+    public static MyPet newInstance(String param1, String param2) {
+        MyPet fragment = new MyPet();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,20 +69,25 @@ public class analytics extends Fragment {
         }
     }
 
-    ImageView selectDevice, goDogInfo;
-    TextView dogName;
+    TextView nameText, razaText, generoText, dueñoText;
+    LinearLayout goBack;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_analytics, container, false);
+        View view =  inflater.inflate(R.layout.fragment_my_pet, container, false);
+
+        nameText = view.findViewById(R.id.nameText);
+        razaText = view.findViewById(R.id.razaText);
+        generoText = view.findViewById(R.id.generoText);
+        dueñoText = view.findViewById(R.id.dueñoText);
+        goBack = view.findViewById(R.id.goBack);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        dogName = view.findViewById(R.id.dogName);
 
         RetrofitApiModel retro = new RetrofitApiModel();
         Retrofit retrofit = retro.provideRetrofit();
@@ -97,33 +96,23 @@ public class analytics extends Fragment {
         myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
             @Override
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
-                dogName.setText(response.body().getNombre());
+                if (response.isSuccessful() && response.body() != null) {
+
+                    MyPetPostModel personalData = response.body();
+                    nameText.setText(personalData.getNombre());
+                    razaText.setText(personalData.getRaza());
+                    generoText.setText(personalData.getGenero());
+                    dueñoText.setText(personalData.getDueño());
+                }
             }
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
         });
 
-        goDogInfo = view.findViewById(R.id.goDogInfo);
-        goDogInfo.setOnClickListener(new View.OnClickListener() {
+        goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, new MyPet()).commit();
-            }
-        });
-
-        dogStatus = view.findViewById(R.id.dogStatus);
-        dogStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame,new dogStatus()).commit();
-            }
-        });
-
-        selectDevice = view.findViewById(R.id.selectDevice);
-        selectDevice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame,new selectDevice()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame, new analytics()).commit();
             }
         });
 

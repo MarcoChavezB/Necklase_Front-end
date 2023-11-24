@@ -17,7 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Necklase"
         android:usesCleartextTraffic="true">
-    tools:targetApi="31">
+        <activity
+            android:name=".SelectDog_holder_desing"
+            android:exported="false" />
+        <activity
+            android:name=".View.SelectDog"
+            android:exported="false" />
         <activity
             android:name=".View.Login_or_sign"
             android:exported="false" />
