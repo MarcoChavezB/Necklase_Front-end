@@ -9,30 +9,48 @@ import android.os.Bundle;
 
 public class navbar extends AppCompatActivity {
     ActivityNavbarBinding binding;
+    private static final String SELECTED_ITEM_ID = "selected_item_id";
+    private int selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new activity_home());
+
+        if (savedInstanceState != null) {
+            selectedItem = savedInstanceState.getInt(SELECTED_ITEM_ID, R.id.location);
+        } else {
+            selectedItem = R.id.location;
+        }
+        binding.navBar.setSelectedItemId(selectedItem);
 
         binding.navBar.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.location) {
+            selectedItem = item.getItemId();
+
+            if (selectedItem == R.id.location) {
                 replaceFragment(new collar_managment());
-            } else if (item.getItemId() == R.id.statistics) {
+            } else if (selectedItem == R.id.statistics) {
                 replaceFragment(new analytics());
-            } else if (item.getItemId() == R.id.home) {
+            } else if (selectedItem == R.id.home) {
                 replaceFragment(new activity_home());
-            } else if (item.getItemId() == R.id.personal) {
+            } else if (selectedItem == R.id.personal) {
                 replaceFragment(new personal_menu());
-            } else if (item.getItemId() == R.id.home){
-                replaceFragment(new collar_managment());
-            } else if (item.getItemId() == R.id.add){
+            } else if (selectedItem == R.id.add) {
                 replaceFragment(new activity_device());
             }
+
             return true;
         });
+
+
+        binding.navBar.setSelectedItemId(selectedItem);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_ITEM_ID, selectedItem);
     }
 
     private void replaceFragment(Fragment fragment){

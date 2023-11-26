@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.necklase.Model.Device;
+import com.example.necklase.Model.Get.Device;
 import com.example.necklase.R;
 import com.example.necklase.View.Adapter.DeviceAdapter;
 

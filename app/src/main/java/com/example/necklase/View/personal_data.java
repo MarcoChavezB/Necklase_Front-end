@@ -41,7 +41,6 @@ public class personal_data extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Context context;
 
     public personal_data() {
         // Required empty public constructor

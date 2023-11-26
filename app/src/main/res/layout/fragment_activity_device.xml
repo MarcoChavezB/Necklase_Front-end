@@ -187,7 +187,7 @@
                 android:layout_marginTop="50dp"
                 >
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                    android:id="@+id/recycler_view_device_config"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/activity_item_device"

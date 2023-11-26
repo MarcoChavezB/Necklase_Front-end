@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.necklase.Model.Device;
+import com.example.necklase.Model.Get.Device;
 import com.example.necklase.R;
 
 import java.util.List;
