@@ -95,9 +95,6 @@ public class activity_home extends Fragment {
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
         });
-
-
-
         return view;
     }
 }
