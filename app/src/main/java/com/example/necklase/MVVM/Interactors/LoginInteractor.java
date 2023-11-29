@@ -10,6 +10,7 @@ import com.example.necklase.Model.Post.LoginPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.Router.Router;
 import com.example.necklase.View.navbar;
+import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,8 +37,13 @@ public class LoginInteractor {
                 editor.putString("token", response.body().getToken());
                 editor.apply();
 
+                ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+                ViewModelTokenIns.settoken(context);
+
+
                 SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 String token = prefs.getString("token", null);
+
 
                 if(token != null){
                     DecodedJWT decodedJWT = JwtUtils.decode(token);

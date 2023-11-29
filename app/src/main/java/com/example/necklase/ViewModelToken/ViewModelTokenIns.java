@@ -10,7 +10,7 @@ import com.example.necklase.Model.Token.JwtUtils;
 
 public class ViewModelTokenIns {
 
-    private ViewModelTokenIns viewModelTokenIns;
+    private static ViewModelTokenIns viewModelTokenIns;
     private static String token;
     private static String userId;
     private static DecodedJWT decodedJWT;
@@ -26,7 +26,7 @@ public class ViewModelTokenIns {
         return null;
     }
 
-    public ViewModelTokenIns getinstance() {
+    public static synchronized ViewModelTokenIns getinstance() {
         if (viewModelTokenIns == null) {
             viewModelTokenIns = new ViewModelTokenIns();
         }
@@ -34,12 +34,12 @@ public class ViewModelTokenIns {
     }
 
     public String getId() {
-        return this.userId;
+        return userId;
     }
     public DecodedJWT getDecodedJWT() {
-        return this.decodedJWT;
+        return decodedJWT;
     }
     public String token() {
-        return this.token;
+        return token;
     }
 }
