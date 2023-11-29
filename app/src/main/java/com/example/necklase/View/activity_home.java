@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,6 +78,9 @@ public class activity_home extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
+        ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+        ViewModelTokenIns.settoken(view.getContext());
+
         nombredeperro = view.findViewById(R.id.nombredeperro);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
@@ -83,7 +88,7 @@ public class activity_home extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        RetrofitApiModel retro = new RetrofitApiModel(getContext());
+        RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 

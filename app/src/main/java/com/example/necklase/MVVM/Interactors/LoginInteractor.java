@@ -40,7 +40,7 @@ public class LoginInteractor {
                 editor.putString("token", response.body().getToken());
                 editor.apply();
 
-                ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+                ViewModelTokenIns.getinstance();
                 ViewModelTokenIns.settoken(context);
 
 

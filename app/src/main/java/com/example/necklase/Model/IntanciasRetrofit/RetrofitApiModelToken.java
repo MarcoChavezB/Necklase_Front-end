@@ -2,6 +2,7 @@ package com.example.necklase.Model.IntanciasRetrofit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.necklase.Model.Interceptor.AuthInterceptor;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
