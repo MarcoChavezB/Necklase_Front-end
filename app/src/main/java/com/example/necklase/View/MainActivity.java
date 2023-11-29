@@ -10,6 +10,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.util.Date;
 
@@ -23,15 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         CountDownTimer count = new CountDownTimer(1000, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
+            public void onTick(long millisUntilFinished) {}
 
             public void onFinish() {
 
-                SharedPreferences prefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                String token = prefs.getString("token", null);
-
+                String token = new ViewModelTokenIns().token();
 
                 if (token != null && !token.isEmpty()) {
 

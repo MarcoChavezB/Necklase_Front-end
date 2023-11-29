@@ -20,6 +20,7 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.ViewModel.LoginViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +51,6 @@ public class login_view extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 String email1 = email.getText().toString();
                 String password1 = password.getText().toString();
 
@@ -59,54 +59,13 @@ public class login_view extends AppCompatActivity {
                     return;
                 }
 
-                RetrofitApiModel retrofitApiModel = new RetrofitApiModel(login_view.this);
-                Retrofit retrofit = retrofitApiModel.provideRetrofit();
-                LoginManagment loginManagment = new LoginManagment(retrofit);
-
-
-                loginManagment.postData(email1, password1, new Callback<LoginPostModel>() {
-                    @Override
-                    public void onResponse(Call<LoginPostModel> call, Response<LoginPostModel> response) {
-                        if(response.isSuccessful()){
-                            Toast.makeText(login_view.this, "Login successful", Toast.LENGTH_SHORT).show();
-
-                            SharedPreferences.Editor editor = getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
-                            editor.putString("token", response.body().getToken());
-                            editor.apply();
-
-                            SharedPreferences prefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                            String token = prefs.getString("token", null);
-
-                            if(token != null){
-                                DecodedJWT decodedJWT = JwtUtils.decode(token);
-                                if(decodedJWT != null){
-                                    String userId = decodedJWT.getSubject();
-
-                                    // aqui se va a chechar si redireccionar al seleccionador de
-                                    // dispositivos o a la pantalla de statistics
-                                }
-                            }
-                            Router.redirectTo(login_view.this, navbar.class);
-                        }
-                        else{
-                            Toast.makeText(login_view.this, "Login failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<LoginPostModel> call, Throwable t) {
-                        email.setText("Failure");
-                    }
-                });
+                LoginViewModel loginViewModel = new LoginViewModel(login_view.this.getApplication());
+                loginViewModel.login(email1, password1);
             }
         });
 
-
-
-        back.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(login_view.this, Login_or_sign.class));
-            }
+        back.setOnClickListener(v -> {
+            startActivity(new Intent(login_view.this, Login_or_sign.class));
         });
 
         signuptxt.setOnClickListener(v -> {
