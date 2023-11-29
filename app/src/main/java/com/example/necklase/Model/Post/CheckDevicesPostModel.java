@@ -3,14 +3,14 @@ package com.example.necklase.Model.Post;
 import com.google.gson.annotations.SerializedName;
 
 public class CheckDevicesPostModel {
-    @SerializedName("id")
-    private String id;
+    @SerializedName("count")
+    private String numero;
 
-    public CheckDevicesPostModel(String id){
-        this.id = id;
+    public CheckDevicesPostModel(String numero){
+        this.numero = numero;
     }
 
-    public String getId(){
-        return id;
+    public String getNumero(){
+        return numero;
     }
 }

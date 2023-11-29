@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
 public class CheckDevicesManagment {
     private ChechDevicesInterface chechDevicesInterface;
 
-    public CheckDevicesManagment(Retrofit retrofit){
+    public CheckDevicesManagment(Retrofit retrofit){    
      this.chechDevicesInterface = retrofit.create(ChechDevicesInterface.class);
     }
 

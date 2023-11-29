@@ -64,22 +64,20 @@ public class login_view extends AppCompatActivity {
                 }
 
                 loginViewModel.login(email1, password1);
+
+                SharedPreferences prefs = getSharedPreferences("Personal", MODE_PRIVATE);
+                String dispositivos = prefs.getString("nDispositivos", null);
+
+                if(dispositivos.equals("0")){
+                    Toast.makeText(login_view.this, "No tienes dispositivos registrados", Toast.LENGTH_SHORT).show();
+                }else{
+                    Router.redirectTo(login_view.this, SelectDog.class);
+                }
+
             }
         });
 
-        SharedPreferences prefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        String token = prefs.getString("token", null);
-        String id = JwtUtils.decode(token).getSubject();
 
-        loginViewModel.checkDevices(id);
-
-        SharedPreferences Ndispositivos = getSharedPreferences("Personal", MODE_PRIVATE);
-        int nDispositivos = Ndispositivos.getInt("nDispositivos", 0);
-
-        if(nDispositivos == 0){
-        }else{
-            Router.redirectTo(login_view.this, selectDevice.class);
-        }
 
 
         back.setOnClickListener(v -> {

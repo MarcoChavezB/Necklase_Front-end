@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.CheckDevicesManagment;
 import com.example.necklase.Model.Post.CheckDevicesPostModel;
 import com.example.necklase.Model.Post.LoginManagment;
@@ -13,6 +14,7 @@ import com.example.necklase.Model.Post.LoginPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.Router.Router;
 import com.example.necklase.View.navbar;
+import com.example.necklase.View.selectDevice;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import retrofit2.Call;
@@ -54,7 +56,8 @@ public class LoginInteractor {
                         String userId = decodedJWT.getSubject();
                     }
                 }
-                Router.redirectTo(context, navbar.class);
+                //Router.redirectTo(context, navbar.class);
+                checkDevices(JwtUtils.decode(token).getSubject());
             }
 
             @Override
@@ -65,7 +68,7 @@ public class LoginInteractor {
     }
 
     public void checkDevices(String id){
-        RetrofitApiModel retro = new RetrofitApiModel(this.context);
+        RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         CheckDevicesManagment checkDevicesManagment = new CheckDevicesManagment(retrofit);
 
@@ -73,7 +76,7 @@ public class LoginInteractor {
             @Override
             public void onResponse(Call<CheckDevicesPostModel> call, Response<CheckDevicesPostModel> response) {
                 SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
-                editor.putString("nDispositivos", response.body().getId());
+                editor.putString("nDispositivos", response.body().getNumero());
                 editor.apply();
             }
             @Override

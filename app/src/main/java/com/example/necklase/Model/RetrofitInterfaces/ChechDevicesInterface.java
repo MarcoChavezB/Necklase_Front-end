@@ -7,6 +7,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ChechDevicesInterface {
-    @GET("getcount/{id}")
+    @POST("getcount/{id}")
     Call<CheckDevicesPostModel> devices(@Path("id") String id, @Body CheckDevicesPostModel checkDevicesPostModel);
 }
