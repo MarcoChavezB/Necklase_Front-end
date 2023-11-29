@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
 
-                String token = new ViewModelTokenIns().token();
+                String token = ViewModelTokenIns.getinstance().token();
 
                 if (token != null && !token.isEmpty()) {
 
