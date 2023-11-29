@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,18 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.MVVM.Factorys.MyViewModelFactory;
 import com.example.necklase.Model.Get.Device;
-import com.example.necklase.Model.RetrofitApiModel;
-import com.example.necklase.Model.RetrofitInterfaces.DispositivosInterface;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.View.Adapter.DeviceConfigAdapter;
 import com.example.necklase.MVVM.ViewModels.DevicesConfigViewModel;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,11 +79,8 @@ public class activity_device extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     private RetrofitApiModel apiService;
-
     TextView txt;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_device, container, false);

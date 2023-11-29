@@ -16,7 +16,7 @@ import com.example.necklase.Model.Post.LogoutManagment;
 import com.example.necklase.Model.Post.LogoutPostModel;
 import com.example.necklase.Model.Post.PersonalDataManagment;
 import com.example.necklase.Model.Post.PersonalDataPostModel;
-import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
