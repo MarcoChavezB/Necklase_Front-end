@@ -2,35 +2,44 @@ package com.example.necklase.ViewModelToken;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.Token.JwtUtils;
 
-public class ViewModelTokenIns extends AndroidViewModel {
+public class ViewModelTokenIns {
 
-    private String token;
-    private String userId;
-    private DecodedJWT decodedJWT;
-    public ViewModelTokenIns() {
-        super();
-        SharedPreferences prefs = getApplication().getApplicationContext().getSharedPreferences("loginPrefs", MODE_PRIVATE);
+    private static ViewModelTokenIns viewModelTokenIns;
+    private static String token;
+    private static String userId;
+    private static DecodedJWT decodedJWT;
+    private ViewModelTokenIns() {
+
+    }
+
+    public static ViewModelTokenIns settoken(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
         token = prefs.getString("token", null);
         decodedJWT = JwtUtils.decode(token);
         userId = decodedJWT.getSubject();
+        return null;
+    }
+
+    public static synchronized ViewModelTokenIns getinstance() {
+        if (viewModelTokenIns == null) {
+            viewModelTokenIns = new ViewModelTokenIns();
+        }
+        return viewModelTokenIns;
     }
 
     public String getId() {
-        return this.userId;
+        return userId;
     }
     public DecodedJWT getDecodedJWT() {
-        return this.decodedJWT;
+        return decodedJWT;
     }
     public String token() {
-        return this.token;
+        return token;
     }
 }

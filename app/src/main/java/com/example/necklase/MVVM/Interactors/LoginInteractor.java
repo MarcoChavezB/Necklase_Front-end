@@ -37,8 +37,13 @@ public class LoginInteractor {
                 editor.putString("token", response.body().getToken());
                 editor.apply();
 
+                ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+                ViewModelTokenIns.settoken(context);
+
+
                 SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 String token = prefs.getString("token", null);
+
 
                 if(token != null){
                     DecodedJWT decodedJWT = JwtUtils.decode(token);

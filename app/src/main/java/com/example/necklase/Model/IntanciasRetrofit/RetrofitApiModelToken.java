@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitApiModelToken {
 
     private static final String API_BASE_URL = "http://18.223.154.5/api/";
-    private String token;
+    private final String token;
     private Context context;
     public RetrofitApiModelToken() {
         ViewModelTokenIns vs = new ViewModelTokenIns();
