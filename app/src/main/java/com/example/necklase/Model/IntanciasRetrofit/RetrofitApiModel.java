@@ -1,4 +1,4 @@
-package com.example.necklase.Model;
+package com.example.necklase.Model.IntanciasRetrofit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,18 +24,6 @@ public class RetrofitApiModel {
     public Retrofit provideRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
-
-    public Retrofit provideRetrofitoken() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new AuthInterceptor(token))
-                .build();
-
-        return new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

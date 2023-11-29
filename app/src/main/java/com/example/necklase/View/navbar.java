@@ -29,11 +29,11 @@ public class navbar extends AppCompatActivity {
             selectedItem = item.getItemId();
 
             if (selectedItem == R.id.location) {
-                replaceFragment(new collar_managment());
+                replaceFragment(new activity_home());
             } else if (selectedItem == R.id.statistics) {
                 replaceFragment(new analytics());
             } else if (selectedItem == R.id.home) {
-                replaceFragment(new activity_home());
+                replaceFragment(new collar_managment());
             } else if (selectedItem == R.id.personal) {
                 replaceFragment(new personal_menu());
             } else if (selectedItem == R.id.add) {

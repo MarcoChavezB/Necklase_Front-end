@@ -12,12 +12,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Extras.EmailValidator;
 import com.example.necklase.Model.Post.LoginManagment;
 import com.example.necklase.Model.Post.LoginPostModel;
-import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;

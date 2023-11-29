@@ -4,18 +4,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.Post.PersonalDataManagment;
 import com.example.necklase.Model.Post.PersonalDataPostModel;
-import com.example.necklase.Model.RetrofitApiModel;
-import com.example.necklase.Model.RetrofitInterfaces.PersonalDataInterface;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
-import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 

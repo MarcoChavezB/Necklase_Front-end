@@ -2,14 +2,13 @@ package com.example.necklase.MVVM.Repositorys;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.necklase.MVVM.Resource.Resource;
 import com.example.necklase.Model.Get.Device;
-import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.RetrofitInterfaces.DispositivosInterface;
 import java.util.List;
 import retrofit2.Call;
@@ -46,7 +45,6 @@ public class DevicesRepository  {
                 liveData.postValue(Resource.error("Error al cargar los datos", null));
             }
         });
-
         return liveData;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +12,8 @@ import android.widget.Toast;
 
 import com.example.necklase.Extras.EmailValidator;
 import com.example.necklase.Model.Post.RegisterManagment;
-import com.example.necklase.Model.RetrofitApiModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterPostModel;
-import com.example.necklase.Model.RetrofitInterfaces.RegisterInterface;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import retrofit2.Call;
