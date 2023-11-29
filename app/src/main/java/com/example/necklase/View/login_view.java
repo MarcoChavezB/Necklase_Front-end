@@ -85,12 +85,6 @@ public class login_view extends AppCompatActivity {
 
                                     // aqui se va a chechar si redireccionar al seleccionador de
                                     // dispositivos o a la pantalla de statistics
-
-
-
-
-
-
                                 }
                             }
                             Router.redirectTo(login_view.this, navbar.class);
