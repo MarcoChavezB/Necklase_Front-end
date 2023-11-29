@@ -2,8 +2,10 @@ package com.example.necklase.ViewModelToken;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
