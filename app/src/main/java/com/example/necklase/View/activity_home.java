@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
@@ -87,7 +88,7 @@ public class activity_home extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        RetrofitApiModel retro = new RetrofitApiModel(getContext());
+        RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 

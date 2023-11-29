@@ -23,10 +23,11 @@ public class AuthInterceptor implements Interceptor {
 
         Request.Builder builder = original.newBuilder();
         if (authToken != null) {
-            builder.header("Authorization", authToken);
+            builder.header("Authorization", "Bearer " + authToken);
         }
 
         Request request = builder.build();
         return chain.proceed(request);
     }
+
 }

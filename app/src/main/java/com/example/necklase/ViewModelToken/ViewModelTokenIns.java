@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.Token.JwtUtils;
@@ -23,6 +24,7 @@ public class ViewModelTokenIns {
         token = prefs.getString("token", null);
         decodedJWT = JwtUtils.decode(token);
         userId = decodedJWT.getSubject();
+        Log.e("El token", "el token es: " + token);
         return null;
     }
 
