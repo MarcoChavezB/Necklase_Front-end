@@ -25,7 +25,6 @@ public class ViewModelTokenIns extends AndroidViewModel {
     public String getId() {
         return this.userId;
     }
-
     public DecodedJWT getDecodedJWT() {
         return this.decodedJWT;
     }
