@@ -51,7 +51,6 @@ public class login_view extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 String email1 = email.getText().toString();
                 String password1 = password.getText().toString();
 
@@ -64,8 +63,6 @@ public class login_view extends AppCompatActivity {
                 loginViewModel.login(email1, password1);
             }
         });
-
-
 
         back.setOnClickListener(v -> {
             startActivity(new Intent(login_view.this, Login_or_sign.class));

@@ -16,6 +16,8 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterPostModel;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.ViewModel.RegisterViewModel;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +30,7 @@ public class register_view extends AppCompatActivity{
     EditText name, email, password, passwordConfirm, lastName;
     TextView signintxt;
     Button register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,24 +61,8 @@ public class register_view extends AppCompatActivity{
                     return;
                 }
 
-                RetrofitApiModel retrofitApiModel = new RetrofitApiModel(register_view.this);
-                Retrofit retrofit = retrofitApiModel.provideRetrofit();
-                RegisterManagment registerManagment = new RegisterManagment(retrofit);
-
-                registerManagment.postData(name1, lastName1, email1, password1, new Callback<RegisterPostModel>() {
-                    @Override
-                    public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
-                        if(response.isSuccessful()){
-                            Toast.makeText(register_view.this, "Register successful", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(register_view.this, "Register failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<RegisterPostModel> call, Throwable t) {
-                    }
-                });
+                RegisterViewModel registerViewModel = new RegisterViewModel(register_view.this.getApplication());
+                registerViewModel.registrar(name1, lastName1, email1, password1);
 
             }
         });
