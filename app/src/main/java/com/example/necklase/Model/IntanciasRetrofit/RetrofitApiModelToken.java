@@ -15,7 +15,7 @@ public class RetrofitApiModelToken {
     private final String token;
     private Context context;
     public RetrofitApiModelToken() {
-        ViewModelTokenIns vs = new ViewModelTokenIns();
+        ViewModelTokenIns vs = ViewModelTokenIns.getinstance();
         this.token = vs.token();
     }
     public Retrofit provideRetrofit() {
