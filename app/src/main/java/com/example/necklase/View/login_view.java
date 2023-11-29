@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Extras.EmailValidator;
+import com.example.necklase.MVVM.Interactors.LoginInteractor;
 import com.example.necklase.Model.Post.LoginManagment;
 import com.example.necklase.Model.Post.LoginPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
@@ -45,6 +46,9 @@ public class login_view extends AppCompatActivity {
         email = findViewById(R.id.emailTXT);
         password = findViewById(R.id.passwordTXT);
 
+        LoginViewModel loginViewModel = new LoginViewModel(login_view.this.getApplication());
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -59,10 +63,24 @@ public class login_view extends AppCompatActivity {
                     return;
                 }
 
-                LoginViewModel loginViewModel = new LoginViewModel(login_view.this.getApplication());
                 loginViewModel.login(email1, password1);
             }
         });
+
+        SharedPreferences prefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        String id = JwtUtils.decode(token).getSubject();
+
+        loginViewModel.checkDevices(id);
+
+        SharedPreferences Ndispositivos = getSharedPreferences("Personal", MODE_PRIVATE);
+        int nDispositivos = Ndispositivos.getInt("nDispositivos", 0);
+
+        if(nDispositivos == 0){
+        }else{
+            Router.redirectTo(login_view.this, selectDevice.class);
+        }
+
 
         back.setOnClickListener(v -> {
             startActivity(new Intent(login_view.this, Login_or_sign.class));

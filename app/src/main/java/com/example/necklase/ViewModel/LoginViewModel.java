@@ -15,4 +15,9 @@ public class LoginViewModel extends AndroidViewModel {
         LoginInteractor loginInteractor = new LoginInteractor(getApplication().getApplicationContext());
         loginInteractor.login(email, password);
     }
+
+    public void checkDevices(String id){
+        LoginInteractor loginInteractor = new LoginInteractor(getApplication().getApplicationContext());
+        loginInteractor.checkDevices(id);
+    }
 }

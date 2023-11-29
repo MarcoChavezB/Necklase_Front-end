@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
+import com.example.necklase.Model.Post.CheckDevicesManagment;
+import com.example.necklase.Model.Post.CheckDevicesPostModel;
 import com.example.necklase.Model.Post.LoginManagment;
 import com.example.necklase.Model.Post.LoginPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
@@ -58,6 +60,25 @@ public class LoginInteractor {
             @Override
             public void onFailure(Call<LoginPostModel> call, Throwable t) {
                 Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void checkDevices(String id){
+        RetrofitApiModel retro = new RetrofitApiModel(this.context);
+        Retrofit retrofit = retro.provideRetrofit();
+        CheckDevicesManagment checkDevicesManagment = new CheckDevicesManagment(retrofit);
+
+        checkDevicesManagment.getData(id, new Callback<CheckDevicesPostModel>() {
+            @Override
+            public void onResponse(Call<CheckDevicesPostModel> call, Response<CheckDevicesPostModel> response) {
+                SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
+                editor.putString("nDispositivos", response.body().getId());
+                editor.apply();
+            }
+            @Override
+            public void onFailure(Call<CheckDevicesPostModel> call, Throwable t) {
+
             }
         });
     }
