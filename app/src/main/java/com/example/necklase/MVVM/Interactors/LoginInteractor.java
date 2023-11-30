@@ -56,8 +56,8 @@ public class LoginInteractor {
                         String userId = decodedJWT.getSubject();
                     }
                 }
-                //Router.redirectTo(context, navbar.class);
                 checkDevices(JwtUtils.decode(token).getSubject());
+
             }
 
             @Override

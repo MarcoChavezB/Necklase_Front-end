@@ -1,14 +1,19 @@
 package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.necklase.Model.SelectDogM;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.View.Adapter.SelectDogAdapter;
+import com.example.necklase.ViewModel.SelectDogViewModel;
+import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +28,22 @@ public class SelectDog extends AppCompatActivity {
         setContentView(R.layout.activity_select_dog);
         recyclerV = findViewById(R.id.recyclerV);
 
-
-        List<SelectDogM> selectDogMList = new ArrayList<>();
-        selectDogMList.add(new SelectDogM("Dog1", "Model1"));
-        selectDogMList.add(new SelectDogM("Dog2", "Model2"));
-
-        SelectDogAdapter selectDogAdapter = new SelectDogAdapter(selectDogMList);
+        SelectDogAdapter selectDogAdapter = new SelectDogAdapter(new ArrayList<>());
         recyclerV.setAdapter(selectDogAdapter);
 
         recyclerV.setLayoutManager(new LinearLayoutManager(this));
         recyclerV.setHasFixedSize(true);
 
+        SelectDogViewModel selectDogViewModel = new ViewModelProvider(this).get(SelectDogViewModel.class);
+
+        selectDogViewModel.getDeviceUserListLiveData().observe(this, deviceUserModels -> {
+            selectDogAdapter.setDeviceUserList(deviceUserModels);
+        });
+
+        SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        String token = preferences.getString("token", null);
+        String id = JwtUtils.decode(token).getSubject();
+        selectDogViewModel.getDeviceUser(id);
     }
 
 }

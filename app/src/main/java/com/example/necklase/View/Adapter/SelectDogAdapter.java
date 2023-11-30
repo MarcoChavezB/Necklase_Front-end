@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.necklase.Model.Get.DeviceUserModel;
 import com.example.necklase.Model.SelectDogM;
 import com.example.necklase.R;
 import com.example.necklase.View.SelectDog;
@@ -34,6 +35,12 @@ public class SelectDogAdapter extends RecyclerView.Adapter<SelectDogAdapter.View
     public void onBindViewHolder(@NonNull SelectDogAdapter.ViewHolder holder, int position) {
         SelectDogM selectDog = selectDogList.get(position);
         holder.setData(selectDog);
+    }
+
+    public void setDeviceUserList(List<DeviceUserModel> selectDogList){
+        selectDogList.clear();
+        selectDogList.addAll(selectDogList);
+        notifyDataSetChanged();
     }
 
     @Override
