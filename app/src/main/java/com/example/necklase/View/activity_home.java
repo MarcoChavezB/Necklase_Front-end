@@ -83,10 +83,6 @@ public class activity_home extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
-
-        ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
-        ViewModelTokenIns.settoken(view.getContext());
-
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
 
@@ -109,6 +105,7 @@ public class activity_home extends Fragment {
 
                 Router.redirectTo(getActivity(), SelectDog.class);
             }
+
         });
 
         myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
