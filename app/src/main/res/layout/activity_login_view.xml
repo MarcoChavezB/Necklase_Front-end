@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansgeorgian_variablefont_wdth_wght"
                     android:gravity="center"
-                    android:text="Login"
+                    android:text="Register"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@id/inputs"
