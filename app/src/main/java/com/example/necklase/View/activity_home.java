@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
@@ -81,14 +82,15 @@ public class activity_home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
-/*
+
+
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
-*/
+
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
 
-        /*
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
 
@@ -98,7 +100,7 @@ public class activity_home extends Fragment {
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 
-*/
+
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,17 +112,19 @@ public class activity_home extends Fragment {
                 Router.redirectTo(getActivity(), SelectDog.class);
             }
         });
-/*
+
         myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
             @Override
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
-                nombredeperro.setText(response.body().getNombre());
+                if (response.isSuccessful()){
+                    nombredeperro.setText(response.body().getNombre());
+                }else{
+                    Toast.makeText(view.getContext(), "Error en cargar los datos del perro", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
         });
-
- */
         return view;
     }
 }
