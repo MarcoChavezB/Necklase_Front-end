@@ -96,6 +96,10 @@ public class activity_home extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
+        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
+        String idDevice = device.getString("id", null);
+
+
         RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
@@ -113,7 +117,7 @@ public class activity_home extends Fragment {
             }
         });
 
-        myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
+        myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
             @Override
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                 if (response.isSuccessful()){
