@@ -71,7 +71,16 @@ public class login_view extends AppCompatActivity {
                 if(dispositivos.equals("0")){
                     Toast.makeText(login_view.this, "No tienes dispositivos registrados", Toast.LENGTH_SHORT).show();
                 }else{
-                    Router.redirectTo(login_view.this, SelectDog.class);
+                    SharedPreferences id = getSharedPreferences("deviceID", MODE_PRIVATE);
+                    String idDevice = id.getString("id", null);
+
+                    if(idDevice == null){
+                        Router.redirectTo(login_view.this, SelectDog.class);
+                    }else{
+                        Toast.makeText(login_view.this, "Ya tienes un dispositivo registrado", Toast.LENGTH_SHORT).show();
+                        Router.redirectTo(login_view.this, navbar.class);
+                    }
+
                 }
 
             }

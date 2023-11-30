@@ -461,6 +461,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
+                android:id="@+id/cambiar"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="320dp"

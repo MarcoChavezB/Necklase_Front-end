@@ -16,8 +16,7 @@ public class DeviceUserManagment {
     }
 
     public void getData(String id, Callback<List<DeviceUserModel>> callback){
-        DeviceUserModel deviceUserModel = new DeviceUserModel(id);
-        Call<List<DeviceUserModel>> call = devicesUserInterface.getDevices(deviceUserModel);
+        Call<List<DeviceUserModel>> call = devicesUserInterface.getDevices(id);
         call.enqueue(callback);
     }
 }

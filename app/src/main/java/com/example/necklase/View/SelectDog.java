@@ -28,7 +28,7 @@ public class SelectDog extends AppCompatActivity {
         setContentView(R.layout.activity_select_dog);
         recyclerV = findViewById(R.id.recyclerV);
 
-        SelectDogAdapter selectDogAdapter = new SelectDogAdapter(new ArrayList<>());
+        SelectDogAdapter selectDogAdapter = new SelectDogAdapter(new ArrayList<>(), this);
         recyclerV.setAdapter(selectDogAdapter);
 
         recyclerV.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +42,7 @@ public class SelectDog extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String token = preferences.getString("token", null);
+
         String id = JwtUtils.decode(token).getSubject();
         selectDogViewModel.getDeviceUser(id);
     }

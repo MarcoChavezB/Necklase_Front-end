@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
@@ -16,6 +18,7 @@ import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import retrofit2.Call;
@@ -71,18 +74,21 @@ public class activity_home extends Fragment {
     }
 
     TextView nombredeperro;
+    ImageView cambiar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
-
+/*
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
-
+*/
         nombredeperro = view.findViewById(R.id.nombredeperro);
+        cambiar = view.findViewById(R.id.cambiar);
 
+        /*
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
 
@@ -92,6 +98,19 @@ public class activity_home extends Fragment {
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 
+*/
+        cambiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("id");
+                editor.apply();
+
+                Router.redirectTo(getActivity(), SelectDog.class);
+            }
+        });
+/*
         myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
             @Override
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
@@ -100,6 +119,8 @@ public class activity_home extends Fragment {
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
         });
+
+ */
         return view;
     }
 }

@@ -38,25 +38,27 @@ public class LoginInteractor {
             @Override
             public void onResponse(Call<LoginPostModel> call, Response<LoginPostModel> response) {
 
-                SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
-                editor.putString("token", response.body().getToken());
-                editor.apply();
+               if(response.isSuccessful()){
+                   SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
+                   editor.putString("token", response.body().getToken());
+                   editor.apply();
 
-                ViewModelTokenIns.getinstance();
-                ViewModelTokenIns.settoken(context);
-
-
-                SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                String token = prefs.getString("token", null);
+                   ViewModelTokenIns.getinstance();
+                   ViewModelTokenIns.settoken(context);
 
 
-                if(token != null){
-                    DecodedJWT decodedJWT = JwtUtils.decode(token);
-                    if(decodedJWT != null){
-                        String userId = decodedJWT.getSubject();
-                    }
-                }
-                checkDevices(JwtUtils.decode(token).getSubject());
+                   SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                   String token = prefs.getString("token", null);
+
+
+                   if(token != null){
+                       DecodedJWT decodedJWT = JwtUtils.decode(token);
+                       if(decodedJWT != null){
+                           String userId = decodedJWT.getSubject();
+                       }
+                   }
+                   checkDevices(JwtUtils.decode(token).getSubject());
+               }
 
             }
 
@@ -75,9 +77,11 @@ public class LoginInteractor {
         checkDevicesManagment.getData(id, new Callback<CheckDevicesPostModel>() {
             @Override
             public void onResponse(Call<CheckDevicesPostModel> call, Response<CheckDevicesPostModel> response) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
-                editor.putString("nDispositivos", response.body().getNumero());
-                editor.apply();
+                if(response.isSuccessful()){
+                    SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
+                    editor.putString("nDispositivos", response.body().getNumero());
+                    editor.apply();
+                }
             }
             @Override
             public void onFailure(Call<CheckDevicesPostModel> call, Throwable t) {
