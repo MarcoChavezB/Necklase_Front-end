@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
@@ -80,21 +81,21 @@ public class analytics extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_analytics, container, false);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
-
-        String userId = JwtUtils.decode(token).getSubject();
+        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
+        String idDevice = device.getString("id", null);
 
         dogName = view.findViewById(R.id.dogName);
 
-        RetrofitApiModel retro = new RetrofitApiModel(getContext());
+        RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
 
-        myPetManagment.getData(userId, new Callback<MyPetPostModel>() {
+        myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
             @Override
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
-                dogName.setText(response.body().getNombre());
+                if(response.isSuccessful()){
+                    dogName.setText(response.body().getNombre());
+                }
             }
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {}

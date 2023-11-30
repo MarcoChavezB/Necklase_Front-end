@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.PersonalDataManagment;
 import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
@@ -88,7 +89,7 @@ public class personal_data extends Fragment {
 
         String userId = JwtUtils.decode(token).getSubject();
 
-        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(getContext());
+        RetrofitApiModelToken retrofitApiModel = new RetrofitApiModelToken();
         Retrofit retrofit = retrofitApiModel.provideRetrofit();
         PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
 

@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.LogoutManagment;
 import com.example.necklase.Model.Post.LogoutPostModel;
 import com.example.necklase.Model.Post.PersonalDataManagment;
@@ -96,7 +97,7 @@ public class personal_menu extends Fragment {
         DecodedJWT decodedJWT = JwtUtils.decode(token);
         String userId =  decodedJWT.getSubject();
 
-        RetrofitApiModel retrofitApiModel = new RetrofitApiModel(getContext());
+        RetrofitApiModelToken retrofitApiModel = new RetrofitApiModelToken();
         Retrofit retrofit = retrofitApiModel.provideRetrofit();
         PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
 

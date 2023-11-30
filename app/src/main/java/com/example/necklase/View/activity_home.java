@@ -90,12 +90,6 @@ public class activity_home extends Fragment {
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
 
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
-
-        String userId = JwtUtils.decode(token).getSubject();
-
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", null);
 
