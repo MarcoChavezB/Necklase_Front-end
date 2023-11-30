@@ -50,7 +50,6 @@ public class LoginInteractor {
                    SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
                    String token = prefs.getString("token", null);
 
-
                    if(token != null){
                        DecodedJWT decodedJWT = JwtUtils.decode(token);
                        if(decodedJWT != null){

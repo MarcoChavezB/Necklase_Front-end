@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,8 +81,12 @@ public class activity_home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
+
+        ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+        ViewModelTokenIns.settoken(view.getContext());
 
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
@@ -93,7 +98,6 @@ public class activity_home extends Fragment {
         RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
-
 
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override

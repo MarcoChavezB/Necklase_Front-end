@@ -16,7 +16,6 @@ public class ViewModelTokenIns {
     private static String userId;
     private static DecodedJWT decodedJWT;
     private ViewModelTokenIns() {
-
     }
 
     public static ViewModelTokenIns settoken(Context context) {
