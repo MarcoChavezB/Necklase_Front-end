@@ -34,8 +34,6 @@ public class SelectDogInteractors {
             public void onResponse(Call<List<DeviceUserModel>> call, Response<List<DeviceUserModel>> response) {
                 int responseCode = response.code();
                 if (response.isSuccessful()) {
-
-                    Toast.makeText(context, "Correcto", Toast.LENGTH_SHORT).show();
                     List<DeviceUserModel> deviceUserList = response.body();
                     viewModel.onDataReceived(deviceUserList);
                 } else {

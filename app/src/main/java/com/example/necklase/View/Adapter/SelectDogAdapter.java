@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,12 +84,10 @@ public class SelectDogAdapter extends RecyclerView.Adapter<SelectDogAdapter.View
                     editor.putString("id", id);
                     editor.apply();
 
-                    //Router.redirectTo(context, navbar.class);
-
+                    Toast.makeText(context, "Perro seleccionado: " + id, Toast.LENGTH_SHORT).show();
+                    Router.redirectTo(context, navbar.class);
                 }
             });
-
         }
-
     }
 }

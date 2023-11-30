@@ -118,6 +118,11 @@ public class activity_home extends Fragment {
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                 if (response.isSuccessful()){
                     nombredeperro.setText(response.body().getNombre());
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE).edit();
+                    editor.putString("nombre", response.body().getNombre());
+                    editor.putString("raza", response.body().getRaza());
+                    editor.putString("genero", response.body().getGenero());
+                    editor.apply();
                 }else{
                     Toast.makeText(view.getContext(), "Error en cargar los datos del perro", Toast.LENGTH_SHORT).show();
                 }
