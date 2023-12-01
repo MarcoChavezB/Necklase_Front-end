@@ -1,8 +1,10 @@
 package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
                 }
+                
             }
         };
         count.start();

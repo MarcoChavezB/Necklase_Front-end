@@ -374,6 +374,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:src="@mipmap/sad_foreground"
+                                                android:alpha="0.3"
                                                 />
 
                                         </LinearLayout>
@@ -396,6 +397,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:src="@mipmap/neutral_foreground"
+                                                android:alpha="0.3"
                                                 />
 
                                         </LinearLayout>
