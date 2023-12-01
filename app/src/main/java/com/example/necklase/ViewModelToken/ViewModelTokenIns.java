@@ -46,7 +46,9 @@ public class ViewModelTokenIns {
     }
     public void setToken(String token) {
         ViewModelTokenIns.token = token;
-        decodedJWT = JwtUtils.decode(ViewModelTokenIns.token);
+        if(token != null){
+            decodedJWT = JwtUtils.decode(ViewModelTokenIns.token);
+        }
     }
     public DecodedJWT getDecodedJWT() {
         return decodedJWT;
