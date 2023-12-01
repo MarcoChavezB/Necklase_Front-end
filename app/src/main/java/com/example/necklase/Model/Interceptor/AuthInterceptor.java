@@ -7,19 +7,16 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class AuthInterceptor implements Interceptor {
-    private String authToken;
+    private TokenProvider tokenProvider;
 
-    public AuthInterceptor(String token) {
-        this.authToken = token;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public AuthInterceptor(TokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
+        String authToken = tokenProvider.getToken();
 
         Request.Builder builder = original.newBuilder();
         if (authToken != null) {
@@ -29,5 +26,4 @@ public class AuthInterceptor implements Interceptor {
         Request request = builder.build();
         return chain.proceed(request);
     }
-
 }

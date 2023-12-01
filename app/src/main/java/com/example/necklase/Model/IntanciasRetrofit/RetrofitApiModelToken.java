@@ -20,8 +20,10 @@ public class RetrofitApiModelToken {
         this.token = vs.token();
     }
     public Retrofit provideRetrofit() {
+        ViewModelTokenIns tokenProvider = ViewModelTokenIns.getinstance();
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new AuthInterceptor(token))
+                .addInterceptor(new AuthInterceptor(tokenProvider))
                 .build();
 
         return new Retrofit.Builder()
