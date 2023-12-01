@@ -1,5 +1,7 @@
 package com.example.necklase.View;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -114,6 +116,7 @@ public class activity_home extends Fragment {
             }
 
         });
+
 
         myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
             @Override

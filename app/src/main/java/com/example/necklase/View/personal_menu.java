@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.ViewModel.PersonalMenuViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +38,6 @@ import retrofit2.Retrofit;
  */
 public class personal_menu extends Fragment {
     LinearLayout personal_data, suport;
-
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -80,10 +82,17 @@ public class personal_menu extends Fragment {
 
     LinearLayout logout, pet;
     TextView test, namePerson, emailPerson;
+    private PersonalMenuViewModel personalMenuViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_menu, container, false);
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        DecodedJWT decodedJWT = JwtUtils.decode(token);
+        String userId =  decodedJWT.getSubject();
 
         pet = view.findViewById(R.id.pet);
         logout = view.findViewById(R.id.logout);
@@ -92,7 +101,35 @@ public class personal_menu extends Fragment {
         namePerson = view.findViewById(R.id.namePerson);
         emailPerson = view.findViewById(R.id.emailPerson);
 
+        personalMenuViewModel = new ViewModelProvider(this).get(PersonalMenuViewModel.class);
+        personalMenuViewModel.getInfoData(userId);
 
+        personalMenuViewModel.getEmailPerson().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                emailPerson.setText(s);
+            }
+        });
+
+        personalMenuViewModel.getNamePerson().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                namePerson.setText(s);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = prefs.getString("token", null);
         DecodedJWT decodedJWT = JwtUtils.decode(token);
@@ -117,13 +154,26 @@ public class personal_menu extends Fragment {
 
             }
         });
+ */
 
-        pet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +198,17 @@ public class personal_menu extends Fragment {
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.remove("token");
                             editor.apply();
+
+                            SharedPreferences.Editor editorRM = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE).edit();
+                            editorRM.remove("id");
+                            editorRM.apply();
+
+                            SharedPreferences.Editor editor2 = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE).edit();
+                            editor2.remove("nombre");
+                            editor2.remove("raza");
+                            editor2.remove("genero");
+                            editor2.apply();
+
                             Router.redirectTo(getActivity(), login_view.class);
                         }else{
                             Toast.makeText(getActivity(), "respuesta no exitosa", Toast.LENGTH_SHORT).show();

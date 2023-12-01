@@ -11,6 +11,8 @@ import com.example.necklase.Model.Post.CheckDevicesManagment;
 import com.example.necklase.Model.Post.CheckDevicesPostModel;
 import com.example.necklase.Model.Post.LoginManagment;
 import com.example.necklase.Model.Post.LoginPostModel;
+import com.example.necklase.Model.Post.MyPetManagment;
+import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.Router.Router;
 import com.example.necklase.View.navbar;
@@ -52,8 +54,10 @@ public class LoginInteractor {
                     ViewModelTokenIns.getinstance();
                     ViewModelTokenIns.settoken(context);
 
-                    Router.redirectTo(context, navbar.class);
 
+
+
+                    Router.redirectTo(context, navbar.class);
                 }else{
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
                 }
@@ -66,6 +70,7 @@ public class LoginInteractor {
             }
         });
     }
+
 
     public void checkDevices(String id){
         RetrofitApiModelToken retro = new RetrofitApiModelToken();
