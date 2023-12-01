@@ -7,9 +7,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.Interceptor.TokenProvider;
 import com.example.necklase.Model.Token.JwtUtils;
 
-public class ViewModelTokenIns {
+public class ViewModelTokenIns implements TokenProvider {
 
     private static ViewModelTokenIns viewModelTokenIns;
     private static String token;
@@ -22,10 +23,16 @@ public class ViewModelTokenIns {
         SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
         token = prefs.getString("token", null);
         decodedJWT = JwtUtils.decode(token);
-        userId = decodedJWT.getSubject();
-        Log.e("El token", "el token es: " + decodedJWT);
+
+        if (decodedJWT != null) {
+            userId = decodedJWT.getSubject();
+            Log.e("El token", "el token es: " + decodedJWT);
+        } else {
+            Log.e("ViewModelTokenIns", "El token es nulo o inválido");
+        }
         return null;
     }
+
 
     public static synchronized ViewModelTokenIns getinstance() {
         if (viewModelTokenIns == null) {
@@ -44,10 +51,24 @@ public class ViewModelTokenIns {
     public String getId() {
         return userId;
     }
+    public void setToken(String token) {
+        ViewModelTokenIns.token = token;
+        if(token != null){
+            decodedJWT = JwtUtils.decode(ViewModelTokenIns.token);
+        }
+    }
     public DecodedJWT getDecodedJWT() {
         return decodedJWT;
     }
+    public void setId(String userId) {
+        ViewModelTokenIns.userId = userId;
+    }
     public String token() {
+        return token;
+    }
+
+    @Override
+    public String getToken() {
         return token;
     }
 }

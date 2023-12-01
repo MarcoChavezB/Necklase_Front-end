@@ -69,8 +69,6 @@ public class login_view extends AppCompatActivity {
         });
 
 
-
-
         back.setOnClickListener(v -> {
             startActivity(new Intent(login_view.this, Login_or_sign.class));
         });
