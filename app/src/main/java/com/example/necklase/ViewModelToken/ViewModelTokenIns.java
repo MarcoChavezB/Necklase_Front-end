@@ -37,8 +37,15 @@ public class ViewModelTokenIns {
     public String getId() {
         return userId;
     }
+    public void setToken(String token) {
+        ViewModelTokenIns.token = token;
+        decodedJWT = JwtUtils.decode(ViewModelTokenIns.token);
+    }
     public DecodedJWT getDecodedJWT() {
         return decodedJWT;
+    }
+    public void setId(String userId) {
+        ViewModelTokenIns.userId = userId;
     }
     public String token() {
         return token;
