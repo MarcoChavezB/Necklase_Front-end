@@ -23,7 +23,7 @@ public class ViewModelTokenIns {
         token = prefs.getString("token", null);
         decodedJWT = JwtUtils.decode(token);
         userId = decodedJWT.getSubject();
-        Log.e("El token", "el token es: " + token);
+        Log.e("El token", "el token es: " + decodedJWT);
         return null;
     }
 
@@ -32,6 +32,13 @@ public class ViewModelTokenIns {
             viewModelTokenIns = new ViewModelTokenIns();
         }
         return viewModelTokenIns;
+    }
+
+    public static ViewModelTokenIns clearToken(Context context){
+        SharedPreferences.Editor editorRM = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
+        editorRM.remove("token");
+        editorRM.apply();
+        return null;
     }
 
     public String getId() {

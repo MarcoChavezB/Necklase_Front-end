@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.necklase.Model.SelectDogM;
 import com.example.necklase.Model.Token.JwtUtils;
@@ -43,7 +44,10 @@ public class SelectDog extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String token = preferences.getString("token", null);
 
+
         String id = JwtUtils.decode(token).getSubject();
+        Toast.makeText(this, "Token de usuario recycler" + id, Toast.LENGTH_SHORT).show();
+
         selectDogViewModel.getDeviceUser(id);
     }
 

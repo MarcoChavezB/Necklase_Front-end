@@ -84,7 +84,6 @@ public class SelectDogAdapter extends RecyclerView.Adapter<SelectDogAdapter.View
                     editor.putString("id", id);
                     editor.apply();
 
-                    Toast.makeText(context, "Perro seleccionado: " + id, Toast.LENGTH_SHORT).show();
                     Router.redirectTo(context, navbar.class);
                 }
             });

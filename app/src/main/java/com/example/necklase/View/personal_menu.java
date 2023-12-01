@@ -127,6 +127,15 @@ public class personal_menu extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editorRM = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE).edit();
+                editorRM.remove("id");
+                editorRM.apply();
+
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE).edit();
+                editor.remove("token");
+                editor.apply();
+
+
                 RetrofitApiModel retro = new RetrofitApiModel(getContext());
                 Retrofit retrofit = retro.provideRetrofit();
                 LogoutManagment logoutManagment = new LogoutManagment(retrofit);
