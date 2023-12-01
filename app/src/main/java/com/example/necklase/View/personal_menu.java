@@ -137,7 +137,7 @@ public class personal_menu extends Fragment {
                 editor.apply();
 
 
-                RetrofitApiModel retro = new RetrofitApiModel(getContext());
+                RetrofitApiModelToken retro = new RetrofitApiModelToken();
                 Retrofit retrofit = retro.provideRetrofit();
                 LogoutManagment logoutManagment = new LogoutManagment(retrofit);
 
