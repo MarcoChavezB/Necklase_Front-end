@@ -31,7 +31,8 @@ public class PersonalMenuViewModel extends AndroidViewModel {
     public void getInfoData(String id){
         PersonalMenuInteractor personalMenuInteractor = new PersonalMenuInteractor(getApplication().getApplicationContext());
         personalMenuInteractor.getInfoData(id);
-        Log.d("name", "Mensajeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee    " + namePerson.getValue());
+        namePerson.setValue(personalMenuInteractor.namePerson);
+        emailPerson.setValue(personalMenuInteractor.emailPerson);
     }
 
 }

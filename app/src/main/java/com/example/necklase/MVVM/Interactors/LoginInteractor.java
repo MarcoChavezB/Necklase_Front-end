@@ -55,11 +55,6 @@ public class LoginInteractor {
                     editor.putString("token", response.body().getToken());
                     editor.apply();
 
-                    ViewModelTokenIns.getinstance();
-                    ViewModelTokenIns.settoken(context);
-
-                    Router.redirectTo(context, navbar.class);
-
                     Intent intent = new Intent(context, activity_bienvenida.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
