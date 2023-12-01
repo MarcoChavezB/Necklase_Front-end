@@ -55,19 +55,15 @@ public class LoginInteractor {
                     editor.putString("token", response.body().getToken());
                     editor.apply();
 
-<<<<<<< HEAD
                     ViewModelTokenIns.getinstance();
                     ViewModelTokenIns.settoken(context);
 
-
-
-
                     Router.redirectTo(context, navbar.class);
-=======
+
                     Intent intent = new Intent(context, activity_bienvenida.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
->>>>>>> 87f94b67ccee36a3e192bd13cd9213e5b927cd1a
+
                 }else{
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
                 }
@@ -78,7 +74,7 @@ public class LoginInteractor {
             }
         });
     }
-<<<<<<< HEAD
+
 
 
     public void checkDevices(String id){
@@ -107,6 +103,4 @@ public class LoginInteractor {
             }
         });
     }
-=======
->>>>>>> 87f94b67ccee36a3e192bd13cd9213e5b927cd1a
 }
