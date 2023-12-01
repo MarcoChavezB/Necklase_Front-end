@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
@@ -82,7 +83,7 @@ public class analytics extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_analytics, container, false);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", null);
+        String idDevice = device.getString("id", "1");
 
         dogName = view.findViewById(R.id.dogName);
 
@@ -95,10 +96,14 @@ public class analytics extends Fragment {
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                 if(response.isSuccessful()){
                     dogName.setText(response.body().getNombre());
+                }else{
+                    Toast.makeText(getActivity(), "Error al cargar datos" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
+            public void onFailure(Call<MyPetPostModel> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error en el servidor", Toast.LENGTH_SHORT).show();
+            }
         });
 
         goDogInfo = view.findViewById(R.id.goDogInfo);

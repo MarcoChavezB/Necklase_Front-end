@@ -38,26 +38,25 @@ public class LoginInteractor {
             @Override
             public void onResponse(Call<LoginPostModel> call, Response<LoginPostModel> response) {
 
-               if(response.isSuccessful()){
-                   SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
-                   editor.putString("token", response.body().getToken());
-                   editor.apply();
+                SharedPreferences.Editor editorRM = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
+                editorRM.remove("token");
+                editorRM.apply();
 
-                   ViewModelTokenIns.getinstance();
-                   ViewModelTokenIns.settoken(context);
+                ViewModelTokenIns.clearToken(context);
 
+                if(response.isSuccessful()){
+                    SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
+                    editor.putString("token", response.body().getToken());
+                    editor.apply();
 
-                   SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                   String token = prefs.getString("token", null);
+                    ViewModelTokenIns.getinstance();
+                    ViewModelTokenIns.settoken(context);
 
-                   if(token != null){
-                       DecodedJWT decodedJWT = JwtUtils.decode(token);
-                       if(decodedJWT != null){
-                           String userId = decodedJWT.getSubject();
-                       }
-                   }
-                   checkDevices(JwtUtils.decode(token).getSubject());
-               }
+                    Router.redirectTo(context, navbar.class);
+
+                }else{
+                    Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -80,6 +79,12 @@ public class LoginInteractor {
                     SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
                     editor.putString("nDispositivos", response.body().getNumero());
                     editor.apply();
+
+                    SharedPreferences dispositivos = context.getSharedPreferences("Personal", MODE_PRIVATE);
+                    String nDispositivos = dispositivos.getString("nDispositivos", null);
+
+                }else{
+                    Toast.makeText(context, "Error al ingresar dispositivos" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

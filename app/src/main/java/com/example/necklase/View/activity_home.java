@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.Get.FirstCollarManagment;
+import com.example.necklase.Model.Get.FirstCollarModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
@@ -92,7 +95,7 @@ public class activity_home extends Fragment {
         cambiar = view.findViewById(R.id.cambiar);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", null);
+        String idDevice = device.getString("id", "1");
 
 
         RetrofitApiModelToken retro = new RetrofitApiModelToken();

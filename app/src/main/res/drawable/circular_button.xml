@@ -4,4 +4,5 @@
     <stroke android:color="#000000" android:width="2dp"/>
     <padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp"/>
     <corners android:radius="100dp"/>
+    <bitmap android:src="@mipmap/perfil_foreground" android:gravity="center"/>
 </shape>

@@ -234,7 +234,8 @@
                                 <Switch
                                     android:layout_width="80dp"
                                     android:layout_height="30dp"
-                                    android:textSize="13sp">
+                                    android:textSize="13sp"
+                                    android:checked="true">
                                 </Switch>
                             </LinearLayout>
                         </LinearLayout>

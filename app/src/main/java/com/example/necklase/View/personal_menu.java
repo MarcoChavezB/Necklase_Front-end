@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
@@ -127,6 +128,15 @@ public class personal_menu extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editorRM = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE).edit();
+                editorRM.remove("id");
+                editorRM.apply();
+
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE).edit();
+                editor.remove("token");
+                editor.apply();
+
+
                 RetrofitApiModel retro = new RetrofitApiModel(getContext());
                 Retrofit retrofit = retro.provideRetrofit();
                 LogoutManagment logoutManagment = new LogoutManagment(retrofit);
@@ -134,10 +144,14 @@ public class personal_menu extends Fragment {
                 logoutManagment.postData(userId, new Callback<LogoutPostModel>() {
                     @Override
                     public void onResponse(Call<LogoutPostModel> call, Response<LogoutPostModel> response) {
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.remove("token");
-                        editor.apply();
-                        Router.redirectTo(getActivity(), login_view.class);
+                        if (response.isSuccessful()){
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.remove("token");
+                            editor.apply();
+                            Router.redirectTo(getActivity(), login_view.class);
+                        }else{
+                            Toast.makeText(getActivity(), "respuesta no exitosa", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     @Override
                     public void onFailure(Call<LogoutPostModel> call, Throwable t) {}

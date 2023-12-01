@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,25 +65,6 @@ public class login_view extends AppCompatActivity {
                 }
 
                 loginViewModel.login(email1, password1);
-
-                SharedPreferences prefs = getSharedPreferences("Personal", MODE_PRIVATE);
-                String dispositivos = prefs.getString("nDispositivos", null);
-
-                if(dispositivos.equals("0")){
-                    Toast.makeText(login_view.this, "No tienes dispositivos registrados", Toast.LENGTH_SHORT).show();
-                }else{
-                    SharedPreferences id = getSharedPreferences("deviceID", MODE_PRIVATE);
-                    String idDevice = id.getString("id", null);
-
-                    if(idDevice == null){
-                        Router.redirectTo(login_view.this, SelectDog.class);
-                    }else{
-                        Toast.makeText(login_view.this, "Ya tienes un dispositivo registrado", Toast.LENGTH_SHORT).show();
-                        Router.redirectTo(login_view.this, navbar.class);
-                    }
-
-                }
-
             }
         });
 

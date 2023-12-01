@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansgeorgian_variablefont_wdth_wght"
                     android:gravity="center"
-                    android:text="Regsiter"
+                    android:text="Login"
                     android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@id/inputs"
@@ -118,6 +118,7 @@
                             android:id="@+id/emailTXT"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
+                            android:text="mzprah@gmail.com"
                             android:background="@drawable/input_style_sencillo"
                             android:paddingStart="8dp"
                             ></EditText>
@@ -147,6 +148,7 @@
                             android:background="@drawable/input_style_sencillo"
                             android:paddingStart="8dp"
                             android:inputType="textPassword"
+                            android:text="1234token"
                             ></EditText>
                     </LinearLayout>
 
