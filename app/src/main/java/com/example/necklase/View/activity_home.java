@@ -99,7 +99,6 @@ public class activity_home extends Fragment {
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
 
-
         RetrofitApiModelToken retro = new RetrofitApiModelToken();
         Retrofit retrofit = retro.provideRetrofit();
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);

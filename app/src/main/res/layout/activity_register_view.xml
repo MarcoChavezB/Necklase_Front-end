@@ -61,6 +61,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/form"
+                android:backgroundTint="@color/Globalbackground"
                 android:layout_width="match_parent"
                 android:layout_height="570dp"
                 android:background="@drawable/rounder_top_left_radius"
@@ -95,11 +96,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="First name"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
+                            android:textColor="@color/white"
                             android:id="@+id/name"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -121,11 +125,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Last name"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
+                            android:textColor="@color/white"
                             android:id="@+id/last_name"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -147,11 +154,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="correo"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
+                            android:textColor="@color/white"
                             android:id="@+id/email"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -173,11 +183,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="contraseña"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
+                            android:textColor="@color/white"
                             android:id="@+id/password"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -200,11 +213,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Confirm password"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
+                            android:textColor="@color/white"
                             android:id="@+id/passwordConfirm"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -227,23 +243,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/inputs">
 
-                    <Button
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/register"
                         android:layout_width="300dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/button_outline_black"
-                        android:backgroundTint="@color/black"
-                        android:text="Register"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toTopOf="@id/signintxt"
+                        android:background="@color/bk_b"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/signintxt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </Button>
+                        >
+                        <ImageView
+                            android:id="@+id/circleanim"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:src="@mipmap/circle_blue_blur"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            ></ImageView>
+                        <Button
+                            android:backgroundTint="#00000000"
+                            android:id="@+id/registerBTN"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Register"
+                            android:textColor="@color/white"
+                            >
+                        </Button>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
+                        android:textColor="@color/white"
                         android:id="@+id/signintxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

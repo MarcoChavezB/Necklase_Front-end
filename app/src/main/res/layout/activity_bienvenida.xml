@@ -29,7 +29,7 @@
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:src="@mipmap/logo_foreground"
+                android:src="@drawable/logo_foreground"
                 android:contentDescription="LOGO"
                 android:layout_gravity="center_vertical"
                 />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundYe"
+    android:background="@color/bk_b"
     tools:context=".View.Main_acept_permisos">
 
     <LinearLayout
@@ -60,7 +60,7 @@
                 <ImageView
                     android:layout_width="300dp"
                     android:layout_height="250dp"
-                    android:src="@mipmap/logo_foreground">
+                    android:src="@drawable/logo_foreground">
                 </ImageView>
             </LinearLayout>
 
@@ -71,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/Globalbackground"
             android:background="@drawable/rounder_top_border"
             android:orientation="vertical">
 
@@ -87,7 +88,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Permisos"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="30sp"
                     android:textStyle="bold"></TextView>
 
@@ -98,7 +99,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Para que la aplicacion funcione como es esperado se necesecita el permiso de localizacion, bluetooth y notificaciones"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
                     >
 
@@ -117,7 +118,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/button_outline_black"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/bkbt_b"
                     android:text="Aceptar"
                     android:textColor="@color/white"></Button>
 
@@ -125,6 +126,8 @@
                     android:id="@+id/denegar"
                     android:layout_width="170dp"
                     android:layout_height="50dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/bk_b"
                     android:background="@drawable/button_outline_white"
                     android:text="Denegar"></Button>
 

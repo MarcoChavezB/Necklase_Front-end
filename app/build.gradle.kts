@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")

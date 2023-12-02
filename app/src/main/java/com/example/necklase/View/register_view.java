@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import retrofit2.Retrofit;
 
 public class register_view extends AppCompatActivity{
 
+    private ImageView img;
     private ImageButton back;
     EditText name, email, password, passwordConfirm, lastName;
     TextView signintxt;
@@ -42,9 +46,11 @@ public class register_view extends AppCompatActivity{
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.passwordConfirm);
-        register = findViewById(R.id.register);
+        register = findViewById(R.id.registerBTN);
         lastName = findViewById(R.id.last_name);
-
+        img = findViewById(R.id.circleanim);
+        Animation scaleAnimation = AnimationUtils.loadAnimation(register_view.this, R.anim.light_blur_blue_slow);
+        img.startAnimation(scaleAnimation);
 
 
         register.setOnClickListener(new View.OnClickListener() {

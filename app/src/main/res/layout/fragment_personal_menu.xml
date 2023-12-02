@@ -62,7 +62,7 @@
                     <ImageView
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:src="@mipmap/logo_foreground"></ImageView>
+                        android:src="@drawable/logo_foreground"></ImageView>
 
                     <LinearLayout
                         android:layout_width="match_parent"

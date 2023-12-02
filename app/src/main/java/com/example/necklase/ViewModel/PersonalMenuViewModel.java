@@ -34,5 +34,4 @@ public class PersonalMenuViewModel extends AndroidViewModel {
         namePerson.setValue(personalMenuInteractor.namePerson);
         emailPerson.setValue(personalMenuInteractor.emailPerson);
     }
-
 }

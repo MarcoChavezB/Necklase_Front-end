@@ -4,37 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/captura_de_pantalla_2023_11_19_231819"
+    android:background="@color/bk_b"
     tools:context=".View.Login_or_sign">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:id="@+id/ima"
         android:layout_width="match_parent"
         tools:ignore="MissingConstraints">
+
+
+
         <ImageView
+            android:id="@+id/img"
+            android:layout_marginTop="150dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@mipmap/logo_foreground"
+            android:src="@drawable/logo_foreground"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="200dp">
         </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="370dp"
+        android:background="#00000000"
         app:layout_constraintTop_toBottomOf="@id/ima"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
+        <ImageView
+            app:layout_constraintTop_toTopOf="@+id/signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/circleanim"
+            android:layout_width="1000dp"
+            android:layout_height="1000dp"
+            android:src="@mipmap/circle_blue_blur"
+            ></ImageView>
 
         <Button
+            android:layout_marginTop="70dp"
             android:background="@drawable/button_outline_black"
-            android:backgroundTint="#43FFFFFF"
+            android:backgroundTint="#12FFFFFF"
             android:text="Register"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -53,7 +69,7 @@
             android:textStyle="bold"
 
             android:background="@drawable/button_outline_black"
-            android:backgroundTint="#75008EB1"
+            android:backgroundTint="#27008EB1"
             android:text="log in"
             android:textSize="20dp"
             android:textColor="@color/white"

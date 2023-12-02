@@ -7,9 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ public class login_view extends AppCompatActivity {
     TextView signuptxt;
     Button login;
     EditText email, password;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +47,12 @@ public class login_view extends AppCompatActivity {
 
         back = findViewById(R.id.regresar);
         signuptxt = findViewById(R.id.signuptxt);
-        login = findViewById(R.id.login);
+        login = findViewById(R.id.loginBTN);
         email = findViewById(R.id.emailTXT);
         password = findViewById(R.id.passwordTXT);
+        img = findViewById(R.id.circleanim);
+        Animation scaleAnimation = AnimationUtils.loadAnimation(login_view.this, R.anim.light_blur_blue_slow);
+        img.startAnimation(scaleAnimation);
 
         LoginViewModel loginViewModel = new LoginViewModel(login_view.this.getApplication());
 

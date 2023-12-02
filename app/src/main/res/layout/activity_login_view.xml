@@ -52,7 +52,7 @@
                     android:layout_width="270dp"
                     android:layout_height="150dp"
                     android:scaleType="fitStart"
-                    android:src="@mipmap/logo_foreground"
+                    android:src="@drawable/logo_foreground"
                     >
                 </ImageView>
 
@@ -62,6 +62,7 @@
                 android:id="@+id/form"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
+                android:backgroundTint="@color/Globalbackground"
                 android:background="@drawable/rounder_top_left_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
                     android:fontFamily="@font/notosansgeorgian_variablefont_wdth_wght"
                     android:gravity="center"
                     android:text="Login"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@id/inputs"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +111,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Email"></TextView>
@@ -119,6 +121,8 @@
                             android:layout_width="300dp"
                             android:layout_height="45dp"
                             android:text="mzprah@gmail.com"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/bg_black_view"
                             android:background="@drawable/input_style_sencillo"
                             android:paddingStart="8dp"
                             ></EditText>
@@ -137,11 +141,13 @@
                         app:layout_constraintTop_toBottomOf="@id/username">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Password"></TextView>
 
                         <EditText
+                            android:backgroundTint="@color/bg_black_view"
                             android:id="@+id/passwordTXT"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
@@ -149,29 +155,47 @@
                             android:paddingStart="8dp"
                             android:inputType="textPassword"
                             android:text="1234token"
+                            android:textColor="@color/white"
                             ></EditText>
                     </LinearLayout>
 
                 </LinearLayout>
 
 
-                <Button
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/login"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/button_outline_black"
-                    android:backgroundTint="@color/black"
-                    android:text="Login"
-                    android:textColor="@color/white"
+                    android:background="@color/bk_b"
                     app:layout_constraintBottom_toTopOf="@+id/signuptxt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/inputs">
+                    app:layout_constraintTop_toBottomOf="@id/inputs"
+                    >
+                    <ImageView
+                        android:id="@+id/circleanim"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:src="@mipmap/circle_blue_blur"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        ></ImageView>
+                    <Button
+                        android:backgroundTint="#00000000"
+                        android:id="@+id/loginBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Login"
+                        android:textColor="@color/white"
+                        >
+                    </Button>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </Button>
 
                 <TextView
+                    android:textColor="@color/white"
                     android:id="@+id/signuptxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

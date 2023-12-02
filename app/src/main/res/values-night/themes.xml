@@ -12,4 +12,11 @@
         <item name="android:statusBarColor">@color/Globalbackground</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+
+    <style name="Temanegro.Necklase" parent="">
+        <item name="android:navigationBarColor">@color/bk_b</item>
+        <item name="android:statusBarColor">@color/bk_b</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
