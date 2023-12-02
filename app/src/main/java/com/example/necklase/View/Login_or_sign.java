@@ -19,6 +19,7 @@ public class Login_or_sign extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Temanegro_Necklase);
         setContentView(R.layout.activity_login_or_sign);
         login = findViewById(R.id.login);
         sign = findViewById(R.id.signup);

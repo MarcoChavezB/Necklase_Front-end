@@ -255,6 +255,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         >
                         <ImageView
+                            android:layout_marginLeft="15dp"
                             android:id="@+id/circleanim"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"

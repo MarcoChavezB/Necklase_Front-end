@@ -23,6 +23,8 @@ public class AnimationSplash extends AppCompatActivity {
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -30,7 +32,7 @@ public class AnimationSplash extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 6000);
+        }, 5000);
 
     }
 }
