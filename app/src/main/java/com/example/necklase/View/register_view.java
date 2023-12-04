@@ -67,6 +67,11 @@ public class register_view extends AppCompatActivity{
                     return;
                 }
 
+                if(password.getText() != passwordConfirm.getText()){
+                    Toast.makeText(register_view.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 RegisterViewModel registerViewModel = new RegisterViewModel(register_view.this.getApplication());
                 registerViewModel.registrar(name1, lastName1, email1, password1);
 

@@ -15,13 +15,16 @@ public class LoginPostModel {
     @SerializedName("access_token")
     private String access_token;
 
+    @SerializedName("isActive")
+    private String activate;
+
     public LoginPostModel(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getActivate() {
+        return activate;
     }
 
     public String getToken() {

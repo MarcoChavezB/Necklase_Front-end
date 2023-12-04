@@ -1,11 +1,15 @@
 package com.example.necklase.MVVM.Interactors;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterManagment;
 import com.example.necklase.Model.Post.RegisterPostModel;
+import com.example.necklase.R;
 import com.example.necklase.View.register_view;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
@@ -30,7 +34,7 @@ public class RegisterInteractor {
             @Override
             public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(context, "Register successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Se envio un correo de verificacion", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(context, "Register failed", Toast.LENGTH_SHORT).show();
                 }
@@ -38,8 +42,9 @@ public class RegisterInteractor {
 
             @Override
             public void onFailure(Call<RegisterPostModel> call, Throwable t) {
-
+                Toast.makeText(context, "Error en el servidor", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }
