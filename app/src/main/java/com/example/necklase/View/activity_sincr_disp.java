@@ -1,43 +1,187 @@
 package com.example.necklase.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.necklase.Model.Get.Device;
 import com.example.necklase.R;
+import com.example.necklase.Router.Router;
 import com.example.necklase.View.Adapter.DeviceSync;
+
+import android.bluetooth.BluetoothAdapter;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class activity_sincr_disp extends AppCompatActivity {
 
+    private static final int REQUEST_ENABLE_BT = 1;
     private RecyclerView recyclerView;
     private DeviceSync adapter;
     private List<Device> listadispositivos;
+    private BluetoothAdapter bluetoothAdapter;
+    int REQUEST_PHONE_LOCATION = 126462626;
+
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @RequiresApi(api = Build.VERSION_CODES.S)
+        @SuppressLint("NotifyDataSetChanged")
+        public void onReceive(Context context, Intent intent) {
+            Log.e("On receive", "onReceive: llego");
+            String action = intent.getAction();
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if (ActivityCompat.checkSelfPermission(activity_sincr_disp.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    ActivityCompat.requestPermissions(activity_sincr_disp.this,
+                            new String[]{Manifest.permission.BLUETOOTH_CONNECT},
+                            REQUEST_ENABLE_BT);
+                    return;
+                }
+                String deviceName = device.getName();
+                if (deviceName == null) {
+                    deviceName = "Desconocido";
+                }
+                String deviceAddress = device.getAddress();
+                if (deviceAddress == null) {
+                    deviceAddress = "Desconocido";
+                }
+                Log.e("Dispositivo encontrado", deviceName + " " + deviceAddress);
+                listadispositivos.add(new Device(0, deviceName, deviceAddress));
+                adapter.notifyDataSetChanged();
+            }
+        }
+    };
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sincr_disp);
 
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, "El dispositivo no soporta Bluetooth", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.BLUETOOTH_CONNECT},
+                        REQUEST_ENABLE_BT);
+                return;
+            }
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                checkBluetoothPermissionsAndDiscover();
+            }
+        }
+
         recyclerView = findViewById(R.id.recycler_view_sync_device);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listadispositivos = new ArrayList<>();
-        listadispositivos.add(new Device(1, "Pechera", "9912ik2"));
-        listadispositivos.add(new Device(2, "Pechera", "9912ik2"));
+        listadispositivos.add(new Device(1, "dark manta", "Desconocido"));
+        listadispositivos.add(new Device(1, "dark alien", "Desconocido"));
+
         adapter = new DeviceSync(this, new DeviceSync.OnItemClickListener() {
             @Override
             public void onItemClick(Device dispositivo) {
-                Intent intent = new Intent(activity_sincr_disp.this, navbar.class);
-                startActivity(intent);
-
+                // Manejar el clic en un dispositivo
             }
         }, listadispositivos);
+
         recyclerView.setAdapter(adapter);
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    private void checkBluetoothPermissionsAndDiscover() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_ENABLE_BT);
+        } else {
+            startBluetoothDiscovery();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    private void startBluetoothDiscovery() {
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(receiver, filter);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.BLUETOOTH_SCAN},
+                    REQUEST_ENABLE_BT);
+            return;
+        }
+        bluetoothAdapter.startDiscovery();
+        Log.e("discovery ", "Buscando dispositivos...");
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_ENABLE_BT && grantResults.length > 0) {
+            boolean allPermissionsGranted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    break;
+                }
+            }
+
+            if (allPermissionsGranted) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    startBluetoothDiscovery();
+                }
+            } else {
+                Toast.makeText(this, "Todos los permisos de Bluetooth son necesarios", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.S)
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.BLUETOOTH_SCAN},
+                    REQUEST_ENABLE_BT);
+            return;
+        }
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+            Log.e("discovery ", "se detuvo buscar dispositivos...");
+        }
+    }
+
 }

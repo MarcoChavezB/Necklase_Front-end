@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c7cccb"
+    android:background="@color/bk_b"
     tools:context=".View.MainActivity"
     >
+    <ImageView
+        android:id="@+id/circleanim"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/cat_paw_clipart_design_illustration_free_png"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        ></ImageView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

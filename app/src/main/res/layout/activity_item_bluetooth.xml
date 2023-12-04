@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent">
+    android:layout_height="150dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dispositivos"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:elevation="55dp"
@@ -72,7 +71,7 @@
                         android:id="@+id/tipodedispositivo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="tipo de dispositivo"
+                        android:text="Nombre del dispositivo"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="15dp"
