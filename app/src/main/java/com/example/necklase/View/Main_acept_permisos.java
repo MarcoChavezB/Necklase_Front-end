@@ -66,6 +66,7 @@ public class Main_acept_permisos extends AppCompatActivity {
 
         if (!permisosNecesarios.isEmpty()) {
             ActivityCompat.requestPermissions(this, permisosNecesarios.toArray(new String[0]), REQUEST_PHONE_LOCATION);
+
         } else {
             Router.redirectTo(Main_acept_permisos.this, Login_or_sign.class);
         }

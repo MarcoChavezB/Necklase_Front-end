@@ -71,6 +71,15 @@ public class login_view extends AppCompatActivity {
                     return;
                 }
 
+                SharedPreferences prefs = getApplication().getSharedPreferences("personal", MODE_PRIVATE);
+                String emailP = prefs.getString("email", null);
+                String passwordP = prefs.getString("password", null);
+
+                if(emailP != null && passwordP != null){
+                    email.setText(emailP);
+                    password.setText(passwordP);
+                }
+
                 loginViewModel.login(email1, password1);
             }
         });

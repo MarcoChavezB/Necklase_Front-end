@@ -2,6 +2,7 @@ package com.example.necklase.MVVM.Interactors;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -10,6 +11,8 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterManagment;
 import com.example.necklase.Model.Post.RegisterPostModel;
 import com.example.necklase.R;
+import com.example.necklase.Router.Router;
+import com.example.necklase.View.login_view;
 import com.example.necklase.View.register_view;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
@@ -35,6 +38,11 @@ public class RegisterInteractor {
             public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(context, "Se envio un correo de verificacion", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor setInfo = context.getSharedPreferences("personal", Context.MODE_PRIVATE).edit();
+                    setInfo.putString("email", email);
+                    setInfo.putString("password", password);
+                    setInfo.apply();
+                    Router.redirectTo(context, login_view.class);
                 }else{
                     Toast.makeText(context, "Register failed", Toast.LENGTH_SHORT).show();
                 }
