@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
@@ -75,34 +78,42 @@ public class analytics extends Fragment {
     }
 
     ImageView selectDevice, goDogInfo;
-    TextView dogName;
+    TextView dogName, restingTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_analytics, container, false);
+        View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
 
+        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
+        String code = codeDevice.getString("codigo", null);
+
         dogName = view.findViewById(R.id.dogName);
+        restingTime = view.findViewById(R.id.restingTime);
 
-        RetrofitApiModelToken retro = new RetrofitApiModelToken();
-        Retrofit retrofit = retro.provideRetrofit();
-        MyPetManagment myPetManagment = new MyPetManagment(retrofit);
+        AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
+        LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
 
-        myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
+        info.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
-                if(response.isSuccessful()){
-                    dogName.setText(response.body().getNombre());
-                }else{
-                    Toast.makeText(getActivity(), "Error al cargar datos" + response.code(), Toast.LENGTH_SHORT).show();
-                }
+            public void onChanged(String newInfo) {
+                dogName.setText(newInfo);
             }
+        });
+
+
+        LiveData<String> hum = analiticsInteractor.getHum(code);
+        hum.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onFailure(Call<MyPetPostModel> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error en el servidor", Toast.LENGTH_SHORT).show();
+            public void onChanged(String newHum) {
+                if(newHum != null){
+                    restingTime.setText(newHum);
+                }else{
+                    restingTime.setText("No data");
+                }
             }
         });
 

@@ -37,11 +37,11 @@ public class RegisterInteractor {
             @Override
             public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
                 if(response.isSuccessful()){
+                    SharedPreferences.Editor editor = context.getSharedPreferences("personal", Context.MODE_PRIVATE).edit();
+                    editor.putString("email", email);
+                    editor.putString("password", password);
+                    editor.apply();
                     Toast.makeText(context, "Se envio un correo de verificacion", Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor setInfo = context.getSharedPreferences("personal", Context.MODE_PRIVATE).edit();
-                    setInfo.putString("email", email);
-                    setInfo.putString("password", password);
-                    setInfo.apply();
                     Router.redirectTo(context, login_view.class);
                 }else{
                     Toast.makeText(context, "Register failed", Toast.LENGTH_SHORT).show();
