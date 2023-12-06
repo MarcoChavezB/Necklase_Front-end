@@ -478,7 +478,55 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.4"></LinearLayout>
+                                    android:layout_weight="0.4">
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:id="@+id/malisimo"
+                                        android:layout_weight="1"
+                                        android:layout_width="match_parent"
+                                        android:background="#751a18"
+                                        android:alpha="0.1"
+                                        android:layout_height="match_parent"/>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:id="@+id/malo"
+                                        android:layout_weight="1"
+                                        android:background="#c42e1c"
+                                        android:alpha="0.1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"/>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:id="@+id/regular"
+                                        android:layout_weight="1"
+                                        android:background="#d4b04a"
+                                        android:alpha="0.1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"/>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:id="@+id/bueno"
+                                        android:layout_weight="1"
+                                        android:background="#446441"
+                                        android:alpha="0.1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"/>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:id="@+id/muyBueno"
+                                        android:alpha="0.1"
+                                        android:layout_weight="1"
+                                        android:background="#70a34e"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                    </LinearLayout>
+
+                                </LinearLayout>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -521,7 +569,18 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.4"></LinearLayout>
+                                    android:layout_weight="0.4">
+
+                                    <TextView
+                                        android:id="@+id/temp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textSize="20dp"
+                                        android:gravity="center"
+                                        />
+
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 

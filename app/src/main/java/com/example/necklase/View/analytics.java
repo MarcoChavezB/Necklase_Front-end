@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +81,8 @@ public class analytics extends Fragment {
     }
 
     ImageView selectDevice, goDogInfo;
-    TextView dogName, restingTime;
+    TextView dogName, restingTime, temp;
+    LinearLayout malisimo, malo, regular, bueno, muyBueno;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +97,12 @@ public class analytics extends Fragment {
 
         dogName = view.findViewById(R.id.dogName);
         restingTime = view.findViewById(R.id.restingTime);
+        temp = view.findViewById(R.id.temp);
+        malisimo = view.findViewById(R.id.malisimo);
+        malo = view.findViewById(R.id.malo);
+        regular = view.findViewById(R.id.regular);
+        bueno = view.findViewById(R.id.bueno);
+        muyBueno = view.findViewById(R.id.muyBueno);
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
         LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
@@ -104,6 +114,7 @@ public class analytics extends Fragment {
             }
         });
 
+        // humedad data
 
         LiveData<String> hum = analiticsInteractor.getHum(code);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -116,6 +127,62 @@ public class analytics extends Fragment {
                 }
             }
         });
+
+        // temperatura data
+
+        LiveData<List<String>> tempLiveData = analiticsInteractor.getTemp(code);
+        tempLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> tempList) {
+                String tempV = tempList.get(0);
+                String nivelV = tempList.get(1);
+                temp.setText(nivelV);
+            }
+        });
+
+        // Air data
+        LiveData<String> airLiveData = analiticsInteractor.getLevelAir(code);
+        airLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                float alphaMalisimo = 0.3f;
+                float alphaMalo = 0.3f;
+                float alphaRegular = 0.3f;
+                float alphaBueno = 0.3f;
+                float alphaMuyBueno = 0.3f;
+
+                switch (s) {
+                    case "1":
+                        alphaMuyBueno = 1.0f;
+                        break;
+                    case "2":
+                        alphaBueno = 1.0f;
+                        break;
+                    case "3":
+                        alphaRegular = 1.0f;
+                        break;
+                    case "4":
+                        alphaMalo = 1.0f;
+                        break;
+                    case "5":
+                        alphaMalisimo = 1.0f;
+                        break;
+                    case "6":
+                        alphaMalisimo = 1.0f;
+                        break;
+                }
+                malisimo.setAlpha(alphaMalisimo);
+                malo.setAlpha(alphaMalo);
+                regular.setAlpha(alphaRegular);
+                bueno.setAlpha(alphaBueno);
+                muyBueno.setAlpha(alphaMuyBueno);
+            }
+        });
+
+
+
+
+
 
         goDogInfo = view.findViewById(R.id.goDogInfo);
         goDogInfo.setOnClickListener(new View.OnClickListener() {
