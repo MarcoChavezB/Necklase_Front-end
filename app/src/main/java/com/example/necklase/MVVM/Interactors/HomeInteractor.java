@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.necklase.Model.Get.HumManagment;
 import com.example.necklase.Model.Get.HumModel;
+import com.example.necklase.Model.Get.TempManagment;
+import com.example.necklase.Model.Get.TempModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
@@ -78,6 +80,26 @@ public class HomeInteractor {
            }
        });
         return dogLiveData;
+    }
+
+    private MutableLiveData<String> tempLiveData = new MutableLiveData<>();
+
+    public LiveData<String>  getTemp(String device){
+        TempManagment tempManagment = new TempManagment(retrofit);
+        tempManagment.getData(device, new Callback<TempModel>() {
+            @Override
+            public void onResponse(Call<TempModel> call, Response<TempModel> response) {
+                if(response.isSuccessful()){
+                    tempLiveData.setValue(String.valueOf(response.body().getTemp()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TempModel> call, Throwable t) {
+
+            }
+        });
+        return tempLiveData;
     }
 
 

@@ -84,7 +84,7 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro, textViewEstadistica;
+    TextView nombredeperro, textViewEstadistica, temperatura;
     ImageView cambiar;
 
     @Override
@@ -99,6 +99,7 @@ public class activity_home extends Fragment {
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
+        temperatura = view.findViewById(R.id.temperatura);
 
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
@@ -110,7 +111,7 @@ public class activity_home extends Fragment {
 
 
 
-        AnaliticsInteractor homeInteractor = new AnaliticsInteractor(getActivity());
+        HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
 
 
@@ -135,6 +136,14 @@ public class activity_home extends Fragment {
                 }else{
                     nombredeperro.setText("NaN");
                 }
+            }
+        });
+
+        LiveData<String> tempDog = homeInteractor.getTemp(code);
+        tempDog.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                temperatura.setText(s + "°C");
             }
         });
 
