@@ -1,11 +1,13 @@
 package com.example.necklase.MVVM.Interactors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Post.RegisterManagment;
 import com.example.necklase.Model.Post.RegisterPostModel;
+import com.example.necklase.View.activity_bienvenida;
 import com.example.necklase.View.register_view;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
@@ -16,16 +18,13 @@ import retrofit2.Retrofit;
 
 public class RegisterInteractor {
     private Context context;
-
     public RegisterInteractor(Context context){
         this.context = context;
     }
-
     public void registrar(String name, String lastName, String email, String password){
         RetrofitApiModel retro = new RetrofitApiModel(this.context);
         Retrofit retrofit = retro.provideRetrofit();
         RegisterManagment registerManagment = new RegisterManagment(retrofit);
-
         registerManagment.postData(name, lastName, email, password, new Callback<RegisterPostModel>() {
             @Override
             public void onResponse(Call<RegisterPostModel> call, Response<RegisterPostModel> response) {
@@ -35,7 +34,6 @@ public class RegisterInteractor {
                     Toast.makeText(context, "Register failed", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<RegisterPostModel> call, Throwable t) {
 

@@ -22,7 +22,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_marginBottom="10dp"
         app:itemIconTint="@color/bg_premium"
         app:itemTextColor="@color/Globalbackground"

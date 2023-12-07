@@ -102,8 +102,7 @@ public class personal_menu extends Fragment {
         emailPerson = view.findViewById(R.id.emailPerson);
 
         personalMenuViewModel = new ViewModelProvider(this).get(PersonalMenuViewModel.class);
-        personalMenuViewModel.getInfoData(userId);
-
+        personalMenuViewModel.setinfoData(userId);
         personalMenuViewModel.getEmailPerson().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {

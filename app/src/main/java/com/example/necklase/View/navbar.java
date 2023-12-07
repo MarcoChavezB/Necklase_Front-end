@@ -29,15 +29,15 @@ public class navbar extends AppCompatActivity {
             selectedItem = item.getItemId();
 
             if (selectedItem == R.id.location) {
-                replaceFragment(new activity_home());
+                replaceFragment(new activity_maps());
             } else if (selectedItem == R.id.statistics) {
                 replaceFragment(new analytics());
-            } else if (selectedItem == R.id.home) {
-                replaceFragment(new collar_managment());
             } else if (selectedItem == R.id.personal) {
                 replaceFragment(new personal_menu());
             } else if (selectedItem == R.id.add) {
                 replaceFragment(new activity_device());
+            } else if (selectedItem == R.id.inicio) {
+                replaceFragment(new activity_home());
             }
 
             return true;
