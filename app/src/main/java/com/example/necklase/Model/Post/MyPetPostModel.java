@@ -21,6 +21,9 @@ public class MyPetPostModel {
     @SerializedName("collar")
     private String collar;
 
+    @SerializedName("codigo")
+    private String codigo;
+
     public MyPetPostModel(String id) {
         this.id = id;
     }
@@ -30,5 +33,6 @@ public class MyPetPostModel {
     public String getGenero(){return genero;}
     public String getDueño(){return dueño;}
     public String getCollar(){return collar;}
+    public String getCodigo(){return codigo;}
 
 }

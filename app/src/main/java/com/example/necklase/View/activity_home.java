@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
+import com.example.necklase.MVVM.Interactors.HomeInteractor;
 import com.example.necklase.Model.Get.FirstCollarManagment;
 import com.example.necklase.Model.Get.FirstCollarModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
@@ -80,14 +84,13 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro;
+    TextView nombredeperro, textViewEstadistica, temperatura;
     ImageView cambiar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
@@ -95,13 +98,57 @@ public class activity_home extends Fragment {
 
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
+        textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
+        temperatura = view.findViewById(R.id.temperatura);
+
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
 
-        RetrofitApiModelToken retro = new RetrofitApiModelToken();
-        Retrofit retrofit = retro.provideRetrofit();
-        MyPetManagment myPetManagment = new MyPetManagment(retrofit);
+        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
+        String code = codeDevice.getString("codigo", null);
+
+
+
+
+        HomeInteractor homeInteractor = new HomeInteractor(getActivity());
+        LiveData<String> info = homeInteractor.getInfoDog(idDevice);
+
+
+        LiveData<String> hum = homeInteractor.getHum(code);
+        hum.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String newHum) {
+                if(newHum != null){
+                    textViewEstadistica.setText(newHum + "%");
+                }else{
+                    textViewEstadistica.setText("NaN");
+                }
+            }
+        });
+
+        LiveData<String> infoDog = homeInteractor.getInfoDog(idDevice);
+        infoDog.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s != null){
+                    nombredeperro.setText(s);
+                }else{
+                    nombredeperro.setText("NaN");
+                }
+            }
+        });
+
+        LiveData<String> tempDog = homeInteractor.getTemp(code);
+        tempDog.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                temperatura.setText(s + "°C");
+            }
+        });
+
+
+
 
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,23 +164,6 @@ public class activity_home extends Fragment {
         });
 
 
-        myPetManagment.getData(idDevice, new Callback<MyPetPostModel>() {
-            @Override
-            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
-                if (response.isSuccessful()){
-                    nombredeperro.setText(response.body().getNombre());
-                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE).edit();
-                    editor.putString("nombre", response.body().getNombre());
-                    editor.putString("raza", response.body().getRaza());
-                    editor.putString("genero", response.body().getGenero());
-                    editor.apply();
-                }else{
-                    Toast.makeText(view.getContext(), "Error en cargar los datos del perro", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
-        });
         return view;
     }
 }

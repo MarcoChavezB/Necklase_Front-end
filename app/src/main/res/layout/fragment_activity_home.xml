@@ -148,7 +148,7 @@
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
-                        android:text="Lozalizar"
+                        android:text="Localizar"
                         android:textColor="@color/white"
                         android:background="@drawable/circular_button_black"
                         app:layout_constraintStart_toStartOf="parent"
@@ -282,7 +282,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:contentDescription="IMG ESTADISTICA"
-                                android:src="@mipmap/dog_collar_foreground"
+                                android:src="@mipmap/humedity_foreground"
                                 />
 
                             <TextView
@@ -470,15 +470,99 @@
                 android:src="@mipmap/logout_foreground" />
 
         </androidx.cardview.widget.CardView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewWalkers"
-            android:layout_width="0dp"
-            android:background="@color/gray"
-            android:layout_height="230dp"
-            android:layout_marginTop="8dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parte1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parte1" />
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/temp_foreground"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_weight="0.4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:id="@+id/temperatura"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="40dp"
+                                android:textColor="@color/font_black"
+                                android:gravity="start|center"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/font_black"
+                                android:text="Temperature"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

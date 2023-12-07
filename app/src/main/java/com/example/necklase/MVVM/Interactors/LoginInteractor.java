@@ -49,16 +49,19 @@ public class LoginInteractor {
                 editorRM.apply();
 
                 ViewModelTokenIns.clearToken(context);
-
                 if(response.isSuccessful()){
-                    SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
-                    editor.putString("token", response.body().getToken());
-                    editor.apply();
+                    String activate = response.body().getActivate();
+                    if(activate.equals("1")){
+                        SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
+                        editor.putString("token", response.body().getToken());
+                        editor.apply();
 
-                    Intent intent = new Intent(context, activity_bienvenida.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-
+                        Intent intent = new Intent(context, activity_bienvenida.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }else{
+                        Toast.makeText(context, "Your account is not activated", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
                 }
@@ -66,35 +69,6 @@ public class LoginInteractor {
             @Override
             public void onFailure(Call<LoginPostModel> call, Throwable t) {
                 Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-
-    public void checkDevices(String id){
-        RetrofitApiModelToken retro = new RetrofitApiModelToken();
-        Retrofit retrofit = retro.provideRetrofit();
-        CheckDevicesManagment checkDevicesManagment = new CheckDevicesManagment(retrofit);
-
-        checkDevicesManagment.getData(id, new Callback<CheckDevicesPostModel>() {
-            @Override
-            public void onResponse(Call<CheckDevicesPostModel> call, Response<CheckDevicesPostModel> response) {
-                if(response.isSuccessful()){
-                    SharedPreferences.Editor editor = context.getSharedPreferences("Personal", MODE_PRIVATE).edit();
-                    editor.putString("nDispositivos", response.body().getNumero());
-                    editor.apply();
-
-                    SharedPreferences dispositivos = context.getSharedPreferences("Personal", MODE_PRIVATE);
-                    String nDispositivos = dispositivos.getString("nDispositivos", null);
-
-                }else{
-                    Toast.makeText(context, "Error al ingresar dispositivos" + response.code(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<CheckDevicesPostModel> call, Throwable t) {
-
             }
         });
     }

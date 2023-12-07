@@ -56,6 +56,13 @@ public class login_view extends AppCompatActivity {
 
         LoginViewModel loginViewModel = new LoginViewModel(login_view.this.getApplication());
 
+        SharedPreferences prefs = getApplication().getSharedPreferences("personal", MODE_PRIVATE);
+        String emailP = prefs.getString("email", null);
+        String passwordP = prefs.getString("password", null);
+
+        email.setText(emailP);
+        password.setText(passwordP);
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +77,6 @@ public class login_view extends AppCompatActivity {
                     Toast.makeText(login_view.this, "Email is not valid", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 loginViewModel.login(email1, password1);
             }
         });

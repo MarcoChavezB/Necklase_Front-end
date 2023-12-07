@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
+import com.example.necklase.MVVM.Interactors.PersonalMenuInteractor;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.LogoutManagment;
 import com.example.necklase.Model.Post.LogoutPostModel;
@@ -25,6 +28,8 @@ import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModel.PersonalMenuViewModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -101,73 +106,16 @@ public class personal_menu extends Fragment {
         namePerson = view.findViewById(R.id.namePerson);
         emailPerson = view.findViewById(R.id.emailPerson);
 
-        personalMenuViewModel = new ViewModelProvider(this).get(PersonalMenuViewModel.class);
-        personalMenuViewModel.setinfoData(userId);
-        personalMenuViewModel.getEmailPerson().observe(getActivity(), new Observer<String>() {
+        PersonalMenuInteractor interactor = new PersonalMenuInteractor(getActivity());
+        LiveData<List<String>> info = interactor.getInfoData(userId);
+
+        info.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
-            public void onChanged(String s) {
-                emailPerson.setText(s);
+            public void onChanged(List<String> strings) {
+                namePerson.setText(strings.get(0));
+                emailPerson.setText(strings.get(1));
             }
         });
-
-        personalMenuViewModel.getNamePerson().observe(getActivity(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                namePerson.setText(s);
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
-        String token = prefs.getString("token", null);
-        DecodedJWT decodedJWT = JwtUtils.decode(token);
-        String userId =  decodedJWT.getSubject();
-
-        RetrofitApiModelToken retrofitApiModel = new RetrofitApiModelToken();
-        Retrofit retrofit = retrofitApiModel.provideRetrofit();
-        PersonalDataManagment personalDataManagment = new PersonalDataManagment(retrofit);
-
-        personalDataManagment.getData(userId, new Callback<PersonalDataPostModel>() {
-            @Override
-            public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    PersonalDataPostModel personalData = response.body();
-                    namePerson.setText(personalData.getNombre());
-                    emailPerson.setText(personalData.getEmail());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PersonalDataPostModel> call, Throwable t) {
-
-            }
-        });
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
