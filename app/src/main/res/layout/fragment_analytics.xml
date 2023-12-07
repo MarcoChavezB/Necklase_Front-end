@@ -571,14 +571,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.4">
 
-                                    <TextView
-                                        android:id="@+id/temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:textColor="@color/font_black"
-                                        android:textSize="20dp"
-                                        android:gravity="center"
-                                        />
+
+
 
                                 </LinearLayout>
                             </LinearLayout>

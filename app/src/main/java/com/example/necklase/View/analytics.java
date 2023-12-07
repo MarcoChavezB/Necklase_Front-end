@@ -1,35 +1,20 @@
 package com.example.necklase.View;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
-import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
-import com.example.necklase.Model.Post.MyPetManagment;
-import com.example.necklase.Model.Post.MyPetPostModel;
-import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
-import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
-
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +82,6 @@ public class analytics extends Fragment {
 
         dogName = view.findViewById(R.id.dogName);
         restingTime = view.findViewById(R.id.restingTime);
-        temp = view.findViewById(R.id.temp);
         malisimo = view.findViewById(R.id.malisimo);
         malo = view.findViewById(R.id.malo);
         regular = view.findViewById(R.id.regular);
@@ -136,7 +120,6 @@ public class analytics extends Fragment {
             public void onChanged(List<String> tempList) {
                 String tempV = tempList.get(0);
                 String nivelV = tempList.get(1);
-                temp.setText(nivelV);
             }
         });
 
@@ -207,6 +190,9 @@ public class analytics extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.frame,new selectDevice()).commit();
             }
         });
+
+
+
 
         return view;
     }
