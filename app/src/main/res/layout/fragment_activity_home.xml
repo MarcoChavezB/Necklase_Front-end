@@ -282,7 +282,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:contentDescription="IMG ESTADISTICA"
-                                android:src="@mipmap/dog_collar_foreground"
+                                android:src="@mipmap/humedity_foreground"
                                 />
 
                             <TextView

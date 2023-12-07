@@ -15,6 +15,7 @@ public class AnaliticsViewModel extends ViewModel {
         this.context = context;
     }
     private AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(context);
+
     private LiveData<String> info = new MutableLiveData<>();
 
     public LiveData<String> getInfo(String device) {

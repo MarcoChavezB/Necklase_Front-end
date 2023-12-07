@@ -77,10 +77,7 @@ public class AnaliticsInteractor {
                 if (response.isSuccessful()) {
                     String hum = String.valueOf(response.body().getHum());
                     humLiveData.setValue(hum);
-                    Toast.makeText(context, "Respuesta exitosa", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Respuesta NO exitosa" + responseCode, Toast.LENGTH_SHORT).show();
-                }
+                } else {}
             }
 
             @Override
@@ -109,9 +106,7 @@ public class AnaliticsInteractor {
                     tempList.add(temp);
                     tempList.add(nivel);
                     infoTemData.setValue(tempList);
-                } else {
-                    Toast.makeText(context, "Respuesta NO exitosa en temperatura", Toast.LENGTH_SHORT).show();
-                }
+                } else {}
             }
             @Override
             public void onFailure(Call<TempModel> call, Throwable t) {
@@ -133,9 +128,7 @@ public class AnaliticsInteractor {
                 if(response.isSuccessful()){
                     String level = String.valueOf(response.body().getNivel());
                     infoAir.setValue(level);
-                }else {
-                    Toast.makeText(context, "Respuesta NO exitosa"+ responseCode, Toast.LENGTH_SHORT).show();
-                }
+                }else {}
             }
 
             @Override
