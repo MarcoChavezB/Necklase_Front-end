@@ -411,7 +411,7 @@
                                     android:layout_marginLeft="7dp"
                                     android:layout_marginTop="5dp"
                                     android:contentDescription="IMG ESTADISTICA"
-                                    android:src="@mipmap/dog_collar_foreground" />
+                                    android:src="@mipmap/kalories_foreground" />
 
                                 <TextView
                                     android:id="@+id/textViewEstadistica4"
@@ -420,7 +420,6 @@
                                     android:layout_marginLeft="45dp"
                                     android:layout_marginTop="12dp"
                                     android:fontFamily="@font/heebo_variablefont_wght"
-                                    android:text="38kcl"
                                     android:textColor="@color/tx_g"
                                     android:textSize="15dp">
 
