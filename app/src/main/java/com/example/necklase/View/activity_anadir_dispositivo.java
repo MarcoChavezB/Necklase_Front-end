@@ -25,6 +25,7 @@ public class activity_anadir_dispositivo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_dispositivo);
 
+
         btn = findViewById(R.id.boton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

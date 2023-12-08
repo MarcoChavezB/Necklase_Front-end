@@ -17,6 +17,7 @@ import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
+import com.example.necklase.TokenValidator.VerificarToken;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,6 +79,9 @@ public class personal_data extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
+
+        VerificarToken.Verificar(view.getContext());
+
         nombreText = view.findViewById(R.id.nameText);
         apellidoText = view.findViewById(R.id.lastNameText);
         emailText = view.findViewById(R.id.emailText);

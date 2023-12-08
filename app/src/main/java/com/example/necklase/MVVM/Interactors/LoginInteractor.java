@@ -56,9 +56,7 @@ public class LoginInteractor {
                         editor.putString("token", response.body().getToken());
                         editor.apply();
 
-                        Intent intent = new Intent(context, activity_bienvenida.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
+
                     }else{
                         Toast.makeText(context, "Your account is not activated", Toast.LENGTH_SHORT).show();
                     }
