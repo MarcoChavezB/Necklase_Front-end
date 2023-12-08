@@ -65,8 +65,8 @@ public class analytics extends Fragment {
         }
     }
 
-    ImageView selectDevice, goDogInfo;
-    TextView dogName, restingTime, temp;
+    ImageView selectDevice, goDogInfo, triste, neutral, feliz;
+    TextView dogName, restingTime, temp, activeTime;
     LinearLayout malisimo, malo, regular, bueno, muyBueno;
 
     @Override
@@ -87,6 +87,11 @@ public class analytics extends Fragment {
         regular = view.findViewById(R.id.regular);
         bueno = view.findViewById(R.id.bueno);
         muyBueno = view.findViewById(R.id.muyBueno);
+        activeTime = view.findViewById(R.id.activeTime);
+        triste = view.findViewById(R.id.triste);
+        neutral = view.findViewById(R.id.neutral);
+        feliz = view.findViewById(R.id.feliz);
+
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
         LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
@@ -161,6 +166,34 @@ public class analytics extends Fragment {
                 muyBueno.setAlpha(alphaMuyBueno);
             }
         });
+
+        LiveData<List<String>> emocionLiveData = analiticsInteractor.getEmocion(code);
+        emocionLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                activeTime.setText(strings.get(0)); // reposo
+
+                float tristeAlpha = 0.3f;
+                float neutralAlpha = 0.3f;
+                float felizAlpha = 0.3f;
+
+                switch (strings.get(1)){ // emocional status
+                    case "1":
+                        tristeAlpha = 1.0f;
+                        break;
+                    case "2":
+                        neutralAlpha = 1.0f;
+                        break;
+                    case "3":
+                        felizAlpha = 1.0f;
+                        break;
+                }
+                triste.setAlpha(tristeAlpha);
+                neutral.setAlpha(neutralAlpha);
+                feliz.setAlpha(felizAlpha);
+            }
+        });
+
 
 
 

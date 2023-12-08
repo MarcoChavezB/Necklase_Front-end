@@ -16,6 +16,8 @@ import com.example.necklase.Model.Get.HumManagment;
 import com.example.necklase.Model.Get.HumModel;
 import com.example.necklase.Model.Get.TempManagment;
 import com.example.necklase.Model.Get.TempModel;
+import com.example.necklase.Model.Get.emocionalManagment;
+import com.example.necklase.Model.Get.emocionalModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
@@ -139,4 +141,30 @@ public class AnaliticsInteractor {
         return infoAir;
     }
 
+
+    private MutableLiveData<List<String>> infoEmocional = new MutableLiveData<>();
+    public LiveData<List<String>> getEmocion(String deviceCode) {
+        emocionalManagment emocion = new emocionalManagment(retrofit);
+        emocion.getData(deviceCode, new Callback<emocionalModel>() {
+            @Override
+            public void onResponse(Call<emocionalModel> call, Response<emocionalModel> response) {
+                if(!response.isSuccessful()){
+                    return;
+                }
+
+                List<String> tempList = new ArrayList<>();
+
+                tempList.add(response.body().getRestingTime());
+                tempList.add(response.body().nivelFelicidad());
+
+                infoEmocional.setValue(tempList);
+            }
+
+            @Override
+            public void onFailure(Call<emocionalModel> call, Throwable t) {
+
+            }
+        });
+        return infoEmocional;
+    }
 }

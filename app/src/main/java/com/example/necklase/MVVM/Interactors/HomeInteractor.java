@@ -11,9 +11,14 @@ import com.example.necklase.Model.Get.HumManagment;
 import com.example.necklase.Model.Get.HumModel;
 import com.example.necklase.Model.Get.TempManagment;
 import com.example.necklase.Model.Get.TempModel;
+import com.example.necklase.Model.Get.caloriasManagment;
+import com.example.necklase.Model.Get.caloriasModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,9 +47,7 @@ public class HomeInteractor {
                 if (response.isSuccessful()) {
                     String hum = String.valueOf(response.body().getHum());
                     humLiveData.setValue(hum);
-                    Toast.makeText(context, "Respuesta exitosa", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Respuesta NO exitosa" + responseCode, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -102,5 +105,33 @@ public class HomeInteractor {
         return tempLiveData;
     }
 
+    private MutableLiveData<List<String>> caloriesLiveData = new MutableLiveData<>();
+
+    public LiveData<List<String>> getCalories(String device, String peso){
+        caloriasManagment calories = new caloriasManagment(retrofit);
+        calories.getData(device, peso, new Callback<caloriasModel>() {
+            @Override
+            public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
+                int codeResponse = response.code();
+                if(!response.isSuccessful()){
+                    return;
+                }
+
+                List<String> tempList = new ArrayList<>();
+
+                tempList.add(response.body().getBmr());
+                tempList.add(response.body().getActiveCalories());
+                tempList.add(response.body().getTotalCalories());
+
+                caloriesLiveData.setValue(tempList);
+            }
+
+            @Override
+            public void onFailure(Call<caloriasModel> call, Throwable t) {
+
+            }
+        });
+        return caloriesLiveData;
+    }
 
 }

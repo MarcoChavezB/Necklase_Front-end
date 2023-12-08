@@ -28,16 +28,16 @@ public class navbar extends AppCompatActivity {
         binding.navBar.setOnItemSelectedListener(item -> {
             selectedItem = item.getItemId();
 
-            if (selectedItem == R.id.location) {
-                replaceFragment(new activity_maps());
+            if (selectedItem == R.id.inicio) {
+                replaceFragment(new activity_home());
             } else if (selectedItem == R.id.statistics) {
                 replaceFragment(new analytics());
             } else if (selectedItem == R.id.personal) {
                 replaceFragment(new personal_menu());
             } else if (selectedItem == R.id.add) {
                 replaceFragment(new activity_device());
-            } else if (selectedItem == R.id.inicio) {
-                replaceFragment(new activity_home());
+            } else if (selectedItem == R.id.location) {
+                replaceFragment(new activity_maps());
             }
 
             return true;

@@ -32,6 +32,9 @@ import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,7 +87,7 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro, textViewEstadistica, temperatura;
+    TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4;
     ImageView cambiar;
 
     @Override
@@ -100,6 +103,7 @@ public class activity_home extends Fragment {
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
         temperatura = view.findViewById(R.id.temperatura);
+        textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
 
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
@@ -147,6 +151,15 @@ public class activity_home extends Fragment {
             }
         });
 
+        LiveData<List<String>> infoCalories = homeInteractor.getCalories(code, "10");
+        infoCalories.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> calories) {
+                String v = noDecimal(calories.get(0));
+                textViewEstadistica4.setText(v + "kcl");
+            }
+        });
+
 
 
 
@@ -166,4 +179,12 @@ public class activity_home extends Fragment {
 
         return view;
     }
+
+
+    public String noDecimal(String valor){
+      double numero = Double.parseDouble(valor);
+        DecimalFormat format = new DecimalFormat("#");
+        String numeroFormateado = format.format(numero);
+        return numeroFormateado.toString();
+    };
 }
