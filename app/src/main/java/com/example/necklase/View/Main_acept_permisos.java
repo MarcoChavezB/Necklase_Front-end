@@ -64,6 +64,10 @@ public class Main_acept_permisos extends AppCompatActivity {
             permisosNecesarios.add(Manifest.permission.BLUETOOTH_CONNECT);
         }
 
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+            permisosNecesarios.add(Manifest.permission.POST_NOTIFICATIONS);
+        }
+
         if (!permisosNecesarios.isEmpty()) {
             ActivityCompat.requestPermissions(this, permisosNecesarios.toArray(new String[0]), REQUEST_PHONE_LOCATION);
 

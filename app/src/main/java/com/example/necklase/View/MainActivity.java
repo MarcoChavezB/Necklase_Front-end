@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Extras.NotificationHelper;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
                 }
-                
             }
         };
         count.start();

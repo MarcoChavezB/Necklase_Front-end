@@ -47,9 +47,7 @@ public class HomeInteractor {
                 if (response.isSuccessful()) {
                     String hum = String.valueOf(response.body().getHum());
                     humLiveData.setValue(hum);
-                    Toast.makeText(context, "Respuesta exitosa", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Respuesta NO exitosa" + responseCode, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -116,7 +114,6 @@ public class HomeInteractor {
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
                 int codeResponse = response.code();
                 if(!response.isSuccessful()){
-                    Toast.makeText(context, "respuesta no exitosa en calorias" + codeResponse, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -323,7 +323,17 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.4"></LinearLayout>
+                                    android:layout_weight="0.4">
+                                    <TextView
+                                        android:id="@+id/activeTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/font_black"
+                                        android:textSize="20dp"
+                                        android:gravity="center"
+                                        />
+
+                                </LinearLayout>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -382,6 +392,7 @@
                                             android:layout_height="50dp">
 
                                             <ImageView
+                                                android:id="@+id/triste"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:src="@mipmap/sad_foreground"
@@ -405,6 +416,7 @@
                                             >
 
                                             <ImageView
+                                                android:id="@+id/neutral"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:src="@mipmap/neutral_foreground"
@@ -427,9 +439,11 @@
                                             >
 
                                             <ImageView
+                                                android:id="@+id/feliz"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
                                                 android:src="@mipmap/happy_foreground"
+                                                android:alpha="0.3"
                                                 />
 
                                         </LinearLayout>
