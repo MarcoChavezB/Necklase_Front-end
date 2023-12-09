@@ -44,13 +44,13 @@ public class RegisterInteractor {
                     Toast.makeText(context, "Se envio un correo de verificacion", Toast.LENGTH_SHORT).show();
                     Router.redirectTo(context, login_view.class);
                 }else{
-                    Toast.makeText(context, "Register failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "El correo ya existe", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<RegisterPostModel> call, Throwable t) {
-                Toast.makeText(context, "Error en el servidor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error de conexion", Toast.LENGTH_SHORT).show();
             }
         });
     }

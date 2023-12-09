@@ -13,6 +13,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,7 +60,6 @@ public class activity_home extends Fragment {
     public activity_home() {
         // Required empty public constructor
     }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -87,8 +87,9 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4;
+    TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4, test;
     ImageView cambiar;
+    Button buttonLocate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,7 +105,8 @@ public class activity_home extends Fragment {
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
         temperatura = view.findViewById(R.id.temperatura);
         textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
-
+        buttonLocate = view.findViewById(R.id.buttonLocate);
+        test = view.findViewById(R.id.test);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
@@ -160,8 +162,13 @@ public class activity_home extends Fragment {
             }
         });
 
-
-
+        LiveData<List<String>> infoClima = homeInteractor.getClima("25.5292, -103.2300");
+        infoClima.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                test.setText(strings.get(5));
+            }
+        });
 
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +184,12 @@ public class activity_home extends Fragment {
         });
 
 
+
+        buttonLocate.setOnClickListener(v ->{
+            getFragmentManager().beginTransaction().replace(R.id.frame,new activity_maps()).commit();
+        });
+
+
         return view;
     }
 
@@ -187,4 +200,5 @@ public class activity_home extends Fragment {
         String numeroFormateado = format.format(numero);
         return numeroFormateado.toString();
     };
+
 }

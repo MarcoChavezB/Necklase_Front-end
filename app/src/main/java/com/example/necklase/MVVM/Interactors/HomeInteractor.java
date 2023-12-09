@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.necklase.Model.Get.ForeManagment;
+import com.example.necklase.Model.Get.ForeModel;
 import com.example.necklase.Model.Get.HumManagment;
 import com.example.necklase.Model.Get.HumModel;
 import com.example.necklase.Model.Get.TempManagment;
@@ -134,4 +136,31 @@ public class HomeInteractor {
         return caloriesLiveData;
     }
 
+
+    private MutableLiveData<List<String>> climaLiveData = new MutableLiveData<>();
+    public LiveData<List<String>> getClima(String cordenadas){
+        ForeManagment fore = new ForeManagment(retrofit);
+        fore.getData(cordenadas, new Callback<ForeModel>() {
+            @Override
+            public void onResponse(Call<ForeModel> call, Response<ForeModel> response) {
+             if(!response.isSuccessful()){
+                 return;
+             }
+                List<String> tempList = new ArrayList<>();
+                tempList.add(response.body().getCitiLocation());
+                tempList.add(response.body().getCitiRegion());
+                tempList.add(response.body().getFeelsLike());
+                tempList.add(response.body().getTemp());
+                tempList.add(response.body().getMintemp());
+                tempList.add(response.body().getMaxtemp());
+                tempList.add(response.body().getDailyChanceOfRain());
+                climaLiveData.setValue(tempList);
+            }
+            @Override
+            public void onFailure(Call<ForeModel> call, Throwable t) {
+
+            }
+        });
+        return climaLiveData;
+    }
 }

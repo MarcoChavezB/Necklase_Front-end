@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.R;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.List;
-
 
 
 /**
@@ -68,7 +70,6 @@ public class analytics extends Fragment {
     ImageView selectDevice, goDogInfo, triste, neutral, feliz;
     TextView dogName, restingTime, temp, activeTime;
     LinearLayout malisimo, malo, regular, bueno, muyBueno;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +92,16 @@ public class analytics extends Fragment {
         triste = view.findViewById(R.id.triste);
         neutral = view.findViewById(R.id.neutral);
         feliz = view.findViewById(R.id.feliz);
+        GraphView graph = (GraphView) view.findViewById(R.id.graph);
 
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
         LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
@@ -223,10 +233,6 @@ public class analytics extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.frame,new selectDevice()).commit();
             }
         });
-
-
-
-
         return view;
     }
 }

@@ -60,10 +60,20 @@ public class register_view extends AppCompatActivity{
                 String name1 = name.getText().toString();
                 String email1 = email.getText().toString();
                 String password1 = password.getText().toString();
+                String confirm = passwordConfirm.getText().toString();
                 String lastName1 = lastName.getText().toString();
 
                 if(EmailValidator.isValidEmail(email1) == false){
                     Toast.makeText(register_view.this, "Email is not valid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(password1.length() <= 8){
+                    Toast.makeText(register_view.this, "contraseña muy corta", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password1 != confirm){
+                    Toast.makeText(register_view.this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
