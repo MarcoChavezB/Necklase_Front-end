@@ -2,6 +2,7 @@ package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -30,10 +31,16 @@ public class activity_bienvenida extends AppCompatActivity {
 
     private Button btn;
     private String id;
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenida);
+
 
         btn = findViewById(R.id.boton);
         btn.setOnClickListener(new View.OnClickListener() {

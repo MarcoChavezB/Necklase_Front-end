@@ -17,6 +17,8 @@ import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.Router.Router;
+import com.example.necklase.View.AnimationSplash;
+import com.example.necklase.View.MainActivity;
 import com.example.necklase.View.activity_bienvenida;
 import com.example.necklase.View.navbar;
 import com.example.necklase.View.selectDevice;
@@ -56,6 +58,9 @@ public class LoginInteractor {
                         editor.putString("token", response.body().getToken());
                         editor.apply();
 
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
 
                     }else{
                         Toast.makeText(context, "Your account is not activated", Toast.LENGTH_SHORT).show();

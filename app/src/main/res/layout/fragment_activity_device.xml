@@ -189,7 +189,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_device_config"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/activity_item_device"
                     android:scrollbars="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"

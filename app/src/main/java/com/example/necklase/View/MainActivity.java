@@ -3,6 +3,7 @@ package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -44,12 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
                 if (token != null && !token.isEmpty()) {
                     if (isTokenExprired(token)) {
-                        Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
+                        Intent intent = new Intent(MainActivity.this, Main_acept_permisos.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     } else {
-                        Router.redirectTo(MainActivity.this, navbar.class);
+                        Intent intent = new Intent(MainActivity.this, navbar.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 } else {
-                    Router.redirectTo(MainActivity.this, Main_acept_permisos.class);
+                    Intent intent = new Intent(MainActivity.this, Main_acept_permisos.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             }
         };

@@ -21,7 +21,7 @@ public class VerificarToken {
 
         if (decodedJWT == null) {
             Intent intent = new Intent(contex, login_view.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             contex.startActivity(intent);
             Toast.makeText(contex, "The token is expired", Toast.LENGTH_SHORT).show();
         }

@@ -1,5 +1,6 @@
 package com.example.necklase.View;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.TokenValidator.VerificarToken;
 import com.example.necklase.ViewModel.PersonalMenuViewModel;
 
 import java.util.List;
@@ -93,6 +95,7 @@ public class personal_menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_menu, container, false);
 
+        VerificarToken.Verificar(view.getContext());
 
         SharedPreferences prefs = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
         String token = prefs.getString("token", null);
@@ -156,7 +159,11 @@ public class personal_menu extends Fragment {
                             editor2.remove("genero");
                             editor2.apply();
 
-                            Router.redirectTo(getActivity(), login_view.class);
+                            Intent intent = new Intent(getActivity(), login_view.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+
+
                         }else{
                             Toast.makeText(getActivity(), "respuesta no exitosa", Toast.LENGTH_SHORT).show();
                         }

@@ -5,18 +5,24 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.necklase.R;
 import com.example.necklase.databinding.ActivityNavbarBinding;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 public class navbar extends AppCompatActivity {
     ActivityNavbarBinding binding;
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private int selectedItem;
-
+    private FrameLayout fr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        fr = findViewById(R.id.frame);
 
         if (savedInstanceState != null) {
             selectedItem = savedInstanceState.getInt(SELECTED_ITEM_ID, R.id.location);
@@ -42,8 +48,6 @@ public class navbar extends AppCompatActivity {
 
             return true;
         });
-
-
         binding.navBar.setSelectedItemId(selectedItem);
     }
 
@@ -54,8 +58,22 @@ public class navbar extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment){
+
+        if (fragment instanceof activity_maps) {
+            ViewGroup.LayoutParams params = fr.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            fr.setLayoutParams(params);
+        } else {
+            ViewGroup.LayoutParams params = fr.getLayoutParams();
+            params.height = dpToPx(0);
+            fr.setLayoutParams(params);
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame,fragment);
         transaction.commit();
+    }
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }

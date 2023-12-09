@@ -2,6 +2,7 @@ package com.example.necklase.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,11 @@ import android.widget.VideoView;
 import com.example.necklase.R;
 
 public class AnimationSplash extends AppCompatActivity {
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,7 @@ public class AnimationSplash extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(AnimationSplash.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

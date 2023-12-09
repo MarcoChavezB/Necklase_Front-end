@@ -80,8 +80,6 @@ public class personal_data extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_personal_data, container, false);
 
-        VerificarToken.Verificar(view.getContext());
-
         nombreText = view.findViewById(R.id.nameText);
         apellidoText = view.findViewById(R.id.lastNameText);
         emailText = view.findViewById(R.id.emailText);
