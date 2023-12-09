@@ -18,7 +18,7 @@
             tools:context=".MapsFragment" />
 
         <ImageView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="100dp"
@@ -34,19 +34,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/rounder_view"
-            android:backgroundTint="#00327E"
+            android:backgroundTint="#45000000"
             android:layout_marginBottom="80dp"
+            android:elevation="55dp"
             android:layout_height="160dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:backgroundTint="#1E1E1E"
-                android:background="@drawable/rounder_view"
-                android:layout_height="150dp">
-
                 <ImageView
                     android:id="@+id/luz"
                     android:layout_width="110dp"
@@ -56,6 +47,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="30dp"
                     android:layout_marginStart="43dp"
+                    android:background="#00000000"
                     ></ImageView>
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -67,13 +59,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="30dp"
                     android:layout_marginStart="40dp"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#0272BD"
                     android:src="@mipmap/perfil_round"
                     ></de.hdodenhof.circleimageview.CircleImageView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

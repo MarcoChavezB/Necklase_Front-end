@@ -2,28 +2,24 @@ package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.databinding.ActivityNavbarBinding;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import java.util.Date;
+import android.util.DisplayMetrics;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 public class navbar extends AppCompatActivity {
     ActivityNavbarBinding binding;
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private int selectedItem;
-
+    private FrameLayout fr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        fr = findViewById(R.id.frame);
 
         if (savedInstanceState != null) {
             selectedItem = savedInstanceState.getInt(SELECTED_ITEM_ID, R.id.inicio);
@@ -61,8 +57,22 @@ public class navbar extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment){
+
+        if (fragment instanceof activity_maps) {
+            ViewGroup.LayoutParams params = fr.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            fr.setLayoutParams(params);
+        } else {
+            ViewGroup.LayoutParams params = fr.getLayoutParams();
+            params.height = dpToPx(0);
+            fr.setLayoutParams(params);
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame,fragment);
         transaction.commit();
+    }
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }

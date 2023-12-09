@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Permisos"
+                    android:text="Permissions"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     android:textStyle="bold"></TextView>
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Para que la aplicacion funcione como es esperado se necesecita el permiso de localizacion, bluetooth y notificaciones"
+                    android:text="For the application to work as expected, you need the location, bluetooth and notifications permissions. keep bluetooth and location turned on while using the application."
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     >
@@ -119,7 +119,7 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/button_outline_black"
                     android:backgroundTint="@color/bkbt_b"
-                    android:text="Aceptar"
+                    android:text="Accept"
                     android:textColor="@color/white"></Button>
 
                 <Button
@@ -129,7 +129,7 @@
                     android:textColor="@color/white"
                     android:backgroundTint="@color/bk_b"
                     android:background="@drawable/button_outline_white"
-                    android:text="Denegar"></Button>
+                    android:text="Deny"></Button>
 
             </LinearLayout>
 

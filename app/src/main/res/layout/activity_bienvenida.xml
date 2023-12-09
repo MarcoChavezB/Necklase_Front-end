@@ -68,7 +68,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="220dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/relleno"
@@ -81,35 +81,52 @@
                 >
             </TextView>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relleno"
-                android:text="¡Bienvenido!"
+                android:text="¡WELCOME!"
                 android:id="@+id/textView"
                 android:textAlignment="center"
-                android:textSize="45dp"
+                android:textSize="40dp"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:fontFamily="@font/quicksand_variablefont_wght"
                 android:textStyle="bold"
                 >
             </TextView>
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:text="¡let's start monitoring your pets!"
+            android:id="@+id/textView2"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/quicksand_variablefont_wght"
+            android:textStyle="bold"
+            >
+        </TextView>
 
             <Button
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/boton"
                 android:background="@drawable/rounder_view"
                 android:backgroundTint="@color/bkbt_b"
                 android:layout_width="250dp"
                 android:textAlignment="center"
-                android:text="Continuar"
+                android:text="Continue"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
                 android:layout_height="60dp">
 
             </Button>

@@ -11,7 +11,6 @@ import com.example.necklase.Model.Interceptor.TokenProvider;
 import com.example.necklase.Model.Token.JwtUtils;
 
 public class ViewModelTokenIns implements TokenProvider {
-
     private static ViewModelTokenIns viewModelTokenIns;
     private static String token;
     private static String userId;
