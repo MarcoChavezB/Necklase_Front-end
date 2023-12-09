@@ -2,10 +2,17 @@ package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.databinding.ActivityNavbarBinding;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import java.util.Date;
 
 public class navbar extends AppCompatActivity {
     ActivityNavbarBinding binding;
@@ -19,9 +26,9 @@ public class navbar extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         if (savedInstanceState != null) {
-            selectedItem = savedInstanceState.getInt(SELECTED_ITEM_ID, R.id.location);
+            selectedItem = savedInstanceState.getInt(SELECTED_ITEM_ID, R.id.inicio);
         } else {
-            selectedItem = R.id.location;
+            selectedItem = R.id.inicio;
         }
         binding.navBar.setSelectedItemId(selectedItem);
 
