@@ -116,6 +116,7 @@ public class HomeInteractor {
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
                 int codeResponse = response.code();
                 if(!response.isSuccessful()){
+                    Toast.makeText(context, "error" + codeResponse, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

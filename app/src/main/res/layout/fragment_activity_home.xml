@@ -473,8 +473,8 @@
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/card2"
-            app:layout_constraintTop_toBottomOf="@id/parte1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
@@ -485,7 +485,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="120dp"
                 app:cardBackgroundColor="@color/gray"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
@@ -495,54 +495,122 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp">
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@mipmap/temp_foreground"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="0.5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
                         <LinearLayout
-                            android:layout_weight="0.4"
+                            android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <TextView
-                                android:id="@+id/temperatura"
+
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="30dp"
-                                android:textColor="@color/font_black"
-                                android:gravity="start|center"
+                                android:src="@mipmap/temperature_foreground"
                                 />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/temp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center"
                                 android:textColor="@color/font_black"
-                                android:text="Temperature"
-                                />
+                                android:textSize="20dp"
+                                android:text="0°C"/>
                         </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/maxTemp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/font_black"
+                                    android:textSize="15dp"
+                                    android:text="0°C"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Max"
+                                    android:gravity="center"
+                                    android:textColor="@color/font_black"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/minTemp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/font_black"
+                                    android:textSize="15dp"
+                                    android:text="0°C"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Min"
+                                    android:gravity="center"
+                                    android:textColor="@color/font_black"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -551,7 +619,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="120dp"
                 app:cardBackgroundColor="@color/gray"
                 app:cardCornerRadius="8dp"
                 android:layout_marginStart="8dp"
@@ -562,50 +630,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp">
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:text="Feels Like"
+                            android:gravity="center"
+                            android:textColor="@color/font_black"
                             />
+
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.3"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:layout_weight="0.4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="40dp"
-                                android:textColor="@color/font_black"
-                                android:gravity="start|center"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/feels"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            >
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/font_black"
-                                />
-                        </LinearLayout>
+                            android:gravity="center"
+                            android:textColor="@color/font_black"
+                            android:textSize="25dp"
+                            android:text="0°C"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -618,9 +673,9 @@
         <LinearLayout
             android:id="@+id/card2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card1"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@id/card1"
+            app:layout_constraintTop_toBottomOf="@id/parte1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
@@ -640,52 +695,85 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp">
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <TextView
+                            android:layout_weight="0.3"
+                            android:id="@+id/ciudad"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="start|center"
+                            android:textColor="@color/font_black"
+                            android:textSize="30dp"
+                            android:text="No data"
+                            />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center"
+                            android:textColor="@color/font_black"
+                            android:text="Today data"
                             />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:layout_weight="0.4"
+                            android:layout_weight="0.7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
                             <TextView
-                                android:id="@+id/test"
+                                android:id="@+id/estado"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="40dp"
-                                android:textColor="@color/font_black"
                                 android:gravity="start|center"
+                                android:textColor="@color/font_black"
+                                android:textSize="20dp"
+                                android:text="No data"
                                 />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_weight="1"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
 
-                            <TextView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textColor="@color/font_black"
-                                />
+                                android:src="@mipmap/chanceofrain_foreground"/>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/porcentaje"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="start|center"
+                                android:textColor="@color/font_black"
+                                android:textSize="30dp"
+                                android:text="0%"/>
+                        </LinearLayout>
+
                     </LinearLayout>
+
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

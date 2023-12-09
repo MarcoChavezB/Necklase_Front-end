@@ -87,7 +87,7 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4, test;
+    TextView nombredeperro, textViewEstadistica, textViewEstadistica4, porcentaje, feels, maxTemp, minTemp, temp, ciudad, estado;
     ImageView cambiar;
     Button buttonLocate;
 
@@ -103,10 +103,15 @@ public class activity_home extends Fragment {
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
-        temperatura = view.findViewById(R.id.temperatura);
         textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
         buttonLocate = view.findViewById(R.id.buttonLocate);
-        test = view.findViewById(R.id.test);
+        porcentaje = view.findViewById(R.id.porcentaje);
+        feels = view.findViewById(R.id.feels);
+        maxTemp = view.findViewById(R.id.maxTemp);
+        minTemp = view.findViewById(R.id.minTemp);
+        temp = view.findViewById(R.id.temp);
+        ciudad = view.findViewById(R.id.ciudad);
+        estado = view.findViewById(R.id.estado);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
@@ -149,7 +154,7 @@ public class activity_home extends Fragment {
         tempDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                temperatura.setText(s + "°C");
+
             }
         });
 
@@ -162,11 +167,17 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<List<String>> infoClima = homeInteractor.getClima("25.5292, -103.2300");
+        LiveData<List<String>> infoClima = homeInteractor.getClima("25.533082, -103.320441");
         infoClima.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
-                test.setText(strings.get(5));
+                porcentaje.setText(strings.get(6) + "%");
+                feels.setText(strings.get(2) + "°C");
+                maxTemp.setText(strings.get(5) + "°C");
+                minTemp.setText(strings.get(4) + "°C");
+                temp.setText(strings.get(3) + "°C");
+                ciudad.setText(strings.get(0));
+                estado.setText(strings.get(1));
             }
         });
 
