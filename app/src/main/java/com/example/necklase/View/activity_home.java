@@ -2,9 +2,14 @@ package com.example.necklase.View;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.viewpager2.widget.ViewPager2;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,8 +87,7 @@ public class activity_home extends Fragment {
         }
     }
 
-    TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4, test;
-    ImageView cambiar;
+    TextView nombredeperro, textViewEstadistica, textViewEstadistica4, porcentaje, feels, maxTemp, minTemp, temp, ciudad, estado;    ImageView cambiar;
     Button buttonLocate;
     private final Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
@@ -141,10 +145,7 @@ public class activity_home extends Fragment {
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
-        temperatura = view.findViewById(R.id.temperatura);
         textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
-        test = view.findViewById(R.id.test);
-        buttonLocate = view.findViewById(R.id.buttonLocate);
         porcentaje = view.findViewById(R.id.porcentaje);
         feels = view.findViewById(R.id.feels);
         maxTemp = view.findViewById(R.id.maxTemp);
