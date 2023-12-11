@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class Main_acept_permisos extends AppCompatActivity {
     Button aceptar, denegar;
+
     int REQUEST_PHONE_LOCATION = 126462626;
     @SuppressLint("MissingSuperCall")
     @Override
@@ -31,6 +33,7 @@ public class Main_acept_permisos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_acept_permisos);
+
 
         aceptar = findViewById(R.id.aceptar);
         denegar = findViewById(R.id.denegar);
@@ -76,7 +79,6 @@ public class Main_acept_permisos extends AppCompatActivity {
 
         if (!permisosNecesarios.isEmpty()) {
             ActivityCompat.requestPermissions(this, permisosNecesarios.toArray(new String[0]), REQUEST_PHONE_LOCATION);
-
         } else {
             Router.redirectTo(Main_acept_permisos.this, Login_or_sign.class);
         }

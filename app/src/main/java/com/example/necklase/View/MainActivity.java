@@ -3,6 +3,7 @@ package com.example.necklase.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,18 +13,10 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.necklase.Extras.NotificationHelper;
-import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
-import com.example.necklase.Model.Post.CheckDevicesManagment;
-import com.example.necklase.Model.Post.CheckDevicesPostModel;
-import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
-import com.example.necklase.Router.Router;
-import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.util.Date;
 
@@ -44,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         img = findViewById(R.id.circleanim);
         Animation scaleAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.light_blur_speed);
         img.startAnimation(scaleAnimation);
+
+
         CountDownTimer count = new CountDownTimer(1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {}
@@ -82,6 +77,25 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return true;
         }
+    }
+
+    public boolean isAllPermissionsGranted() {
+        String[] requiredPermissions = {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.BLUETOOTH,
+                Manifest.permission.BLUETOOTH_ADMIN,
+                Manifest.permission.BLUETOOTH_CONNECT,
+                Manifest.permission.POST_NOTIFICATIONS
+        };
+
+        for (String permission : requiredPermissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

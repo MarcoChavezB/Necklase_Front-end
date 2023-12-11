@@ -12,9 +12,9 @@ import com.example.necklase.R;
 
 public class NotificationHelper {
 
-    private static final String CHANNEL_ID = "MyChannelID";
+    static final String CHANNEL_ID = "MyChannelID";
     private static final String CHANNEL_NAME = "MyChannelName";
-    private static final int NOTIFICATION_ID = 1;
+    static final int NOTIFICATION_ID = 1;
 
     public static void showNotification(Context context, String title, String message) {
 

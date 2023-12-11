@@ -57,6 +57,7 @@ public class LoginInteractor {
                         SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
                         editor.putString("token", response.body().getToken());
                         editor.apply();
+                        Log.e("token", response.body().getToken());
 
                         Intent intent = new Intent(context, activity_bienvenida.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

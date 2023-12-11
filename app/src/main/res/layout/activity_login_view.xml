@@ -120,7 +120,6 @@
                             android:id="@+id/emailTXT"
                             android:layout_width="300dp"
                             android:layout_height="45dp"
-                            android:text="mzprah@gmail.com"
                             android:textColor="@color/white"
                             android:backgroundTint="@color/bg_black_view"
                             android:background="@drawable/input_style_sencillo"
@@ -154,7 +153,6 @@
                             android:background="@drawable/input_style_sencillo"
                             android:paddingStart="8dp"
                             android:inputType="textPassword"
-                            android:text="1234token"
                             android:textColor="@color/white"
                             ></EditText>
                     </LinearLayout>

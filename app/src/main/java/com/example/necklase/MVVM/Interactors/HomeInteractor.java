@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.necklase.Extras.NotificationHelper;
 import com.example.necklase.Model.Get.ForeManagment;
 import com.example.necklase.Model.Get.ForeModel;
 import com.example.necklase.Model.Get.HumManagment;
@@ -157,6 +158,13 @@ public class HomeInteractor {
                 tempList.add(response.body().getMintemp());
                 tempList.add(response.body().getMaxtemp());
                 tempList.add(response.body().getDailyChanceOfRain());
+
+                String temp = response.body().getTemp();
+                double tempDouble = Double.parseDouble(temp);
+                if(tempDouble > 30){
+                    NotificationHelper.showNotification(context, "Temperatura alta", "La temperatura podria no ser ideal para un canino");
+                }
+
                 climaLiveData.setValue(tempList);
             }
             @Override

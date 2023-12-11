@@ -79,10 +79,15 @@ public class SelectDogAdapter extends RecyclerView.Adapter<SelectDogAdapter.View
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     String id = deviceUserList.get(position).getId();
+                    String modelo = deviceUserList.get(position).getCodigo();
 
                     SharedPreferences.Editor editor = context.getSharedPreferences("deviceID", MODE_PRIVATE).edit();
                     editor.putString("id", id);
                     editor.apply();
+
+                    SharedPreferences.Editor codigo = context.getSharedPreferences("collar", MODE_PRIVATE).edit();
+                    codigo.putString("codigo", modelo);
+                    codigo.apply();
 
                     Router.redirectTo(context, navbar.class);
                 }

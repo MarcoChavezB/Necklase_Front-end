@@ -46,8 +46,6 @@ public class SelectDog extends AppCompatActivity {
 
 
         String id = JwtUtils.decode(token).getSubject();
-        Toast.makeText(this, "Token de usuario recycler" + id, Toast.LENGTH_SHORT).show();
-
         selectDogViewModel.getDeviceUser(id);
     }
 

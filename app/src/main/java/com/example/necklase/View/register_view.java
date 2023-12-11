@@ -73,11 +73,6 @@ public class register_view extends AppCompatActivity{
                     return;
                 }
 
-                if (password1 != confirm){
-                    Toast.makeText(register_view.this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 RegisterViewModel registerViewModel = new RegisterViewModel(register_view.this.getApplication());
                 registerViewModel.registrar(name1, lastName1, email1, password1);
 

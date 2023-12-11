@@ -1,19 +1,10 @@
 package com.example.necklase.View;
-
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +31,10 @@ import com.example.necklase.Router.Router;
 import com.example.necklase.TokenValidator.VerificarToken;
 import com.example.necklase.View.Adapter.CarruselAdapter;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,6 +91,7 @@ public class activity_home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
         VerificarToken.Verificar(view.getContext());
@@ -157,6 +144,14 @@ public class activity_home extends Fragment {
         temperatura = view.findViewById(R.id.temperatura);
         textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
         test = view.findViewById(R.id.test);
+        buttonLocate = view.findViewById(R.id.buttonLocate);
+        porcentaje = view.findViewById(R.id.porcentaje);
+        feels = view.findViewById(R.id.feels);
+        maxTemp = view.findViewById(R.id.maxTemp);
+        minTemp = view.findViewById(R.id.minTemp);
+        temp = view.findViewById(R.id.temp);
+        ciudad = view.findViewById(R.id.ciudad);
+        estado = view.findViewById(R.id.estado);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
         String idDevice = device.getString("id", "1");
@@ -164,11 +159,6 @@ public class activity_home extends Fragment {
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
 
-        SharedPreferences.Editor editor2 = getContext().getSharedPreferences("DogInfo", getContext().MODE_PRIVATE).edit();
-        editor2.remove("nombre");
-        editor2.remove("raza");
-        editor2.remove("genero");
-        editor2.apply();
 
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
@@ -202,7 +192,7 @@ public class activity_home extends Fragment {
         tempDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                temperatura.setText(s + "°C");
+
             }
         });
 
@@ -215,25 +205,29 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<List<String>> infoClima = homeInteractor.getClima("25.5292, -103.2300");
+        LiveData<List<String>> infoClima = homeInteractor.getClima("25.533082, -103.320441");
         infoClima.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
-                test.setText(strings.get(5));
+                porcentaje.setText(strings.get(6) + "%");
+                feels.setText(strings.get(2) + "°C");
+                maxTemp.setText(strings.get(5) + "°C");
+                minTemp.setText(strings.get(4) + "°C");
+                temp.setText(strings.get(3) + "°C");
+                ciudad.setText(strings.get(0));
+                estado.setText(strings.get(1));
             }
         });
 
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("id");
-                editor.apply();
+                SharedPreferences.Editor remove = getActivity().getSharedPreferences("collar", Context.MODE_PRIVATE).edit();
+                remove.remove("codigo");
+                remove.apply();
 
                 Router.redirectTo(getActivity(), SelectDog.class);
             }
-
         });
 
         return view;
