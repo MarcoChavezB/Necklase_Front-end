@@ -87,7 +87,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                android:text="Register Pet"
+                android:text="Device Code"
                 android:id="@+id/textView2"
                 android:textAlignment="center"
                 android:textSize="30dp"
@@ -181,12 +181,7 @@
                     android:layout_height="60dp">
 
                 </Button>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,7 +105,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/parte2"
             android:layout_width="0dp"
             android:layout_height="200dp"
@@ -117,74 +117,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    tools:ignore="MissingConstraints">
-
-                    <TextView
-                        android:id="@+id/sii"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/heebo_variablefont_wght"
-                        android:text="¡Localiza a tu perro donde quieras!"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.533"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.15" />
-
-                    <Button
-                        android:id="@+id/buttonLocate"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Localizar"
-                        android:textColor="@color/white"
-                        android:background="@drawable/circular_button_black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/sii"
-                        android:layout_marginLeft="25dp"
-                        ></Button>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="150dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="213dp"
-                    tools:layout_editor_absoluteY="0dp"
-                    tools:ignore="MissingConstraints">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/dog_collar_foreground"
-                        android:contentDescription="IMG PERRO"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
+        </androidx.viewpager2.widget.ViewPager2>
 
 
         <androidx.cardview.widget.CardView
@@ -230,17 +163,16 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.891" />
 
-                    <ImageButton
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="70dp"
+                        android:background="@drawable/bordesuave"
                         android:layout_height="70dp"
-                        android:background="@drawable/circular_button"
-                        android:padding="20dp"
-                        android:src="@mipmap/perfil_foreground"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@mipmap/perfil_round"
+                        app:layout_constraintBottom_toTopOf="@+id/nombredeperro"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.228" />
+                        >
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="150dp">
+    android:layout_height="165dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dispositivos"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:elevation="55dp"
+        android:elevation="75dp"
         android:background="@drawable/rounder_view"
         tools:ignore="MissingConstraints">
 

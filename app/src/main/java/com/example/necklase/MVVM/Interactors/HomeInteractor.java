@@ -69,6 +69,7 @@ public class HomeInteractor {
            @Override
            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                if (response.isSuccessful()){
+
                    String nameDog = response.body().getNombre();
                    SharedPreferences.Editor editor = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
                    editor.putString("nombre", response.body().getNombre());
@@ -76,7 +77,9 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
-               }else{}
+               }else{
+
+               }
            }
 
            @Override

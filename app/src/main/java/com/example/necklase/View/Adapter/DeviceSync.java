@@ -25,7 +25,7 @@ public class DeviceSync extends RecyclerView.Adapter<DeviceSync.DevicesAdapterHo
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(Device dispositivo);
+        void onItemClick(String code);
     }
 
     public DeviceSync(Context context, OnItemClickListener listener, List<Device> listadispositivos) {
@@ -67,7 +67,7 @@ public class DeviceSync extends RecyclerView.Adapter<DeviceSync.DevicesAdapterHo
         }
         public void bind(Device device, OnItemClickListener listener) {
             tvModelo.setText(device.getModelo());
-            btn.setOnClickListener(v -> listener.onItemClick(device));
+            btn.setOnClickListener(v -> listener.onItemClick(device.getModelo()));
             Animation scaleAnimation = AnimationUtils.loadAnimation(context, R.anim.light_blur_blue);
             img.startAnimation(scaleAnimation);
         }

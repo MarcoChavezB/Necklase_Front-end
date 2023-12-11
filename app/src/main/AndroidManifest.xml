@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -23,6 +22,18 @@
         android:theme="@style/Base.Theme.Necklase"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".View.activity_pets_info"
+            android:exported="false" />
+        <activity
+            android:name=".View.activity_Device_pet_info"
+            android:exported="false" />
+        <activity
+            android:name=".View.VerifyDevice"
+            android:exported="false" />
+        <activity
+            android:name=".View.Activity_sinc_dis_codigo"
+            android:exported="false" />
         <activity
             android:name=".View.activity_PetWeight"
             android:exported="false" />

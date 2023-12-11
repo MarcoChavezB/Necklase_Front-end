@@ -2,14 +2,18 @@ package com.example.necklase.View;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.Extras.SlowScrollSpeedManager;
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
+import com.example.necklase.Model.CarruselModel;
 import com.example.necklase.Model.Get.FirstCollarManagment;
 import com.example.necklase.Model.Get.FirstCollarModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
@@ -31,9 +37,12 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.TokenValidator.VerificarToken;
+import com.example.necklase.View.Adapter.CarruselAdapter;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -90,22 +99,63 @@ public class activity_home extends Fragment {
     TextView nombredeperro, textViewEstadistica, temperatura, textViewEstadistica4, test;
     ImageView cambiar;
     Button buttonLocate;
+    private final Handler sliderHandler = new Handler();
+    private Runnable sliderRunnable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
+
+        VerificarToken.Verificar(view.getContext());
 
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
+
+        ViewPager2 viewPager = view.findViewById(R.id.parte2);
+        List<CarruselModel> milista = new ArrayList<>();
+        milista.add(new CarruselModel("Locate", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Router.redirectTo(getActivity(), navbar.class);
+            }
+        }, "¡Locate your pet anywhere!"));
+
+        milista.add(new CarruselModel("Locate", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Router.redirectTo(getActivity(), navbar.class);
+            }
+        }, "¡Locate your pet anywhere!"));
+
+        CarruselAdapter adapter = new CarruselAdapter(milista);
+        viewPager.setAdapter(adapter);
+
+        viewPager.setPageTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                page.setAlpha(0.7f - Math.abs(position));
+                page.setScaleY(0.8f + (1 - Math.abs(position)) * 0.2f);
+            }
+        });
+
+        sliderRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = viewPager.getCurrentItem();
+                int totalItems = viewPager.getAdapter().getItemCount();
+
+                int nextItem = (currentItem + 1) % totalItems;
+                viewPager.setCurrentItem(nextItem, true);
+                sliderHandler.postDelayed(sliderRunnable, 5000);
+            }
+        };
 
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
         temperatura = view.findViewById(R.id.temperatura);
         textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
-        buttonLocate = view.findViewById(R.id.buttonLocate);
         test = view.findViewById(R.id.test);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
@@ -114,8 +164,11 @@ public class activity_home extends Fragment {
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
 
-
-
+        SharedPreferences.Editor editor2 = getContext().getSharedPreferences("DogInfo", getContext().MODE_PRIVATE).edit();
+        editor2.remove("nombre");
+        editor2.remove("raza");
+        editor2.remove("genero");
+        editor2.apply();
 
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
@@ -183,14 +236,19 @@ public class activity_home extends Fragment {
 
         });
 
-
-
-        buttonLocate.setOnClickListener(v ->{
-            getFragmentManager().beginTransaction().replace(R.id.frame,new activity_maps()).commit();
-        });
-
-
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    public  void onResume() {
+        super.onResume();
+        sliderHandler.postDelayed(sliderRunnable, 12000);
     }
 
 

@@ -1,7 +1,9 @@
 package com.example.necklase.Model.Get;
 import com.google.gson.annotations.SerializedName;
 
-public class Device {
+import java.io.Serializable;
+
+public class Device implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("modelo")
