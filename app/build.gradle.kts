@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.jjoe64:graphview:4.2.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")

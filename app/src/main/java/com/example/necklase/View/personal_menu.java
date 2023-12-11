@@ -87,7 +87,7 @@ public class personal_menu extends Fragment {
         }
     }
 
-    LinearLayout logout, pet;
+    LinearLayout logout, pet, location;
     TextView test, namePerson, emailPerson;
     private PersonalMenuViewModel personalMenuViewModel;
 
@@ -108,6 +108,7 @@ public class personal_menu extends Fragment {
         test = view.findViewById(R.id.test);
         namePerson = view.findViewById(R.id.namePerson);
         emailPerson = view.findViewById(R.id.emailPerson);
+        location = view.findViewById(R.id.location);
 
         PersonalMenuInteractor interactor = new PersonalMenuInteractor(getActivity());
         LiveData<List<String>> info = interactor.getInfoData(userId);
@@ -120,9 +121,12 @@ public class personal_menu extends Fragment {
             }
         });
 
-
-
-
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame, new activity_maps()).commit();
+            }
+        });
 
 
         logout.setOnClickListener(new View.OnClickListener() {

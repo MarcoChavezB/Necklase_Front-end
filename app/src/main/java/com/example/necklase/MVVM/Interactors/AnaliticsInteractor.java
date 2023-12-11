@@ -1,15 +1,14 @@
 package com.example.necklase.MVVM.Interactors;
-
 import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.tv.interactive.TvInteractiveAppService;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
+import com.example.necklase.Extras.NotificationHelper;
 import com.example.necklase.Model.Get.AirManagment;
 import com.example.necklase.Model.Get.AirModel;
 import com.example.necklase.Model.Get.HumManagment;
@@ -18,13 +17,13 @@ import com.example.necklase.Model.Get.TempManagment;
 import com.example.necklase.Model.Get.TempModel;
 import com.example.necklase.Model.Get.emocionalManagment;
 import com.example.necklase.Model.Get.emocionalModel;
+import com.example.necklase.Model.Get.tempPerHourManagment;
+import com.example.necklase.Model.Get.tempPerHourModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +39,7 @@ public class AnaliticsInteractor {
     RetrofitApiModelToken retro = new RetrofitApiModelToken();
     Retrofit retrofit = retro.provideRetrofit();
 
-    private MutableLiveData<String> infoLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> infoLiveData = new MutableLiveData<>();
 
     public LiveData<String> getInfoDog(String device) {
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
@@ -58,7 +57,6 @@ public class AnaliticsInteractor {
                     infoLiveData.setValue(info);
                 } else {}
             }
-
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {
 
@@ -125,8 +123,6 @@ public class AnaliticsInteractor {
         airManagment.getData(deviceCode, new Callback<AirModel>() {
             @Override
             public void onResponse(Call<AirModel> call, Response<AirModel> response) {
-                int responseCode = response.code();
-
                 if(response.isSuccessful()){
                     String level = String.valueOf(response.body().getNivel());
                     infoAir.setValue(level);
@@ -142,6 +138,8 @@ public class AnaliticsInteractor {
     }
 
 
+
+    // error en la peticion pues no tiene datos
     private MutableLiveData<List<String>> infoEmocional = new MutableLiveData<>();
     public LiveData<List<String>> getEmocion(String deviceCode) {
         emocionalManagment emocion = new emocionalManagment(retrofit);
@@ -167,4 +165,29 @@ public class AnaliticsInteractor {
         });
         return infoEmocional;
     }
+
+    private MutableLiveData<List<tempPerHourModel>> infoGraph = new MutableLiveData<>();
+    public LiveData<List<tempPerHourModel>> getGraph(String deviceCode) {
+        tempPerHourManagment tempGraph = new tempPerHourManagment(retrofit);
+        tempGraph.getGraph(deviceCode, new Callback<List<tempPerHourModel>>() {
+            @Override
+            public void onResponse(Call<List<tempPerHourModel>> call, Response<List<tempPerHourModel>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(context, "Error en peticion grafica", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                infoGraph.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<tempPerHourModel>> call, Throwable t) {
+                NotificationHelper.showNotification(context, "error", t.getCause().toString());
+            }
+        });
+        return infoGraph;
+    }
+
+
 }

@@ -61,7 +61,6 @@ public class login_view extends AppCompatActivity {
         String passwordP = prefs.getString("password", null);
 
         email.setText(emailP);
-        password.setText(passwordP);
 
 
 
@@ -77,6 +76,7 @@ public class login_view extends AppCompatActivity {
                     Toast.makeText(login_view.this, "Email is not valid", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 loginViewModel.login(email1, password1);
             }
         });

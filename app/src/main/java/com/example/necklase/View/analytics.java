@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+
+import android.security.keystore.StrongBoxUnavailableException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
+import com.example.necklase.Model.Get.tempPerHourModel;
 import com.example.necklase.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -68,7 +78,7 @@ public class analytics extends Fragment {
     }
 
     ImageView selectDevice, goDogInfo, triste, neutral, feliz;
-    TextView dogName, restingTime, temp, activeTime;
+    TextView dogName, temp, activeTime, test;
     LinearLayout malisimo, malo, regular, bueno, muyBueno;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,26 +92,36 @@ public class analytics extends Fragment {
         String code = codeDevice.getString("codigo", null);
 
         dogName = view.findViewById(R.id.dogName);
-        restingTime = view.findViewById(R.id.restingTime);
         malisimo = view.findViewById(R.id.malisimo);
         malo = view.findViewById(R.id.malo);
         regular = view.findViewById(R.id.regular);
         bueno = view.findViewById(R.id.bueno);
         muyBueno = view.findViewById(R.id.muyBueno);
-        activeTime = view.findViewById(R.id.activeTime);
         triste = view.findViewById(R.id.triste);
         neutral = view.findViewById(R.id.neutral);
         feliz = view.findViewById(R.id.feliz);
+        test = view.findViewById(R.id.test);
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
+        GraphView graphResting = (GraphView) view.findViewById(R.id.graphResting);
+
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),
-                new DataPoint(1, 5),
+                new DataPoint(1, 2),
                 new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(3, 4),
+                new DataPoint(4, 5),
+                new DataPoint(5, 6),
+                new DataPoint(6, 7),
+                new DataPoint(7, 8),
+                new DataPoint(8, 9),
+                new DataPoint(9, 10),
+                new DataPoint(10, 11),
+                new DataPoint(11, 12),
+                new DataPoint(12, 13),
+
         });
-        graph.addSeries(series);
+        graphResting.addSeries(series);
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
         LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
@@ -113,22 +133,74 @@ public class analytics extends Fragment {
             }
         });
 
-        // humedad data
+// infoGraph
+// infoGraph
+        LiveData<List<tempPerHourModel>> infoGraph = analiticsInteractor.getGraph(code);
+        infoGraph.observe(getViewLifecycleOwner(), new Observer<List<tempPerHourModel>>() {
+            @Override
+            public void onChanged(List<tempPerHourModel> tempPerHourModels) {
+                if (tempPerHourModels != null && !tempPerHourModels.isEmpty()) {
+                    List<DataPoint> dataPoints = new ArrayList<>();
 
+                    int[] fixedHours = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+                    double[] yValues = new double[12];
+                    Arrays.fill(yValues, 0.0);
+
+                    for (tempPerHourModel model : tempPerHourModels) {
+                        try {
+                            SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                            Date date = sdfInput.parse(model.getCreated_at());
+
+                            int hour = date.getHours();
+                            double yValue = Double.parseDouble(model.getValue());
+
+                            yValues[hour - 1] += yValue;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Crear DataPoints a partir de las horas y valores acumulados
+                    for (int i = 0; i < fixedHours.length; i++) {
+                        double xValue = fixedHours[i];
+                        double yValue = yValues[i];
+                        DataPoint dataPoint = new DataPoint(xValue, yValue);
+                        dataPoints.add(dataPoint);
+                    }
+
+                    DataPoint[] dataPointsArray = dataPoints.toArray(new DataPoint[0]);
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointsArray);
+
+                    graph.addSeries(series);
+
+                    graph.getViewport().setMinX(1);
+                    graph.getViewport().setMaxX(12);
+                } else {
+
+                }
+            }
+        });
+
+
+
+
+
+
+        // humedad data
         LiveData<String> hum = analiticsInteractor.getHum(code);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String newHum) {
                 if(newHum != null){
-                    restingTime.setText(newHum);
+
                 }else{
-                    restingTime.setText("No data");
+
                 }
             }
         });
 
         // temperatura data
-
         LiveData<List<String>> tempLiveData = analiticsInteractor.getTemp(code);
         tempLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
@@ -234,5 +306,23 @@ public class analytics extends Fragment {
             }
         });
         return view;
+    }
+
+    private double findValueForHour(List<tempPerHourModel> models, double hour) {
+        for (tempPerHourModel model : models) {
+            try {
+                SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                Date date = sdfInput.parse(model.getCreated_at());
+
+                // Comparar solo las horas (ignorar minutos y segundos)
+                if (hour == date.getHours()) {
+                    return Double.parseDouble(model.getValue());
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        // Valor predeterminado si no se encuentra ninguna correspondencia
+        return 0.0;
     }
 }

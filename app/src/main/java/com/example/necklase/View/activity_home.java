@@ -1,45 +1,25 @@
 package com.example.necklase.View;
-
-import static android.content.Context.MODE_PRIVATE;
-
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
-import com.example.necklase.Model.Get.FirstCollarManagment;
-import com.example.necklase.Model.Get.FirstCollarModel;
-import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
-import com.example.necklase.Model.Post.MyPetManagment;
-import com.example.necklase.Model.Post.MyPetPostModel;
-import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
-import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,7 +101,6 @@ public class activity_home extends Fragment {
 
 
 
-
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
 
@@ -184,16 +163,13 @@ public class activity_home extends Fragment {
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("id");
-                editor.apply();
+                SharedPreferences.Editor remove = getActivity().getSharedPreferences("collar", Context.MODE_PRIVATE).edit();
+                remove.remove("codigo");
+                remove.apply();
 
                 Router.redirectTo(getActivity(), SelectDog.class);
             }
-
         });
-
 
 
         buttonLocate.setOnClickListener(v ->{

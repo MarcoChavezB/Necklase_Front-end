@@ -32,12 +32,10 @@ public class SelectDogInteractors {
         deviceUserManagment.getData(id, new Callback<List<DeviceUserModel>>() {
             @Override
             public void onResponse(Call<List<DeviceUserModel>> call, Response<List<DeviceUserModel>> response) {
-                Toast.makeText(context, "id mostrado:" + id, Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()) {
                     List<DeviceUserModel> deviceUserList = response.body();
                     viewModel.onDataReceived(deviceUserList);
                 } else {
-                    Toast.makeText(context, "Error de servidor"  , Toast.LENGTH_SHORT).show();
                 }
             }
 
