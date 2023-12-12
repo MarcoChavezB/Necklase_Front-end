@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
+import com.example.necklase.TokenValidator.VerificarToken;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -70,15 +72,19 @@ public class activity_home extends Fragment {
     TextView nombredeperro, textViewEstadistica, textViewEstadistica4, porcentaje, feels, maxTemp, minTemp, temp, ciudad, estado;
     ImageView cambiar;
     Button buttonLocate;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
+        VerificarToken.Verificar(view.getContext());
+
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
+
+        HomeInteractor homeInteractor = new HomeInteractor(getActivity());
+        homeInteractor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
 
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
@@ -94,16 +100,14 @@ public class activity_home extends Fragment {
         estado = view.findViewById(R.id.estado);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", "1");
+        String idDevice = device.getString("id", null);
 
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
 
 
-
-        HomeInteractor homeInteractor = new HomeInteractor(getActivity());
-        LiveData<String> info = homeInteractor.getInfoDog(idDevice);
-
+        SharedPreferences dogId = getActivity().getSharedPreferences("infoDog", getActivity().MODE_PRIVATE);
+        String DogId = dogId.getString("dogId", null);
 
         LiveData<String> hum = homeInteractor.getHum(code);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -117,7 +121,7 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<String> infoDog = homeInteractor.getInfoDog(idDevice);
+        LiveData<String> infoDog = homeInteractor.getInfoDog(DogId);
         infoDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {

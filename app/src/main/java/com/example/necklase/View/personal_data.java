@@ -99,14 +99,14 @@ public class personal_data extends Fragment {
             @Override
             public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
                     PersonalDataPostModel personalData = response.body();
                     nombreText.setText(personalData.getNombre());
                     apellidoText.setText(personalData.getApellido());
                     emailText.setText(personalData.getEmail());
                     collaresText.setText(personalData.getNSensores());
-
                 }
+
+
             }
 
             @Override
@@ -114,11 +114,6 @@ public class personal_data extends Fragment {
                 nombreText.setText("no se pudo");
             }
         });
-
-
-
-
-
 
 
 
