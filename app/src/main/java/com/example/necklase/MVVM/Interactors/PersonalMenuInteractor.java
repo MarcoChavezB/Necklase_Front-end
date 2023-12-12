@@ -40,7 +40,6 @@ public class PersonalMenuInteractor {
             @Override
             public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
                 if(!response.isSuccessful()){
-                    return;
                 }
                 String name = response.body().getNombre();
                 String email = response.body().getEmail();

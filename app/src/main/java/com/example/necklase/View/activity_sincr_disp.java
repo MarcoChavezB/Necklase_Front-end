@@ -117,7 +117,6 @@ public class activity_sincr_disp extends AppCompatActivity {
             public void onItemClick(String code) {
                 Intent intent = new Intent(activity_sincr_disp.this, VerifyDevice.class);
                 intent.putExtra("code", code);
-                Log.e("code desde sinc", code);
                 startActivity(intent);
             }
         }, listadispositivos);

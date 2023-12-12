@@ -7,21 +7,10 @@ public class PetModel {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
     public String getRaza() {
         return raza;
     }
@@ -30,7 +19,10 @@ public class PetModel {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public PetModel(String id, String nombre, String raza, String genero){
+        this.id = id;
+        this.name = nombre;
+        this.raza = raza;
         this.genero = genero;
     }
 

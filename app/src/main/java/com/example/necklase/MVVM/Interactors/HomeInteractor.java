@@ -120,7 +120,6 @@ public class HomeInteractor {
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
                 int codeResponse = response.code();
                 if(!response.isSuccessful()){
-                    return;
                 }
 
                 List<String> tempList = new ArrayList<>();
@@ -148,7 +147,6 @@ public class HomeInteractor {
             @Override
             public void onResponse(Call<ForeModel> call, Response<ForeModel> response) {
              if(!response.isSuccessful()){
-                 return;
              }
                 List<String> tempList = new ArrayList<>();
                 tempList.add(response.body().getCitiLocation());

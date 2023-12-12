@@ -205,7 +205,7 @@
 
                 <Button
                     android:layout_marginTop="100dp"
-                    android:id="@+id/boton"
+                    android:id="@+id/botonregistrar"
                     android:background="@drawable/rounder_view"
                     android:backgroundTint="@color/bkbt_b"
                     android:layout_width="250dp"

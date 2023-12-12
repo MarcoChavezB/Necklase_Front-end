@@ -147,7 +147,6 @@ public class AnaliticsInteractor {
             @Override
             public void onResponse(Call<emocionalModel> call, Response<emocionalModel> response) {
                 if(!response.isSuccessful()){
-                    return;
                 }
 
                 List<String> tempList = new ArrayList<>();
@@ -174,7 +173,6 @@ public class AnaliticsInteractor {
             public void onResponse(Call<List<tempPerHourModel>> call, Response<List<tempPerHourModel>> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(context, "Error en peticion grafica", Toast.LENGTH_SHORT).show();
-                    return;
                 }
 
 

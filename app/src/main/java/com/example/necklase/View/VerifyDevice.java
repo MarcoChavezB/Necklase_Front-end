@@ -80,6 +80,7 @@ public class VerifyDevice extends AppCompatActivity {
                 } else if (response.body().getlinked()){
                     Toast.makeText(VerifyDevice.this,"Accepted device", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(VerifyDevice.this, activity_register_pet.class);
+                    intent.putExtra("code", codigo);
                     startActivity(intent);
                 } else{
                     Toast.makeText(VerifyDevice.this,"This device is already linked to an account", Toast.LENGTH_SHORT).show();

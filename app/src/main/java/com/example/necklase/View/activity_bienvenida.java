@@ -83,7 +83,6 @@ public class activity_bienvenida extends AppCompatActivity {
                 if(response.isSuccessful()){
                     if(response.body().getNumero() == null){
                         Toast.makeText(activity_bienvenida.this, "Error al cargar dispositivos", Toast.LENGTH_SHORT).show();
-                        return;
                     }
                     if(Integer.parseInt(response.body().getNumero()) == 0){
                         Router.redirectTo(activity_bienvenida.this, activity_anadir_dispositivo.class);

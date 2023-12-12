@@ -12,5 +12,6 @@ public class activity_pets_info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets_info);
+
     }
 }
