@@ -140,7 +140,6 @@ public class personal_menu extends Fragment {
                 editor.remove("token");
                 editor.apply();
 
-
                 RetrofitApiModelToken retro = new RetrofitApiModelToken();
                 Retrofit retrofit = retro.provideRetrofit();
                 LogoutManagment logoutManagment = new LogoutManagment(retrofit);
@@ -149,7 +148,7 @@ public class personal_menu extends Fragment {
                     @Override
                     public void onResponse(Call<LogoutPostModel> call, Response<LogoutPostModel> response) {
                         if (response.isSuccessful()){
-                            SharedPreferences.Editor editor = prefs.edit();
+                            SharedPreferences.Editor editor = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE).edit();
                             editor.remove("token");
                             editor.apply();
 
@@ -162,6 +161,12 @@ public class personal_menu extends Fragment {
                             editor2.remove("raza");
                             editor2.remove("genero");
                             editor2.apply();
+
+                            SharedPreferences.Editor removeCode = getActivity().getSharedPreferences("code", getActivity().MODE_PRIVATE).edit();
+                            removeCode.remove("code");
+                            removeCode.apply();
+
+                            Toast.makeText(getActivity(), "elimnado", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(getActivity(), login_view.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

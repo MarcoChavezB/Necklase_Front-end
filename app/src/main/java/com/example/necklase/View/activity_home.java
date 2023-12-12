@@ -23,6 +23,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Extras.SlowScrollSpeedManager;
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
+<<<<<<< HEAD
+=======
 import com.example.necklase.Model.CarruselModel;
 import com.example.necklase.Model.Get.FirstCollarManagment;
 import com.example.necklase.Model.Get.FirstCollarModel;
@@ -30,11 +32,15 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import com.example.necklase.TokenValidator.VerificarToken;
+<<<<<<< HEAD
+=======
 import com.example.necklase.View.Adapter.CarruselAdapter;
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -89,9 +95,12 @@ public class activity_home extends Fragment {
 
     TextView nombredeperro, textViewEstadistica, textViewEstadistica4, porcentaje, feels, maxTemp, minTemp, temp, ciudad, estado;    ImageView cambiar;
     Button buttonLocate;
+<<<<<<< HEAD
+=======
     private final Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
 
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +112,10 @@ public class activity_home extends Fragment {
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
 
+<<<<<<< HEAD
+        HomeInteractor homeInteractor = new HomeInteractor(getActivity());
+        homeInteractor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
+=======
         ViewPager2 viewPager = view.findViewById(R.id.parte2);
         List<CarruselModel> milista = new ArrayList<>();
         milista.add(new CarruselModel("Locate", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
@@ -141,6 +154,7 @@ public class activity_home extends Fragment {
                 sliderHandler.postDelayed(sliderRunnable, 5000);
             }
         };
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
 
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
@@ -155,15 +169,20 @@ public class activity_home extends Fragment {
         estado = view.findViewById(R.id.estado);
 
         SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", "1");
+        String idDevice = device.getString("id", null);
 
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
 
 
+<<<<<<< HEAD
+        SharedPreferences dogId = getActivity().getSharedPreferences("infoDog", getActivity().MODE_PRIVATE);
+        String DogId = dogId.getString("dogId", null);
+=======
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
 
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
 
         LiveData<String> hum = homeInteractor.getHum(code);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -177,7 +196,7 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<String> infoDog = homeInteractor.getInfoDog(idDevice);
+        LiveData<String> infoDog = homeInteractor.getInfoDog(DogId);
         infoDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {

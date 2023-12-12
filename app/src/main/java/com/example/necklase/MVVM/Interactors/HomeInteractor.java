@@ -2,12 +2,15 @@ package com.example.necklase.MVVM.Interactors;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.necklase.Extras.NotificationHelper;
+import com.example.necklase.Model.Get.FirstdManagment;
+import com.example.necklase.Model.Get.FirstdModel;
 import com.example.necklase.Model.Get.ForeManagment;
 import com.example.necklase.Model.Get.ForeModel;
 import com.example.necklase.Model.Get.HumManagment;
@@ -62,6 +65,29 @@ public class HomeInteractor {
         return humLiveData;
     }
 
+    public void setCorrectDevice(String userId){
+        FirstdManagment firstdManagment = new FirstdManagment(retrofit);
+        firstdManagment.getFirstId(userId, new Callback<FirstdModel>() {
+            @Override
+            public void onResponse(Call<FirstdModel> call, Response<FirstdModel> response) {
+                if(!response.isSuccessful()){
+                    return;
+                }
+
+                SharedPreferences.Editor editor = context.getSharedPreferences("deviceID", context.MODE_PRIVATE).edit();
+                editor.putString("id", response.body().getDeviceCode());
+                editor.apply();
+
+                SharedPreferences.Editor editor1 = context.getSharedPreferences("infoDog", context.MODE_PRIVATE).edit();
+                editor1.putString("dogId", response.body().getDogId());
+                editor1.apply();
+            }
+
+            @Override
+            public void onFailure(Call<FirstdModel> call, Throwable t) {}
+        });
+    }
+
     private MutableLiveData<String> dogLiveData = new MutableLiveData<>();
 
     public LiveData<String> getInfoDog(String id) {
@@ -78,14 +104,20 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
+<<<<<<< HEAD
+                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
+               }else{
+                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
+=======
                }else{
 
+>>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
                }
            }
 
            @Override
            public void onFailure(Call<MyPetPostModel> call, Throwable t) {
-
+               Toast.makeText(context, "code" + t.getCause(), Toast.LENGTH_SHORT).show();
            }
        });
         return dogLiveData;
@@ -118,7 +150,6 @@ public class HomeInteractor {
         calories.getData(device, peso, new Callback<caloriasModel>() {
             @Override
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
-                int codeResponse = response.code();
                 if(!response.isSuccessful()){
                 }
 
@@ -172,4 +203,7 @@ public class HomeInteractor {
         });
         return climaLiveData;
     }
+
+
+
 }
