@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,19 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.necklase.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class activity_maps extends Fragment implements OnMapReadyCallback{
+import org.w3c.dom.Text;
+
+public class activity_maps extends Fragment {
 
     private GoogleMap mMap;
 
@@ -39,6 +47,11 @@ public class activity_maps extends Fragment implements OnMapReadyCallback{
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+
+
+
+
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
@@ -53,23 +66,67 @@ public class activity_maps extends Fragment implements OnMapReadyCallback{
             } catch (Resources.NotFoundException e) {
                 Log.e("MapsActivity", "No se puede encontrar el estilo. Error: ", e);
             }
-            LatLng sydney = new LatLng(25.556900,-103.332600);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+            LatLng posicionInicial = new LatLng(25.556900, -103.332600);
+            miMarcador = googleMap.addMarker(new MarkerOptions().position(posicionInicial)
+                    .icon(icon)
+                    .title("Mi Ubicación"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicionInicial, 13));
         }
     };
 
+    public void actualizarUbicacionMarcador(double nuevaLatitud, double nuevaLongitud) {
+        LatLng nuevaPosicion = new LatLng(nuevaLatitud, nuevaLongitud);
+        if (miMarcador == null) {
+            miMarcador = mMap.addMarker(new MarkerOptions().position(nuevaPosicion).icon(icon));
+        } else {
+            miMarcador.setPosition(nuevaPosicion);
+        }
+
+        if (seguimientoActivo) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(nuevaPosicion));
+        }
+    }
+
+
     private ImageView img;
+    private Marker miMarcador;
+    private BitmapDescriptor icon;
+    private Button btnSeguirPunto;
+
+    private boolean seguimientoActivo = false;
+
+    private TextView txt, txt2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_maps, container, false);
+        btnSeguirPunto = view.findViewById(R.id.btnSeguirPunto);
+        btnSeguirPunto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seguimientoActivo = !seguimientoActivo;
+                if (seguimientoActivo) {
+                    btnSeguirPunto.setText("Detener Seguimiento");
+                } else {
+                    btnSeguirPunto.setText("Seguir Punto");
+                }
+            }
+        });
+
+        txt = view.findViewById(R.id.nombreperro);
+        txt2 = view.findViewById(R.id.nombreperro2);
+        SharedPreferences infoperro = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE);
+        String nombreperro = infoperro.getString("nombre", null);
+        txt.setText(nombreperro);
+        txt2.setText(nombreperro);
 
         img = view.findViewById(R.id.luz);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.light_blur_big);
         img.startAnimation(scaleAnimation);
+        icon = BitmapDescriptorFactory.fromResource(R.mipmap.collar_icon);
+
         return view;
     }
 
@@ -82,16 +139,4 @@ public class activity_maps extends Fragment implements OnMapReadyCallback{
             mapFragment.getMapAsync(callback);
         }
     }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        LatLng newYork = new LatLng( 25.533767, -103.318708);
-
-        mMap.addMarker(new MarkerOptions().position(newYork).title("Marker in New York"));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newYork, 10));
-    }
-
 }

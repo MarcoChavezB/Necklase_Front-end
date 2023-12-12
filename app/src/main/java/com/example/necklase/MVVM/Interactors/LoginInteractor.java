@@ -59,7 +59,7 @@ public class LoginInteractor {
                         editor.apply();
                         Log.e("token", response.body().getToken());
 
-                        Intent intent = new Intent(context, MainActivity.class);
+                        Intent intent = new Intent(context, activity_bienvenida.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
 

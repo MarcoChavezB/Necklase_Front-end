@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -20,6 +22,7 @@ import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -29,29 +32,33 @@ import retrofit2.Retrofit;
 
 public class activity_bienvenida extends AppCompatActivity {
 
-    private Button btn;
     private String id;
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
     }
+    private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Temanegro_Necklase);
         setContentView(R.layout.activity_bienvenida);
 
+        img = findViewById(R.id.circleanim);
+        Animation scaleAnimation = AnimationUtils.loadAnimation(activity_bienvenida.this, R.anim.light_blur_speed);
+        img.startAnimation(scaleAnimation);
 
-        btn = findViewById(R.id.boton);
-        btn.setOnClickListener(new View.OnClickListener() {
+        CountDownTimer count = new CountDownTimer(2000, 2000) {
             @Override
-            public void onClick(View v) {
+            public void onTick(long millisUntilFinished) {}
+
+            public void onFinish() {
                 ViewModelTokenIns.getinstance();
                 ViewModelTokenIns.settoken(activity_bienvenida.this);
 
                 SharedPreferences prefs = activity_bienvenida.this.getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 String token = prefs.getString("token", null);
-                DecodedJWT decodedJWT = JwtUtils.decode(token);
                 DecodedJWT decode = JwtUtils.decode(token);
 
                 if (decode != null) {
@@ -61,9 +68,10 @@ public class activity_bienvenida extends AppCompatActivity {
                 } else {
                     Log.e("ID bienvenida token", "El token es nulo o inválido");
                 }
-
             }
-        });
+        };
+        count.start();
+
     }
     public void checkDevices(){
         RetrofitApiModelToken retro = new RetrofitApiModelToken();
@@ -92,13 +100,6 @@ public class activity_bienvenida extends AppCompatActivity {
         });
     }
 
-    private void CountDownTimer() {
-        new CountDownTimer(2000, 2000) {
-            public void onFinish() {
-            }
-            public void onTick(long millisUntilFinished) {
-            }
-        }.start();
-    }
+
 
 }

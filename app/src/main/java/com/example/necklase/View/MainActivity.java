@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -23,6 +24,11 @@ import com.example.necklase.Router.Router;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,17 +49,25 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {}
 
             public void onFinish() {
+
                 SharedPreferences prefs = MainActivity.this.getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 String token = prefs.getString("token", null);
 
-                    Intent intent;
-                    if (token != null && !token.isEmpty() && isTokenExprired(token)) {
-                        intent = new Intent(MainActivity.this, Main_acept_permisos.class);
+                if (token != null && !token.isEmpty()) {
+                    if (isTokenExprired(token)) {
+                        Intent intent = new Intent(MainActivity.this, Main_acept_permisos.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     } else {
-                        intent = new Intent(MainActivity.this, navbar.class);
+                        Intent intent = new Intent(MainActivity.this, activity_bienvenida.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
+                } else {
+                    Intent intent = new Intent(MainActivity.this, Main_acept_permisos.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                }
             }
         };
         count.start();
