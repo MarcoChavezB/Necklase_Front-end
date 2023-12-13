@@ -3,10 +3,14 @@ package com.example.necklase.View.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.necklase.Model.CarruselModel;
@@ -35,6 +39,7 @@ public class CarruselAdapter extends RecyclerView.Adapter<CarruselAdapter.ViewHo
         holder.itemImage.setImageResource(item.getImage());
         holder.btn.setOnClickListener(item.getEvento());
         holder.btn.setText(item.getNombreboton());
+        holder.cont.setCardBackgroundColor(item.getColor());
     }
 
     @Override
@@ -46,9 +51,11 @@ public class CarruselAdapter extends RecyclerView.Adapter<CarruselAdapter.ViewHo
         TextView itemText;
         ImageView itemImage;
         Button btn;
+        CardView cont;
 
         ViewHolder(View view) {
             super(view);
+            cont = view.findViewById(R.id.parte22);
             itemText = view.findViewById(R.id.texto);
             itemImage = view.findViewById(R.id.imagencarrusel);
             btn = view.findViewById(R.id.buttonLocate);

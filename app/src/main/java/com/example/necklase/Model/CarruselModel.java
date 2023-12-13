@@ -1,18 +1,26 @@
 package com.example.necklase.Model;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 
 public class CarruselModel {
 
-    public CarruselModel(String nombreboton, int image, View.OnClickListener evento, String texto){
+    public CarruselModel(String nombreboton, int image, View.OnClickListener evento, String texto, int color){
         this.evento = evento;
         this.image = image;
         this.nombreboton = nombreboton;
         this.texto = texto;
+        this.color = color;
     }
     private String nombreboton;
     private int image;
+
+    public int getColor() {
+        return color;
+    }
+
+    private int color;
 
     public View.OnClickListener getEvento() {
         return evento;

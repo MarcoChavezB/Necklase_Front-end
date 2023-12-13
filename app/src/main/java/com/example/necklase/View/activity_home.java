@@ -16,9 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
 import com.example.necklase.Model.CarruselModel;
+import com.example.necklase.Model.Get.FirstCollarManagment;
+import com.example.necklase.Model.Get.FirstCollarModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
+import com.example.necklase.Model.Post.MyPetManagment;
+import com.example.necklase.Model.Post.MyPetPostModel;
+import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
+import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
 import com.example.necklase.TokenValidator.VerificarToken;
+
 import com.example.necklase.View.Adapter.CarruselAdapter;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 import java.text.DecimalFormat;
@@ -96,16 +104,23 @@ public class activity_home extends Fragment {
         milista.add(new CarruselModel("Locate", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Router.redirectTo(getActivity(), navbar.class);
+                getFragmentManager().beginTransaction().replace(R.id.frame, new activity_maps()).commit();
             }
-        }, "¡Locate your pet anywhere!"));
+        }, "¡Locate your pet anywhere!", R.color.bk_g));
 
-        milista.add(new CarruselModel("Monitorize", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
+        milista.add(new CarruselModel("Manages", R.mipmap.hearthicon_foreground, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Router.redirectTo(getActivity(), navbar.class);
+                getFragmentManager().beginTransaction().replace(R.id.frame, new analytics()).commit();
             }
-        }, "¡Monitorize your pet!"));
+        }, "¡Monitor your pet's health!", R.color.tx_r ));
+
+        milista.add(new CarruselModel("Take a look", R.mipmap.collar_icon, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame, new activity_device()).commit();
+            }
+        }, "¡Take a look at your devices!", R.color.linked));
 
         CarruselAdapter adapter = new CarruselAdapter(milista);
         viewPager.setAdapter(adapter);

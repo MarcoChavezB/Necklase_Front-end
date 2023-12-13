@@ -1,14 +1,13 @@
 package com.example.necklase.Model.Get;
+import java.io.Serializable;
 
-import com.google.gson.annotations.SerializedName;
-
-public class PetModel {
+public class PetModel implements Serializable {
     public String getId() {
         return id;
     }
 
     public String getName() {
-        return name;
+        return nombre;
     }
 
     public String getRaza() {
@@ -21,21 +20,17 @@ public class PetModel {
 
     public PetModel(String id, String nombre, String raza, String genero){
         this.id = id;
-        this.name = nombre;
+        this.nombre = nombre;
         this.raza = raza;
         this.genero = genero;
     }
 
-    @SerializedName("id")
     private String id;
 
-    @SerializedName("nombre")
-    private String name ;
+    private String nombre ;
 
-    @SerializedName("raza")
     private String raza;
 
-    @SerializedName("genero")
     private String genero;
 
 }

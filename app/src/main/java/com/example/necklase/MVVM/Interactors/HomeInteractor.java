@@ -91,6 +91,7 @@ public class HomeInteractor {
            @Override
            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                if (response.isSuccessful()){
+
                    String nameDog = response.body().getNombre();
                    SharedPreferences.Editor editor = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
                    editor.putString("nombre", response.body().getNombre());
@@ -98,6 +99,7 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
+                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
                }else {
                    Toast.makeText(context, "Error code1234" + response.code(), Toast.LENGTH_SHORT).show();
                }
@@ -142,9 +144,20 @@ public class HomeInteractor {
 
                 List<String> tempList = new ArrayList<>();
 
-                tempList.add(response.body().getBmr());
-                tempList.add(response.body().getActiveCalories());
-                tempList.add(response.body().getTotalCalories());
+                if (response.body() != null) {
+                    String bmrValue = response.body().getBmr() != null ? response.body().getBmr() : "0";
+                    tempList.add(bmrValue);
+
+                    String activeCalories = response.body().getActiveCalories() != null ? response.body().getActiveCalories() : "0";
+                    tempList.add(activeCalories);
+
+                    String totalCalories = response.body().getTotalCalories() != null ? response.body().getTotalCalories() : "0";
+                    tempList.add(totalCalories);
+                } else {
+                    tempList.add("0");
+                    tempList.add("0");
+                    tempList.add("0");
+                }
 
                 caloriesLiveData.setValue(tempList);
             }

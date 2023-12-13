@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.necklase.R;
 import com.example.necklase.databinding.ActivityNavbarBinding;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
@@ -14,6 +16,12 @@ public class navbar extends AppCompatActivity {
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private int selectedItem;
     private FrameLayout fr;
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

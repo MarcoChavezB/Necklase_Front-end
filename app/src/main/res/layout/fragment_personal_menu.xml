@@ -219,7 +219,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
                                 android:gravity="start|center"
-                                android:text="My Pet"
+                                android:text="My Pets"
                                 android:textColor="@color/font_black"
                                 android:textSize="17dp"></TextView>
 

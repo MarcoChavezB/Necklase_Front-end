@@ -54,5 +54,4 @@ public class MapsInteractor {
         });
         return locationLiveData;
     }
-
 }

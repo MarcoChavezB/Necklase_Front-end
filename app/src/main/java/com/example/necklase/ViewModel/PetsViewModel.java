@@ -4,33 +4,24 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 
 import com.example.necklase.MVVM.Interactors.PetsInteractor;
 import com.example.necklase.Model.Get.PetModel;
 
 import java.util.List;
 
-public class PetsViewModel extends AndroidViewModel {
+public class PetsViewModel extends ViewModel {
 
     private MutableLiveData<List<PetModel>> mipet = new MutableLiveData<>();
-
-    public PetsViewModel(@NonNull Application application) {
-        super(application);
+    public void PostData(List<PetModel> pets){
+        mipet.postValue(pets);
     }
 
-    PetsInteractor pts = new PetsInteractor(getApplication().getApplicationContext());
-    public void GetData(String id){
-        pts.getPets(id);
-        pts.lista.observe(getApplication(), new Observer<List<PetModel>>() {
-            @Override
-            public void onChanged(List<PetModel> petModels) {
-                mipet.postValue(petModels);
-            }
-        });
+    public LiveData<List<PetModel>> getLiveData(){
+        return mipet;
     }
-
-
-
 }

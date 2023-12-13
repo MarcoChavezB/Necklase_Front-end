@@ -129,6 +129,14 @@ public class personal_menu extends Fragment {
         });
 
 
+        pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), activity_pets_info.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
