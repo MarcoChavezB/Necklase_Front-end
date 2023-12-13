@@ -48,10 +48,6 @@ public class activity_maps extends Fragment {
          * user has installed Google Play services and returned to the app.
          */
 
-
-
-
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
 

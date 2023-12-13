@@ -1,42 +1,25 @@
 package com.example.necklase.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.example.necklase.Model.Get.Device;
 import com.example.necklase.R;
-import com.example.necklase.Router.Router;
 import com.example.necklase.View.Adapter.DeviceSync;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.Task;
-
 import android.bluetooth.BluetoothAdapter;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;

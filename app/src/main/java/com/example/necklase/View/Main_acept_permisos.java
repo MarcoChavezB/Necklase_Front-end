@@ -34,6 +34,8 @@ public class Main_acept_permisos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_acept_permisos);
 
+        Router.redirectTo(Main_acept_permisos.this, navbar.class);
+
 
         aceptar = findViewById(R.id.aceptar);
         denegar = findViewById(R.id.denegar);

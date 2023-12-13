@@ -2,26 +2,18 @@ package com.example.necklase.View;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.necklase.Extras.SlowScrollSpeedManager;
-import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
 import com.example.necklase.Model.CarruselModel;
 import com.example.necklase.Model.Get.FirstCollarManagment;
@@ -69,7 +61,6 @@ public class activity_home extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment activity_home.
      */
-    // TODO: Rename and change types and number of parameters
     public static activity_home newInstance(String param1, String param2) {
         activity_home fragment = new activity_home();
         Bundle args = new Bundle();
@@ -104,8 +95,10 @@ public class activity_home extends Fragment {
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         ViewModelTokenIns.settoken(view.getContext());
 
+
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
         homeInteractor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
+
         ViewPager2 viewPager = view.findViewById(R.id.parte2);
         List<CarruselModel> milista = new ArrayList<>();
         milista.add(new CarruselModel("Locate", R.mipmap.dog_collar_foreground, new View.OnClickListener() {
@@ -169,6 +162,7 @@ public class activity_home extends Fragment {
 
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
+
 
 
         SharedPreferences dogId = getActivity().getSharedPreferences("infoDog", getActivity().MODE_PRIVATE);

@@ -133,58 +133,28 @@ public class analytics extends Fragment {
             }
         });
 
-// infoGraph
-// infoGraph
         LiveData<List<tempPerHourModel>> infoGraph = analiticsInteractor.getGraph(code);
         infoGraph.observe(getViewLifecycleOwner(), new Observer<List<tempPerHourModel>>() {
             @Override
             public void onChanged(List<tempPerHourModel> tempPerHourModels) {
-                if (tempPerHourModels != null && !tempPerHourModels.isEmpty()) {
-                    List<DataPoint> dataPoints = new ArrayList<>();
-
-                    int[] fixedHours = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-
-                    double[] yValues = new double[12];
-                    Arrays.fill(yValues, 0.0);
-
-                    for (tempPerHourModel model : tempPerHourModels) {
-                        try {
-                            SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-                            Date date = sdfInput.parse(model.getCreated_at());
-
-                            int hour = date.getHours();
-                            double yValue = Double.parseDouble(model.getValue());
-
-                            yValues[hour - 1] += yValue;
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    // Crear DataPoints a partir de las horas y valores acumulados
-                    for (int i = 0; i < fixedHours.length; i++) {
-                        double xValue = fixedHours[i];
-                        double yValue = yValues[i];
-                        DataPoint dataPoint = new DataPoint(xValue, yValue);
-                        dataPoints.add(dataPoint);
-                    }
-
-                    DataPoint[] dataPointsArray = dataPoints.toArray(new DataPoint[0]);
-                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPointsArray);
-
-                    graph.addSeries(series);
-
-                    graph.getViewport().setMinX(1);
-                    graph.getViewport().setMaxX(12);
-                } else {
-
-                }
+                LineGraphSeries<DataPoint> graphInfo = new LineGraphSeries<>(new DataPoint[]{
+                        new DataPoint(0, findValueForHour(tempPerHourModels, 0)),
+                        new DataPoint(1, findValueForHour(tempPerHourModels, 1)),
+                        new DataPoint(2, findValueForHour(tempPerHourModels, 2)),
+                        new DataPoint(3, findValueForHour(tempPerHourModels, 3)),
+                        new DataPoint(4, findValueForHour(tempPerHourModels, 4)),
+                        new DataPoint(5, findValueForHour(tempPerHourModels, 5)),
+                        new DataPoint(6, findValueForHour(tempPerHourModels, 6)),
+                        new DataPoint(7, findValueForHour(tempPerHourModels, 7)),
+                        new DataPoint(8, findValueForHour(tempPerHourModels, 8)),
+                        new DataPoint(9, findValueForHour(tempPerHourModels, 9)),
+                        new DataPoint(10, findValueForHour(tempPerHourModels, 10)),
+                        new DataPoint(11, findValueForHour(tempPerHourModels, 11)),
+                        new DataPoint(12, findValueForHour(tempPerHourModels, 12)),
+                });
+                graph.addSeries(graphInfo);
             }
         });
-
-
-
-
 
 
         // humedad data

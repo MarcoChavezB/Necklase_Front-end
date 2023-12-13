@@ -105,17 +105,15 @@ public class HomeInteractor {
                    editor.apply();
                    dogLiveData.setValue(nameDog);
                    Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
-               }else{
-                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
+               }else {
+                   Toast.makeText(context, "Error code1234" + response.code(), Toast.LENGTH_SHORT).show();
                }
            }
 
            @Override
-           public void onFailure(Call<MyPetPostModel> call, Throwable t) {
-               Toast.makeText(context, "code" + t.getCause(), Toast.LENGTH_SHORT).show();
-           }
+           public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
        });
-        return dogLiveData;
+       return dogLiveData;
     }
 
     private MutableLiveData<String> tempLiveData = new MutableLiveData<>();
@@ -146,6 +144,7 @@ public class HomeInteractor {
             @Override
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
                 if(!response.isSuccessful()){
+                    return;
                 }
 
                 List<String> tempList = new ArrayList<>();
@@ -184,6 +183,7 @@ public class HomeInteractor {
             @Override
             public void onResponse(Call<ForeModel> call, Response<ForeModel> response) {
              if(!response.isSuccessful()){
+                 return;
              }
                 List<String> tempList = new ArrayList<>();
                 tempList.add(response.body().getCitiLocation());
@@ -209,7 +209,4 @@ public class HomeInteractor {
         });
         return climaLiveData;
     }
-
-
-
 }
