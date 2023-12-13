@@ -96,7 +96,6 @@ public class HomeInteractor {
            @Override
            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                if (response.isSuccessful()){
-
                    String nameDog = response.body().getNombre();
                    SharedPreferences.Editor editor = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
                    editor.putString("nombre", response.body().getNombre());
@@ -104,23 +103,15 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
-<<<<<<< HEAD
-                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
-               }else{
-                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
-=======
-               }else{
-
->>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
+               }else {
+                   Toast.makeText(context, "Error code1234" + response.code(), Toast.LENGTH_SHORT).show();
                }
            }
 
            @Override
-           public void onFailure(Call<MyPetPostModel> call, Throwable t) {
-               Toast.makeText(context, "code" + t.getCause(), Toast.LENGTH_SHORT).show();
-           }
+           public void onFailure(Call<MyPetPostModel> call, Throwable t) {}
        });
-        return dogLiveData;
+       return dogLiveData;
     }
 
     private MutableLiveData<String> tempLiveData = new MutableLiveData<>();
@@ -151,6 +142,7 @@ public class HomeInteractor {
             @Override
             public void onResponse(Call<caloriasModel> call, Response<caloriasModel> response) {
                 if(!response.isSuccessful()){
+                    return;
                 }
 
                 List<String> tempList = new ArrayList<>();
@@ -178,6 +170,7 @@ public class HomeInteractor {
             @Override
             public void onResponse(Call<ForeModel> call, Response<ForeModel> response) {
              if(!response.isSuccessful()){
+                 return;
              }
                 List<String> tempList = new ArrayList<>();
                 tempList.add(response.body().getCitiLocation());
@@ -203,7 +196,4 @@ public class HomeInteractor {
         });
         return climaLiveData;
     }
-
-
-
 }
