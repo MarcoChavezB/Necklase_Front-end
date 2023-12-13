@@ -3,6 +3,7 @@ package com.example.necklase.Model.RetrofitInterfaces;
 import com.example.necklase.Model.Get.DevicePetModel;
 import com.example.necklase.Model.Get.MessageModel;
 import com.example.necklase.Model.Get.PetModel;
+import com.example.necklase.Model.Get.PetsWithoutDeviceSyncModel;
 import com.example.necklase.Model.Post.MyPetPostModel;
 import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.Post.RegisterPetOnlyModel;
@@ -16,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MyPetInterface {
     @POST("infoMascota/{id}")
@@ -27,7 +29,7 @@ public interface MyPetInterface {
     @DELETE("deletePet/{id}")
     Call<MessageModel> deletepet(@Path("id") String id);
 
-    @POST("infoDispositivo/{id]")
+    @POST("infoDispositivo/{id}")
     Call<DevicePetModel> getdevicePet(@Path("id") String id);
 
     @PUT("updateDevicePet/{PetId}/{DeviceId}")
@@ -35,5 +37,7 @@ public interface MyPetInterface {
 
     @POST("registerPet")
     Call<MessageModel> registerPet(@Body RegisterPetOnlyModel petmodel);
+    @GET("getPetsWithoutDevice/{iduser}")
+    Call<List<PetsWithoutDeviceSyncModel>> getpetswithout(@Path("iduser") String iduser);
 
 }

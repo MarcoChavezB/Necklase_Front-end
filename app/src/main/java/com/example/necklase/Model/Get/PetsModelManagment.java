@@ -38,4 +38,9 @@ public class PetsModelManagment {
         Call<MessageModel> del = inter.registerPet(pts);
         del.enqueue(call);
     }
+
+    public void getPetsWithoutDevice (String iduser,  Callback<List<PetsWithoutDeviceSyncModel>> call){
+        Call<List<PetsWithoutDeviceSyncModel>> del = inter.getpetswithout(iduser);
+        del.enqueue(call);
+    }
 }

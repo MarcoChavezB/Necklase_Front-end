@@ -106,8 +106,8 @@ public class activity_device extends Fragment {
                             deviceAdapter = new DeviceConfigAdapter(view.getContext(), new DeviceConfigAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(Device item) {
-                                    Intent intent = new Intent(view.getContext(), activity_home.class);
-                                    intent.putExtra("id", item.getId());
+                                    Intent intent = new Intent(view.getContext(), activity_Device_pet_info.class);
+                                    intent.putExtra("device", String.valueOf(item.getId()));
                                     startActivity(intent);
                                 }
                             }, resource.data);

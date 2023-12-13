@@ -67,7 +67,8 @@
             tools:ignore="MissingConstraints">
 
             <LinearLayout
-                android:id="@+id/goBack2"
+                android:layout_marginTop="40dp"
+                android:id="@+id/goBack222"
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/caja"
                 android:layout_height="50dp"

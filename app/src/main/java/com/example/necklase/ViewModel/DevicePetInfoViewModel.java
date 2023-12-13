@@ -4,12 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.necklase.Model.Get.PetsWithoutDeviceSyncModel;
+
+import java.util.List;
+
 public class DevicePetInfoViewModel extends ViewModel {
     private MutableLiveData<String> devicename = new MutableLiveData<>();
     private MutableLiveData<String> deviceType = new MutableLiveData<>();
     private MutableLiveData<String> petname = new MutableLiveData<>();
     private MutableLiveData<String> petid = new MutableLiveData<>();
     private MutableLiveData<String> deviceid = new MutableLiveData<>();
+
+    public LiveData<List<PetsWithoutDeviceSyncModel>> getListapetswithout() {
+        return listapetswithout;
+    }
+    private MutableLiveData<List<PetsWithoutDeviceSyncModel>> listapetswithout = new MutableLiveData<>();
+
+    public void setListapetswithout(List<PetsWithoutDeviceSyncModel> lista){
+        listapetswithout.postValue(lista);
+    }
 
     public LiveData<String> getPetid() {
         return petid;

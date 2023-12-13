@@ -53,7 +53,6 @@ public class Activity_Pet_Info_Individual extends AppCompatActivity {
             viewmodel.setData(pet);
         }
 
-
         viewmodel.getData().observe(this, new Observer<PetModel>() {
             @Override
             public void onChanged(PetModel petModel) {

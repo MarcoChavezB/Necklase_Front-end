@@ -14,7 +14,13 @@ public class MapsInteractor {
 
     private Context context;
     private RetrofitApiModelToken retrotoken;
-    public MapsInteractor(){
+    public MapsInteractor(Context context){
+        this.context = context;
+    }
+
+    public void GetData(String iddevice){
+        retrotoken = new RetrofitApiModelToken();
+        Retrofit rt = retrotoken.provideRetrofit();
 
     }
 }

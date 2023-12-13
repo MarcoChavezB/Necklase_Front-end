@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class activity_Device_pet_info extends AppCompatActivity {
     private TextView nombredevice, typedevice, petname;
     private Button cambiarpet;
     private String iddevice;
+    private LinearLayout lin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,7 @@ public class activity_Device_pet_info extends AppCompatActivity {
         typedevice = findViewById(R.id.devicetype);
         petname = findViewById(R.id.textView3);
         cambiarpet = findViewById(R.id.cambiarpet);
+        lin = findViewById(R.id.goBack222);
 
         viewmodel = new ViewModelProvider(this).get(DevicePetInfoViewModel.class);
         DevicePetInfoInteractor intec = new DevicePetInfoInteractor(this);
@@ -70,6 +73,14 @@ public class activity_Device_pet_info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(activity_Device_pet_info.this, activity_pets_device_change.class);
                 intent.putExtra("iddevice",iddevice);
+                startActivity(intent);
+            }
+        });
+
+        lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity_Device_pet_info.this, navbar.class);
                 startActivity(intent);
             }
         });
