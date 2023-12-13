@@ -3,6 +3,7 @@ package com.example.necklase.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.SavedStateHandle;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.necklase.MVVM.Interactors.MapsInteractor;
 import com.example.necklase.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +33,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class activity_maps extends Fragment {
 
@@ -62,6 +66,7 @@ public class activity_maps extends Fragment {
             } catch (Resources.NotFoundException e) {
                 Log.e("MapsActivity", "No se puede encontrar el estilo. Error: ", e);
             }
+
             LatLng posicionInicial = new LatLng(25.556900, -103.332600);
             miMarcador = googleMap.addMarker(new MarkerOptions().position(posicionInicial)
                     .icon(icon)
@@ -110,6 +115,7 @@ public class activity_maps extends Fragment {
                 }
             }
         });
+
 
         txt = view.findViewById(R.id.nombreperro);
         txt2 = view.findViewById(R.id.nombreperro2);
