@@ -2,6 +2,7 @@ package com.example.necklase.MVVM.Interactors;
 import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -13,6 +14,8 @@ import com.example.necklase.Model.Get.AirManagment;
 import com.example.necklase.Model.Get.AirModel;
 import com.example.necklase.Model.Get.HumManagment;
 import com.example.necklase.Model.Get.HumModel;
+import com.example.necklase.Model.Get.SoundManagment;
+import com.example.necklase.Model.Get.SoundModel;
 import com.example.necklase.Model.Get.TempManagment;
 import com.example.necklase.Model.Get.TempModel;
 import com.example.necklase.Model.Get.emocionalManagment;
@@ -180,11 +183,33 @@ public class AnaliticsInteractor {
 
             @Override
             public void onFailure(Call<List<tempPerHourModel>> call, Throwable t) {
-                NotificationHelper.showNotification(context, "error", t.getCause().toString());
             }
         });
         return infoGraph;
     }
+
+    public void getSound(String code){
+        SoundManagment managment = new SoundManagment(retrofit);
+        managment.getData(code, new Callback<SoundModel>() {
+            @Override
+            public void onResponse(Call<SoundModel> call, Response<SoundModel> response) {
+                if(!response.isSuccessful()){
+                    return;
+                }
+
+                if(response.body().getValue().equals("1")){
+                    NotificationHelper.showNotification(context, "Alerta", "El perro esta ladrando");
+                }
+            }
+            @Override
+            public void onFailure(Call<SoundModel> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
 
 
 }

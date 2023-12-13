@@ -2,12 +2,9 @@ package com.example.necklase.MVVM.Interactors;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.example.necklase.Extras.NotificationHelper;
 import com.example.necklase.Model.Get.FirstdManagment;
 import com.example.necklase.Model.Get.FirstdModel;
@@ -22,10 +19,8 @@ import com.example.necklase.Model.Get.caloriasModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -198,6 +193,14 @@ public class HomeInteractor {
                 double tempDouble = Double.parseDouble(temp);
                 if(tempDouble > 30){
                     NotificationHelper.showNotification(context, "Temperatura alta", "La temperatura podria no ser ideal para un canino");
+                }
+
+                if(tempDouble > 15 && tempDouble < 25){
+                    NotificationHelper.showNotification(context, "Temperatura Ideal", "Temperatura optima para pasear a tu canino");
+                }
+
+                if(tempDouble < 10){
+                    NotificationHelper.showNotification(context, "Temperatura baja", "La temperatura podria no ser ideal para un canino");
                 }
 
                 climaLiveData.setValue(tempList);

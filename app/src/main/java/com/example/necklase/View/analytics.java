@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import android.os.CountDownTimer;
 import android.security.keystore.StrongBoxUnavailableException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,7 +158,7 @@ public class analytics extends Fragment {
         });
 
 
-        // humedad data
+        // humedad data ?=========================================================
         LiveData<String> hum = analiticsInteractor.getHum(code);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -169,6 +170,20 @@ public class analytics extends Fragment {
                 }
             }
         });
+
+        CountDownTimer count = new CountDownTimer(Long.MAX_VALUE, 5000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                analiticsInteractor.getSound(code);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        count.start();
+
 
         // temperatura data
         LiveData<List<String>> tempLiveData = analiticsInteractor.getTemp(code);

@@ -6,5 +6,5 @@ import retrofit2.http.Query;
 
 public interface SoundInterface {
     @GET("getSoundValue")
-    Call<SoundModel> getSound(@Query("device") String device);
+    Call<SoundModel> getSound(@Query("deviceCode") String device);
 }

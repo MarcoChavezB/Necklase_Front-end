@@ -1,6 +1,7 @@
 package com.example.necklase.MVVM.Interactors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -8,9 +9,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
+import com.example.necklase.Model.Post.LogoutManagment;
+import com.example.necklase.Model.Post.LogoutPostModel;
 import com.example.necklase.Model.Post.PersonalDataManagment;
 import com.example.necklase.Model.Post.PersonalDataPostModel;
 import com.example.necklase.Model.Token.JwtUtils;
+import com.example.necklase.View.login_view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +63,47 @@ public class PersonalMenuInteractor {
             }
         });
         return infoLiveData;
+    }
+
+
+    public void logout(String userId){
+
+        RetrofitApiModelToken retro = new RetrofitApiModelToken();
+        Retrofit retrofit = retro.provideRetrofit();
+        LogoutManagment logoutManagment = new LogoutManagment(retrofit);
+
+        logoutManagment.postData(userId, new Callback<LogoutPostModel>() {
+            @Override
+            public void onResponse(Call<LogoutPostModel> call, Response<LogoutPostModel> response) {
+                if (response.isSuccessful()){
+                    SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", context.MODE_PRIVATE).edit();
+                    editor.remove("token");
+                    editor.apply();
+
+                    SharedPreferences.Editor editorRM = context.getSharedPreferences("deviceID", context.MODE_PRIVATE).edit();
+                    editorRM.remove("id");
+                    editorRM.apply();
+
+                    SharedPreferences.Editor editor2 = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
+                    editor2.remove("nombre");
+                    editor2.remove("raza");
+                    editor2.remove("genero");
+                    editor2.apply();
+
+                    SharedPreferences.Editor removeCode = context.getSharedPreferences("code", context.MODE_PRIVATE).edit();
+                    removeCode.remove("code");
+                    removeCode.apply();
+
+                    Intent intent = new Intent(context, login_view.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, "respuesta no exitosa", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<LogoutPostModel> call, Throwable t) {}
+        });
     }
 
 }
