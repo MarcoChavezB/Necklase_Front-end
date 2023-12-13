@@ -104,14 +104,9 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
-<<<<<<< HEAD
                    Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
                }else{
                    Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
-=======
-               }else{
-
->>>>>>> 4e4da73ad8856d36141c7234bf212ba63995e7a1
                }
            }
 
@@ -155,9 +150,20 @@ public class HomeInteractor {
 
                 List<String> tempList = new ArrayList<>();
 
-                tempList.add(response.body().getBmr());
-                tempList.add(response.body().getActiveCalories());
-                tempList.add(response.body().getTotalCalories());
+                if (response.body() != null) {
+                    String bmrValue = response.body().getBmr() != null ? response.body().getBmr() : "0";
+                    tempList.add(bmrValue);
+
+                    String activeCalories = response.body().getActiveCalories() != null ? response.body().getActiveCalories() : "0";
+                    tempList.add(activeCalories);
+
+                    String totalCalories = response.body().getTotalCalories() != null ? response.body().getTotalCalories() : "0";
+                    tempList.add(totalCalories);
+                } else {
+                    tempList.add("0");
+                    tempList.add("0");
+                    tempList.add("0");
+                }
 
                 caloriesLiveData.setValue(tempList);
             }

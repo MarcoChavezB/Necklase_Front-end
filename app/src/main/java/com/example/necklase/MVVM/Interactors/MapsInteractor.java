@@ -14,9 +14,7 @@ public class MapsInteractor {
 
     private Context context;
     private RetrofitApiModelToken retrotoken;
-
     public MapsInteractor(){
 
     }
-
 }

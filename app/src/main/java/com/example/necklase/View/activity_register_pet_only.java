@@ -23,13 +23,12 @@ import com.example.necklase.ViewModelToken.ViewModelTokenIns;
 
 import java.util.Objects;
 
-public class activity_register_pet extends AppCompatActivity {
+public class activity_register_pet_only extends AppCompatActivity {
 
     private EditText nombre, raza;
     private Spinner genero;
     private Button registrar;
     private RegisterPetViewModel viewm;
-    private String code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,7 @@ public class activity_register_pet extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(activity_register_pet.this, "Select a genre", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_register_pet_only.this, "Select a genre", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -71,26 +70,20 @@ public class activity_register_pet extends AppCompatActivity {
             }
         });
 
-        viewm.getCode().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                code = s;
-            }
-        });
         ViewModelTokenIns modelTokenIns = ViewModelTokenIns.getinstance();
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(nombre.getText().toString().length() <= 5){
-                    Toast.makeText(activity_register_pet.this, "the name must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_register_pet_only.this, "the name must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 } else if (raza.getText().toString().length() <= 3){
-                    Toast.makeText(activity_register_pet.this, "the bread must be at least 4 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_register_pet_only.this, "the bread must be at least 4 characters", Toast.LENGTH_SHORT).show();
                 } else if (genero.getSelectedItem().toString().equals(null) || genero.getSelectedItem().toString().equals("")){
-                    Toast.makeText(activity_register_pet.this, "Select a genre", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_register_pet_only.this, "Select a genre", Toast.LENGTH_SHORT).show();
                 } else {
-                    RegisterPetInteractor nv = new RegisterPetInteractor(activity_register_pet.this);
-                    nv.RegistrarPet(code, nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() ,modelTokenIns.getId());
+                    RegisterPetInteractor nv = new RegisterPetInteractor(activity_register_pet_only.this);
+                    nv.RegisterPetOnly(nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() ,modelTokenIns.getId());
                 }
             }
         });
