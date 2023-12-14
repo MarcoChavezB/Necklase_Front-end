@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 
 import com.example.necklase.MVVM.Interactors.MapsInteractor;
 import com.example.necklase.R;
+import com.example.necklase.TokenValidator.VerificarToken;
+import com.example.necklase.ViewModel.GoogleMapsViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -56,7 +59,7 @@ public class activity_maps extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
+            mMap = googleMap;
             try {
                 boolean success = googleMap.setMapStyle(
                         MapStyleOptions.loadRawResourceStyle(
@@ -99,9 +102,11 @@ public class activity_maps extends Fragment {
     private BitmapDescriptor icon;
     private Button btnSeguirPunto;
 
+    private GoogleMapsViewModel miview;
+
     private boolean seguimientoActivo = false;
 
-    private TextView txt, txt2;
+    private TextView txt, txt2, cordenadas;
 
     private String code;
 
@@ -115,7 +120,11 @@ public class activity_maps extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_maps, container, false);
+        VerificarToken.Verificar(view.getContext());
         btnSeguirPunto = view.findViewById(R.id.btnSeguirPunto);
+
+        cordenadas = view.findViewById(R.id.coordenadas);
+        miview = new ViewModelProvider(this ).get(GoogleMapsViewModel.class);
         btnSeguirPunto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +139,14 @@ public class activity_maps extends Fragment {
 
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         code = codeDevice.getString("codigo", null);
+        miview.setDevicecode(code);
+
+        miview.getDevicecode().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                code = s;
+            }
+        });
 
         maps = new MapsInteractor(view.getContext());
         runnableCode = new Runnable() {
@@ -153,11 +170,22 @@ public class activity_maps extends Fragment {
                     String latitud = partes[0];
                     String longitud = partes[1];
 
+                    Log.e("codenadas separdas", latitud + " "+ longitud);
+
                     double lat = Double.parseDouble(latitud);
                     double lng = Double.parseDouble(longitud);
 
+                    miview.setLatitud(coordenadas);
+
                     actualizarUbicacionMarcador(lat, lng);
                 }
+            }
+        });
+
+        miview.getLatitud().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                cordenadas.setText(s);
             }
         });
 

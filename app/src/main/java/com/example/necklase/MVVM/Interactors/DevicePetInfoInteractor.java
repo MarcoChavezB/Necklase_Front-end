@@ -107,4 +107,32 @@ public class DevicePetInfoInteractor {
         });
         return null;
     }
+
+
+    public MessageModel vinculardevicepetonly(String iddevice, String idpet){
+        RetrofitApiModelToken api = new RetrofitApiModelToken();
+        Retrofit miretro = api.provideRetrofit();
+        PetsModelManagment manag = new PetsModelManagment(miretro);
+        manag.registerpetdeviceonly(iddevice, idpet, new Callback<MessageModel>() {
+            @Override
+            public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
+                if (response.code() == 404) {
+                    Toast.makeText(context, "Null Error", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == 200){
+                    Toast.makeText(context, "Pet and device successfully linked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+
+                } else{
+                    Toast.makeText(context, "No data to show", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<MessageModel> call, Throwable t) {
+                Toast.makeText(context, "Server Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return null;
+    }
 }

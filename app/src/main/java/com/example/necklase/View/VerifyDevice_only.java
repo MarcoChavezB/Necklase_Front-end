@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class VerifyDevice extends AppCompatActivity {
+public class VerifyDevice_only extends AppCompatActivity {
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -44,7 +44,7 @@ public class VerifyDevice extends AppCompatActivity {
         setTheme(R.style.Temanegro_Necklase);
         setContentView(R.layout.activity_verify_device);
         img = findViewById(R.id.circleanim);
-        Animation scaleAnimation = AnimationUtils.loadAnimation(VerifyDevice.this, R.anim.light_blur_speed);
+        Animation scaleAnimation = AnimationUtils.loadAnimation(VerifyDevice_only.this, R.anim.light_blur_speed);
         img.startAnimation(scaleAnimation);
 
         VerificarToken.Verificar(this);
@@ -60,16 +60,18 @@ public class VerifyDevice extends AppCompatActivity {
                     String[] partes = nom.split("-");
 
                     if (partes.length != 3) {
-                        Toast.makeText(VerifyDevice.this, "the device is not supported", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(VerifyDevice.this, activity_sincr_disp.class);
+                        Toast.makeText(VerifyDevice_only.this, "the device is not supported", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(VerifyDevice_only.this, activity_sincr_disp_only.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
                         Log.e("codigo", partes[2]);
                         checkDevices(partes[2]);
                     }
                 } else {
-                    Toast.makeText(VerifyDevice.this, "No code received", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(VerifyDevice.this, activity_sincr_disp.class);
+                    Toast.makeText(VerifyDevice_only.this, "No code received", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(VerifyDevice_only.this, activity_sincr_disp_only.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
             }
@@ -87,25 +89,29 @@ public class VerifyDevice extends AppCompatActivity {
                 int status = response.code();
                 Log.e("estatus", String.valueOf(status));
                 if(status == 404){
-                    Toast.makeText(VerifyDevice.this,"This device doesn´t exist in the database", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(VerifyDevice.this, activity_anadir_dispositivo.class);
+                    Toast.makeText(VerifyDevice_only.this,"This device doesn´t exist in the database", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(VerifyDevice_only.this, activity_anadir_dispositivo_only.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else if (response.body().getlinked()){
-                    Toast.makeText(VerifyDevice.this,"Accepted device", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(VerifyDevice.this, activity_register_pet.class);
+                    Toast.makeText(VerifyDevice_only.this,"Accepted device", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(VerifyDevice_only.this, Activity_pets_whothout_only.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("code", codigo);
                     startActivity(intent);
                 } else{
-                    Toast.makeText(VerifyDevice.this,"This device is already linked to an account", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(VerifyDevice.this, activity_anadir_dispositivo.class);
+                    Toast.makeText(VerifyDevice_only.this,"This device is already linked to an account", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(VerifyDevice_only.this, activity_anadir_dispositivo_only.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<BoleanModel> call, Throwable t) {
-                Toast.makeText(VerifyDevice.this,"Server Error",  Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(VerifyDevice.this, activity_anadir_dispositivo.class);
+                Toast.makeText(VerifyDevice_only.this,"Server Error",  Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(VerifyDevice_only.this, activity_anadir_dispositivo_only.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

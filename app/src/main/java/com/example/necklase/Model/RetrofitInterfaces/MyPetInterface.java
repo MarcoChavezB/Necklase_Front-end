@@ -40,4 +40,6 @@ public interface MyPetInterface {
     @GET("getPetsWithoutDevice/{iduser}")
     Call<List<PetsWithoutDeviceSyncModel>> getpetswithout(@Path("iduser") String iduser);
 
+    @POST("linkPetDisp/{PetId}/{DeviceId}")
+    Call<MessageModel> registerpetonly(@Path("PetId") String PetId, @Path("DeviceId") String DeviceId);
 }

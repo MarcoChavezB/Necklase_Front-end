@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activity_sincr_disp extends AppCompatActivity {
+public class activity_sincr_disp_only extends AppCompatActivity {
 
     private static final int REQUEST_ENABLE_BT = 1;
     private RecyclerView recyclerView;
@@ -37,6 +37,14 @@ public class activity_sincr_disp extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     int REQUEST_PHONE_LOCATION = 126462626;
     private Button btnReiniciarBusqueda;
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(activity_sincr_disp_only.this, navbar.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
@@ -93,7 +101,7 @@ public class activity_sincr_disp extends AppCompatActivity {
         adapter = new DeviceSync(this, new DeviceSync.OnItemClickListener() {
             @Override
             public void onItemClick(String code) {
-                Intent intent = new Intent(activity_sincr_disp.this, VerifyDevice.class);
+                Intent intent = new Intent(activity_sincr_disp_only.this, VerifyDevice.class);
                 intent.putExtra("code", code);
                 startActivity(intent);
             }

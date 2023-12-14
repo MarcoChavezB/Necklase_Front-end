@@ -196,9 +196,9 @@
                     android:layout_width="300dp"
                     android:layout_height="45dp"
                     android:hint="The Genre of your pet"
-                    android:textColorHint="@color/font_black"
+                    android:textColorHint="@color/bg_premium"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/bg_black_view"
+                    android:backgroundTint="#979797"
                     android:background="@drawable/input_style_sencillo"
                     android:paddingStart="8dp"
                     ></Spinner>

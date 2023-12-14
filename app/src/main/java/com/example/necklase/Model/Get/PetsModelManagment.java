@@ -43,4 +43,11 @@ public class PetsModelManagment {
         Call<List<PetsWithoutDeviceSyncModel>> del = inter.getpetswithout(iduser);
         del.enqueue(call);
     }
+
+    public void registerpetdeviceonly(String deviceid, String petid, Callback<MessageModel> call){
+        Call<MessageModel> del = inter.registerpetonly(petid, deviceid);
+        del.enqueue(call);
+    }
+
+
 }
