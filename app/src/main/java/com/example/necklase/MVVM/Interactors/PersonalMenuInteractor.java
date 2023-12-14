@@ -1,8 +1,11 @@
 package com.example.necklase.MVVM.Interactors;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.Display;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -44,6 +47,7 @@ public class PersonalMenuInteractor {
             @Override
             public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
                 if(!response.isSuccessful()){
+                    return;
                 }
                 String name = response.body().getNombre();
                 String email = response.body().getEmail();
@@ -76,29 +80,29 @@ public class PersonalMenuInteractor {
             @Override
             public void onResponse(Call<LogoutPostModel> call, Response<LogoutPostModel> response) {
                 if (response.isSuccessful()){
-                    SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("loginPrefs", MODE_PRIVATE).edit();
                     editor.remove("token");
                     editor.apply();
 
-                    SharedPreferences.Editor editorRM = context.getSharedPreferences("deviceID", context.MODE_PRIVATE).edit();
-                    editorRM.remove("id");
-                    editorRM.apply();
+                    SharedPreferences.Editor removePet = context.getSharedPreferences("petInfo", MODE_PRIVATE).edit();
+                    removePet.remove("petName");
+                    removePet.remove("petRaza");
+                    removePet.remove("petGenero");
+                    removePet.remove("petDueño");
+                    removePet.remove("petCollar");
+                    removePet.apply();
 
-                    SharedPreferences.Editor editor2 = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
-                    editor2.remove("nombre");
-                    editor2.remove("raza");
-                    editor2.remove("genero");
-                    editor2.apply();
-
-                    SharedPreferences.Editor removeCode = context.getSharedPreferences("code", context.MODE_PRIVATE).edit();
-                    removeCode.remove("code");
-                    removeCode.apply();
+                    SharedPreferences.Editor removeDevice = context.getSharedPreferences("deviceInfo", MODE_PRIVATE).edit();
+                    removeDevice.remove("deviceId");
+                    removeDevice.remove("deviceCode");
+                    removeDevice.remove("petId");
+                    removeDevice.apply();
 
                     Intent intent = new Intent(context, login_view.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }else{
-                    Toast.makeText(context, "respuesta no exitosa", Toast.LENGTH_SHORT).show();
+
                 }
             }
             @Override

@@ -51,14 +51,16 @@ public class AnaliticsInteractor {
             public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                 if (response.isSuccessful()) {
                     String info = response.body().getNombre();
-                    String codigoCollar = response.body().getCodigo();
-
-                    SharedPreferences.Editor editor = context.getSharedPreferences("collar", MODE_PRIVATE).edit();
-                    editor.putString("codigo", codigoCollar);
-                    editor.apply();
+                    SharedPreferences.Editor petInfo = context.getSharedPreferences("petInfo", MODE_PRIVATE).edit();
+                    petInfo.putString("petName", response.body().getNombre());
+                    petInfo.putString("petRaza", response.body().getRaza());
+                    petInfo.putString("petGenero", response.body().getGenero());
+                    petInfo.putString("petDueño", response.body().getDueño());
+                    petInfo.putString("petCollar", response.body().getCollar());
 
                     infoLiveData.setValue(info);
-                } else {}
+                } else {
+                }
             }
             @Override
             public void onFailure(Call<MyPetPostModel> call, Throwable t) {
@@ -176,7 +178,6 @@ public class AnaliticsInteractor {
             @Override
             public void onResponse(Call<List<tempPerHourModel>> call, Response<List<tempPerHourModel>> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(context, "Error en peticion grafica", Toast.LENGTH_SHORT).show();
                 }
                 infoGraph.postValue(response.body());
             }

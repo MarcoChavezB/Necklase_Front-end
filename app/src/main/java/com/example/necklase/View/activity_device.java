@@ -26,7 +26,6 @@ import com.example.necklase.Model.Get.Device;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModel;
 import com.example.necklase.Model.Token.JwtUtils;
 import com.example.necklase.R;
-import com.example.necklase.TokenValidator.VerificarToken;
 import com.example.necklase.View.Adapter.DeviceConfigAdapter;
 import com.example.necklase.MVVM.ViewModels.DevicesConfigViewModel;
 
@@ -46,7 +45,7 @@ public class activity_device extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private CardView cd;
+    public CardView cd;
 
     private DeviceConfigAdapter deviceAdapter;
     private DevicesConfigViewModel viewModel;
@@ -89,13 +88,10 @@ public class activity_device extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_device, container, false);
 
-        VerificarToken.Verificar(view.getContext());
-
         SharedPreferences prefs = view.getContext().getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String token = prefs.getString("token", null);
         DecodedJWT decodedJWT = JwtUtils.decode(token);
         String userId = decodedJWT.getSubject();
-        cd = view.findViewById(R.id.sincronizar);
 
         MyViewModelFactory factory = new MyViewModelFactory(getActivity().getApplication(), userId );
         viewModel = new ViewModelProvider(this, factory).get(DevicesConfigViewModel.class);

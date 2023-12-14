@@ -1,7 +1,10 @@
 package com.example.necklase.MVVM.Interactors;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.tv.interactive.TvInteractiveAppService;
 import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,6 +22,8 @@ import com.example.necklase.Model.Get.caloriasModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.MyPetManagment;
 import com.example.necklase.Model.Post.MyPetPostModel;
+import com.example.necklase.ViewModelToken.ViewModelTokenIns;
+
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -68,14 +73,15 @@ public class HomeInteractor {
                 if(!response.isSuccessful()){
                     return;
                 }
+                SharedPreferences.Editor deviceInfo = context.getSharedPreferences("deviceInfo", MODE_PRIVATE).edit();
+                deviceInfo.putString("deviceId", response.body().getIdDevice());
+                deviceInfo.putString("deviceCode", response.body().getCodigo());
+                deviceInfo.putString("petId", response.body().getDogId());
+                deviceInfo.apply();
 
-                SharedPreferences.Editor editor = context.getSharedPreferences("deviceID", context.MODE_PRIVATE).edit();
-                editor.putString("id", response.body().getDeviceCode());
-                editor.apply();
+                AnaliticsInteractor interactorAnalitics = new AnaliticsInteractor(context);
+                interactorAnalitics.getInfoDog(response.body().getIdDevice());
 
-                SharedPreferences.Editor editor1 = context.getSharedPreferences("infoDog", context.MODE_PRIVATE).edit();
-                editor1.putString("dogId", response.body().getDogId());
-                editor1.apply();
             }
 
             @Override
@@ -83,26 +89,19 @@ public class HomeInteractor {
         });
     }
 
+
+
     private MutableLiveData<String> dogLiveData = new MutableLiveData<>();
 
-    public LiveData<String> getInfoDog(String id) {
+    public LiveData<String> getInfoDog(String petId) {
         MyPetManagment myPetManagment = new MyPetManagment(retrofit);
-       myPetManagment.getData(id, new Callback<MyPetPostModel>() {
+       myPetManagment.getData(petId, new Callback<MyPetPostModel>() {
            @Override
            public void onResponse(Call<MyPetPostModel> call, Response<MyPetPostModel> response) {
                if (response.isSuccessful()){
-
                    String nameDog = response.body().getNombre();
-                   SharedPreferences.Editor editor = context.getSharedPreferences("DogInfo", context.MODE_PRIVATE).edit();
-                   editor.putString("nombre", response.body().getNombre());
-                   editor.putString("raza", response.body().getRaza());
-                   editor.putString("genero", response.body().getGenero());
-                   editor.apply();
                    dogLiveData.setValue(nameDog);
-                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
-               }else {
-                   Toast.makeText(context, "Error code1234" + response.code(), Toast.LENGTH_SHORT).show();
-               }
+               }else {}
            }
 
            @Override

@@ -1,5 +1,7 @@
 package com.example.necklase.View;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -24,8 +27,6 @@ import android.widget.TextView;
 
 import com.example.necklase.MVVM.Interactors.MapsInteractor;
 import com.example.necklase.R;
-import com.example.necklase.TokenValidator.VerificarToken;
-import com.example.necklase.ViewModel.GoogleMapsViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -59,7 +60,7 @@ public class activity_maps extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            mMap = googleMap;
+
             try {
                 boolean success = googleMap.setMapStyle(
                         MapStyleOptions.loadRawResourceStyle(
@@ -102,11 +103,9 @@ public class activity_maps extends Fragment {
     private BitmapDescriptor icon;
     private Button btnSeguirPunto;
 
-    private GoogleMapsViewModel miview;
-
     private boolean seguimientoActivo = false;
 
-    private TextView txt, txt2, cordenadas;
+    private TextView txt, txt2;
 
     private String code;
 
@@ -170,32 +169,19 @@ public class activity_maps extends Fragment {
                     String latitud = partes[0];
                     String longitud = partes[1];
 
-                    Log.e("codenadas separdas", latitud + " "+ longitud);
-
                     double lat = Double.parseDouble(latitud);
                     double lng = Double.parseDouble(longitud);
-
-                    miview.setLatitud(coordenadas);
 
                     actualizarUbicacionMarcador(lat, lng);
                 }
             }
         });
 
-        miview.getLatitud().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                cordenadas.setText(s);
-            }
-        });
-
-
         txt = view.findViewById(R.id.nombreperro);
         txt2 = view.findViewById(R.id.nombreperro2);
-        SharedPreferences infoperro = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE);
-        String nombreperro = infoperro.getString("nombre", null);
-        txt.setText(nombreperro);
-        txt2.setText(nombreperro);
+
+        txt.setText(petName);
+        txt2.setText(petName);
 
         img = view.findViewById(R.id.luz);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.light_blur_big);
