@@ -9,6 +9,7 @@ import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
 import com.example.necklase.Model.Post.RegisterPetManagment;
 import com.example.necklase.View.activity_PetWeight;
 import com.example.necklase.View.activity_register_pet;
+import com.example.necklase.View.activity_tutorial;
 import com.example.necklase.View.navbar;
 
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class RegisterPetInteractor {
                     Toast.makeText(context, "Request Error", Toast.LENGTH_SHORT).show();
                 } else if (response.body() != null){
                     if (Objects.equals(response.body().getMsg(), "Mascota registrada") && response.code() == 201) {
-                        Intent intent = new Intent(context, activity_PetWeight.class);
+                        Intent intent = new Intent(context, activity_tutorial.class);
                         context.startActivity(intent);
                     } else {
                         Toast.makeText(context, "Null Error", Toast.LENGTH_SHORT).show();

@@ -12,5 +12,6 @@ public class Activity_sinc_dis_codigo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sinc_dis_codigo);
+
     }
 }

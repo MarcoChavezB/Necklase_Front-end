@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -43,6 +44,8 @@ public class activity_device extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private CardView cd;
 
     private DeviceConfigAdapter deviceAdapter;
     private DevicesConfigViewModel viewModel;
@@ -96,6 +99,14 @@ public class activity_device extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_device_config);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), activity_anadir_dispositivo.class);
+                startActivity(intent);
+            }
+        });
+
         viewModel.getMyDataList().observe(getViewLifecycleOwner(), resource -> {
             if (resource != null) {
                 Log.d("FragmentObserver", "Resource status: " + resource.status);
@@ -106,8 +117,8 @@ public class activity_device extends Fragment {
                             deviceAdapter = new DeviceConfigAdapter(view.getContext(), new DeviceConfigAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(Device item) {
-                                    Intent intent = new Intent(view.getContext(), activity_home.class);
-                                    intent.putExtra("id", item.getId());
+                                    Intent intent = new Intent(view.getContext(), activity_Device_pet_info.class);
+                                    intent.putExtra("device", String.valueOf(item.getId()));
                                     startActivity(intent);
                                 }
                             }, resource.data);

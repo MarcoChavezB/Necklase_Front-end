@@ -21,9 +21,11 @@ import android.widget.Toast;
 import com.example.necklase.MVVM.Interactors.DevicePetInfoInteractor;
 import com.example.necklase.MVVM.Interactors.PetsInteractor;
 import com.example.necklase.Model.Get.PetModel;
+import com.example.necklase.Model.Get.PetsWithoutDeviceSyncModel;
 import com.example.necklase.R;
 import com.example.necklase.TokenValidator.VerificarToken;
 import com.example.necklase.View.Adapter.PetsInfoAdapter;
+import com.example.necklase.View.Adapter.petswithoutAdapter;
 import com.example.necklase.ViewModel.DevicePetInfoViewModel;
 import com.example.necklase.ViewModel.PetsViewModel;
 import com.example.necklase.ViewModelToken.ViewModelTokenIns;
@@ -37,9 +39,7 @@ public class activity_pets_device_change extends AppCompatActivity {
     private TextView cons;
     private RecyclerView rc;
     private LinearLayout btnback;
-    private PetsInfoAdapter adapter;
-    private PetsViewModel miview;
-    private List<PetModel> lista = new ArrayList<>();
+    private petswithoutAdapter adapter;
     private String iddevice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +48,33 @@ public class activity_pets_device_change extends AppCompatActivity {
 
         VerificarToken.Verificar(this);
 
+        rc = findViewById(R.id.recycler_view_dog_info);
+        btnback = findViewById(R.id.goBack);
+        cons = findViewById(R.id.textView2);
+        rc.setLayoutManager(new LinearLayoutManager(this));
+
         viewmodel = new ViewModelProvider(this).get(DevicePetInfoViewModel.class);
         DevicePetInfoInteractor intec = new DevicePetInfoInteractor(this);
 
         Intent intent = getIntent();
         if (intent != null) {
-            iddevice = (String) intent.getStringExtra("device");
+            iddevice = (String) intent.getStringExtra("iddevice");
         } else{
             Toast.makeText(this, "Error Intent Data", Toast.LENGTH_SHORT).show();
         }
         if (iddevice != null) {
             viewmodel.setiddevice(iddevice);
-            intec.getData(iddevice);
+
         }
+        ViewModelTokenIns view = ViewModelTokenIns.getinstance();
+        intec.getDataChange(view.getId());
+        intec.pets.observe(this, new Observer<List<PetsWithoutDeviceSyncModel>>() {
+            @Override
+            public void onChanged(List<PetsWithoutDeviceSyncModel> petsWithoutDeviceSyncModels) {
+                viewmodel.setListapetswithout(petsWithoutDeviceSyncModels);
+            }
+        });
+
         viewmodel.getiddevice().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -68,36 +82,18 @@ public class activity_pets_device_change extends AppCompatActivity {
             }
         });
 
-        rc = findViewById(R.id.recycler_view_dog_info);
-        btnback = findViewById(R.id.goBack);
-        cons = findViewById(R.id.textView2);
 
-        rc.setLayoutManager(new LinearLayoutManager(this));
-
-        miview = new ViewModelProvider(this).get(PetsViewModel.class);
-        ViewModelTokenIns modelTokenIns = ViewModelTokenIns.getinstance();
-
-        PetsInteractor pts = new PetsInteractor(activity_pets_device_change.this);
-        pts.getPets(modelTokenIns.getId());
-        pts.lista.observe(this, new Observer<List<PetModel>>() {
-            @Override
-            public void onChanged(List<PetModel> petModels) {
-                miview.PostData(petModels);
-            }
-        });
-
-        miview.getLiveData().observe(this, new Observer<List<PetModel>>() {
+        viewmodel.getListapetswithout().observe(this, new Observer<List<PetsWithoutDeviceSyncModel>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onChanged(List<PetModel> petModels) {
-
-                if (petModels != null && !petModels.isEmpty()) {
-                    adapter = new PetsInfoAdapter(activity_pets_device_change.this, new PetsInfoAdapter.OnItemClickListener() {
+            public void onChanged(List<PetsWithoutDeviceSyncModel> petsWithoutDeviceSyncModels) {
+                if (petsWithoutDeviceSyncModels != null && !petsWithoutDeviceSyncModels.isEmpty()) {
+                    adapter = new petswithoutAdapter(activity_pets_device_change.this, new petswithoutAdapter.OnItemClickListener() {
                         @Override
-                        public void onItemClick(PetModel pet) {
-
+                        public void onItemClick(PetsWithoutDeviceSyncModel pet) {
+                            intec.updateDevicepet(iddevice, pet.getId());
                         }
-                    }, petModels);
+                    }, petsWithoutDeviceSyncModels);
 
                     rc.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -106,6 +102,7 @@ public class activity_pets_device_change extends AppCompatActivity {
                 }
             }
         });
+
 
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override

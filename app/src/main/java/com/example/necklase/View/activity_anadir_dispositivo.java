@@ -83,7 +83,6 @@ public class activity_anadir_dispositivo extends AppCompatActivity {
                     ResolvableApiException resolvable = (ResolvableApiException) e;
                     resolvable.startResolutionForResult(activity_anadir_dispositivo.this, REQUEST_CODE_LOCATION);
                 } catch (IntentSender.SendIntentException sendEx) {
-                    // Ignorar el error o manejarlo adecuadamente
                 }
             }
         });
