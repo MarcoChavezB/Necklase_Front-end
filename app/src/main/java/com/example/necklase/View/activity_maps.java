@@ -1,11 +1,14 @@
 package com.example.necklase.View;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -115,6 +118,12 @@ public class activity_maps extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_maps, container, false);
+
+        String petName;
+
+        SharedPreferences petInfo = getActivity().getSharedPreferences("petInfo", MODE_PRIVATE);
+        petName = petInfo.getString("petName", null);
+
         btnSeguirPunto = view.findViewById(R.id.btnSeguirPunto);
         btnSeguirPunto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +137,7 @@ public class activity_maps extends Fragment {
             }
         });
 
-        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        code = codeDevice.getString("codigo", null);
+
 
         maps = new MapsInteractor(view.getContext());
         runnableCode = new Runnable() {
@@ -161,13 +169,11 @@ public class activity_maps extends Fragment {
             }
         });
 
-
         txt = view.findViewById(R.id.nombreperro);
         txt2 = view.findViewById(R.id.nombreperro2);
-        SharedPreferences infoperro = getActivity().getSharedPreferences("DogInfo", getActivity().MODE_PRIVATE);
-        String nombreperro = infoperro.getString("nombre", null);
-        txt.setText(nombreperro);
-        txt2.setText(nombreperro);
+
+        txt.setText(petName);
+        txt2.setText(petName);
 
         img = view.findViewById(R.id.luz);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.light_blur_big);

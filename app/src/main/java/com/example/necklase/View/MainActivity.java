@@ -15,9 +15,11 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
 import com.example.necklase.R;
 import com.example.necklase.Router.Router;
@@ -43,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         Animation scaleAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.light_blur_speed);
         img.startAnimation(scaleAnimation);
 
+        ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
+        viewModelTokenIns.settoken(this);
+        HomeInteractor interactor = new HomeInteractor(this);
+
+        SharedPreferences.Editor userInfo = getSharedPreferences("userInfo", MODE_PRIVATE).edit();
+        userInfo.putString("id", ViewModelTokenIns.getinstance().getId());
+        userInfo.apply();
+
+        interactor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
 
         CountDownTimer count = new CountDownTimer(1000, 1000) {
             @Override

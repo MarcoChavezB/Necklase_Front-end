@@ -45,7 +45,7 @@ public class activity_device extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private CardView cd;
+    public CardView cd;
 
     private DeviceConfigAdapter deviceAdapter;
     private DevicesConfigViewModel viewModel;
@@ -98,14 +98,6 @@ public class activity_device extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view_device_config);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        cd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), activity_anadir_dispositivo.class);
-                startActivity(intent);
-            }
-        });
 
         viewModel.getMyDataList().observe(getViewLifecycleOwner(), resource -> {
             if (resource != null) {

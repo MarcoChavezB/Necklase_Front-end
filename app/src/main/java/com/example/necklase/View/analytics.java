@@ -1,4 +1,7 @@
 package com.example.necklase.View;
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -88,12 +91,13 @@ public class analytics extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
 
-        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", "1");
+        String idDevice, codeDevice, dogNameTXT;
 
-        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        String code = codeDevice.getString("codigo", null);
-        Toast.makeText(getActivity(), "COllar iniciado " + code, Toast.LENGTH_SHORT).show();
+        SharedPreferences deviceInfo = getActivity().getSharedPreferences("deviceInfo", MODE_PRIVATE);
+        idDevice = deviceInfo.getString("deviceId", null);
+        codeDevice = deviceInfo.getString("deviceCode", null);
+
+
 
         dogName = view.findViewById(R.id.dogName);
         malisimo = view.findViewById(R.id.malisimo);
@@ -129,15 +133,10 @@ public class analytics extends Fragment {
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
 
-        LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
-        info.observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String newInfo) {
-                dogName.setText(newInfo);
-            }
-        });
 
-        LiveData<List<tempPerHourModel>> infoGraph = analiticsInteractor.getGraph(code);
+
+
+        LiveData<List<tempPerHourModel>> infoGraph = analiticsInteractor.getGraph(codeDevice);
         infoGraph.observe(getViewLifecycleOwner(), new Observer<List<tempPerHourModel>>() {
             @Override
             public void onChanged(List<tempPerHourModel> tempPerHourModels) {
@@ -160,9 +159,11 @@ public class analytics extends Fragment {
             }
         });
 
+        SharedPreferences setName = getActivity().getSharedPreferences("tempName", MODE_PRIVATE);
+        dogName.setText(setName.getString("tempName", null));
 
         // humedad data ?=========================================================
-        LiveData<String> hum = analiticsInteractor.getHum(code);
+        LiveData<String> hum = analiticsInteractor.getHum(codeDevice);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String newHum) {
@@ -177,7 +178,7 @@ public class analytics extends Fragment {
         CountDownTimer count = new CountDownTimer(Long.MAX_VALUE, 5000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                analiticsInteractor.getSound(code);
+                analiticsInteractor.getSound(codeDevice);
             }
 
             @Override
@@ -189,7 +190,7 @@ public class analytics extends Fragment {
 
 
         // temperatura data
-        LiveData<List<String>> tempLiveData = analiticsInteractor.getTemp(code);
+        LiveData<List<String>> tempLiveData = analiticsInteractor.getTemp(codeDevice);
         tempLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> tempList) {
@@ -199,7 +200,7 @@ public class analytics extends Fragment {
         });
 
         // Air data
-        LiveData<String> airLiveData = analiticsInteractor.getLevelAir(code);
+        LiveData<String> airLiveData = analiticsInteractor.getLevelAir(codeDevice);
         airLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -237,7 +238,7 @@ public class analytics extends Fragment {
             }
         });
 
-        LiveData<List<String>> emocionLiveData = analiticsInteractor.getEmocion(code);
+        LiveData<List<String>> emocionLiveData = analiticsInteractor.getEmocion(codeDevice);
         emocionLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
@@ -295,20 +296,24 @@ public class analytics extends Fragment {
         });
         return view;
     }
-
     private double findValueForHour(List<tempPerHourModel> models, double hour) {
         try {
-        for (tempPerHourModel model : models) {
-                SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-                Date date = sdfInput.parse(model.getCreated_at());
+            if (models != null) {
+                for (tempPerHourModel model : models) {
+                    SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                    Date date = sdfInput.parse(model.getCreated_at());
 
-                if (hour == date.getHours()) {
-                    return Double.parseDouble(model.getValue());
+                    if (hour == date.getHours()) {
+                        return Double.parseDouble(model.getValue());
+                    }
                 }
-        }
+            } else {
+                return -1.0;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return 0.0;
     }
+
 }

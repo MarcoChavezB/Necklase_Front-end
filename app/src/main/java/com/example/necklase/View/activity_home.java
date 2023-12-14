@@ -3,10 +3,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
+
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +55,7 @@ public class activity_home extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     public activity_home() {
         // Required empty public constructor
     }
@@ -90,27 +94,22 @@ public class activity_home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        String idDevice, codeDevice, idPet;
+
+        SharedPreferences deviceInfo = getActivity().getSharedPreferences("deviceInfo", Context.MODE_PRIVATE);
+        idDevice = deviceInfo.getString("deviceId", null);
+        codeDevice = deviceInfo.getString("deviceCode", null);
+        idPet = deviceInfo.getString("petId", null);
+
+
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
-
-
-        SharedPreferences getCode = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        String codes = getCode.getString("codigo", null);
-
-        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", null);
-
-        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        String code = codeDevice.getString("codigo", null);
 
 
         VerificarToken.Verificar(view.getContext());
 
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
         viewModelTokenIns.settoken(view.getContext());
-
-
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
-        homeInteractor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
 
         ViewPager2 viewPager = view.findViewById(R.id.parte2);
         List<CarruselModel> milista = new ArrayList<>();
@@ -171,11 +170,12 @@ public class activity_home extends Fragment {
         estado = view.findViewById(R.id.estado);
 
 
-        SharedPreferences dogId = getActivity().getSharedPreferences("infoDog", getActivity().MODE_PRIVATE);
-        String DogId = dogId.getString("dogId", null);
         LiveData<String> info = homeInteractor.getInfoDog(idDevice);
+        homeInteractor.setCorrectDevice(ViewModelTokenIns.getinstance().getId());
 
-        LiveData<String> hum = homeInteractor.getHum(code);
+
+
+        LiveData<String> hum = homeInteractor.getHum(codeDevice);
         hum.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String newHum) {
@@ -187,19 +187,22 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<String> infoDog = homeInteractor.getInfoDog(DogId);
+        LiveData<String> infoDog = homeInteractor.getInfoDog(idPet);
         infoDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 if(s != null){
                     nombredeperro.setText(s);
+                    SharedPreferences.Editor tempName = getActivity().getSharedPreferences("tempName", Context.MODE_PRIVATE).edit();
+                    tempName.putString("tempName", s);
+                    tempName.apply();
                 }else{
                     nombredeperro.setText("NaN");
                 }
             }
         });
 
-        LiveData<String> tempDog = homeInteractor.getTemp(code);
+        LiveData<String> tempDog = homeInteractor.getTemp(codeDevice);
         tempDog.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -207,7 +210,7 @@ public class activity_home extends Fragment {
             }
         });
 
-        LiveData<List<String>> infoCalories = homeInteractor.getCalories(code, "10");
+        LiveData<List<String>> infoCalories = homeInteractor.getCalories(codeDevice, "10");
         infoCalories.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> calories) {
