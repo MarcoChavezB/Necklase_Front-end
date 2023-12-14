@@ -8,5 +8,5 @@ import retrofit2.http.Query;
 
 public interface LocationInterface {
     @GET("getLocation")
-    Call<LocationModel> getLocation(@Query("device") String device);
+    Call<LocationModel> getLocation(@Query("deviceCode") String device);
 }

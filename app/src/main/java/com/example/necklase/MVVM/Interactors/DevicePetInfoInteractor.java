@@ -11,7 +11,10 @@ import com.example.necklase.Model.Get.MessageModel;
 import com.example.necklase.Model.Get.PetsModelManagment;
 import com.example.necklase.Model.Get.PetsWithoutDeviceSyncModel;
 import com.example.necklase.Model.IntanciasRetrofit.RetrofitApiModelToken;
+import com.example.necklase.R;
+import com.example.necklase.View.MainActivity;
 import com.example.necklase.View.activity_Device_pet_info;
+import com.example.necklase.View.activity_device;
 import com.example.necklase.View.activity_pets_info;
 import com.example.necklase.View.navbar;
 
@@ -87,11 +90,12 @@ public class DevicePetInfoInteractor {
             public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
                 if (response.code() == 404) {
                     Toast.makeText(context, "Null Error", Toast.LENGTH_SHORT).show();
-                } else if (response.code() == 201){
+                } else if (response.code() == 200){
                     Toast.makeText(context, "Pet changed with successful device", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, navbar.class);
+                    Intent intent = new Intent(context, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
+
                 } else{
                     Toast.makeText(context, "No data to show", Toast.LENGTH_SHORT).show();
                 }

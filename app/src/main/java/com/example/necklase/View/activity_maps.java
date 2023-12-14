@@ -3,11 +3,13 @@ package com.example.necklase.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +69,7 @@ public class activity_maps extends Fragment {
                 Log.e("MapsActivity", "No se puede encontrar el estilo. Error: ", e);
             }
 
-            LatLng posicionInicial = new LatLng(25.556900, -103.332600);
+            LatLng posicionInicial = new LatLng(25.531561,-103.321922);
             miMarcador = googleMap.addMarker(new MarkerOptions().position(posicionInicial)
                     .icon(icon)
                     .title("Mi Ubicación"));
@@ -89,6 +91,9 @@ public class activity_maps extends Fragment {
     }
 
 
+    private MapsInteractor maps;
+    private Handler handler = new Handler();
+    private Runnable runnableCode;
     private ImageView img;
     private Marker miMarcador;
     private BitmapDescriptor icon;
@@ -97,6 +102,13 @@ public class activity_maps extends Fragment {
     private boolean seguimientoActivo = false;
 
     private TextView txt, txt2;
+
+    private String code;
+
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -112,6 +124,38 @@ public class activity_maps extends Fragment {
                     btnSeguirPunto.setText("Detener Seguimiento");
                 } else {
                     btnSeguirPunto.setText("Seguir Punto");
+                }
+            }
+        });
+
+        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
+        code = codeDevice.getString("codigo", null);
+
+        maps = new MapsInteractor(view.getContext());
+        runnableCode = new Runnable() {
+            @Override
+            public void run() {
+                maps.getLocation("dv0120");
+                handler.postDelayed(this, 15000);
+            }
+        };
+
+        handler.post(runnableCode);
+
+        maps.locationLiveData.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                String coordenadas = strings.get(1);
+                String[] partes = coordenadas.split(",");
+
+                if (partes.length >= 2) {
+                    String latitud = partes[0];
+                    String longitud = partes[1];
+
+                    double lat = Double.parseDouble(latitud);
+                    double lng = Double.parseDouble(longitud);
+
+                    actualizarUbicacionMarcador(lat, lng);
                 }
             }
         });
@@ -141,4 +185,6 @@ public class activity_maps extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
+
+
 }

@@ -35,7 +35,7 @@ public class activity_register_pet_only extends AppCompatActivity {
         setContentView(R.layout.activity_register_pet);
         VerificarToken.Verificar(this);
 
-        registrar = findViewById(R.id.botonregistrar);
+        registrar = findViewById(R.id.botonregistrarr);
         nombre = findViewById(R.id.nombreinfo);
         raza = findViewById(R.id.Razainfo);
         genero = findViewById(R.id.generoinfo);

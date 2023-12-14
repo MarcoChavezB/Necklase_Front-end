@@ -1,6 +1,7 @@
 package com.example.necklase.MVVM.Interactors;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -30,7 +31,7 @@ public class MapsInteractor {
     RetrofitApiModelToken retro = new RetrofitApiModelToken();
     Retrofit retrofit = retro.provideRetrofit();
 
-    private MutableLiveData<List<String>> locationLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<String>> locationLiveData = new MutableLiveData<>();
 
     public LiveData<List<String>> getLocation(String deviceCode) {
         LocationManagment manag = new LocationManagment(retrofit);
@@ -48,6 +49,7 @@ public class MapsInteractor {
                 locationLiveData.setValue(tempList);
 
                 Toast.makeText(context, "code "+ response.code(), Toast.LENGTH_SHORT).show();
+                Log.e("codenas",response.body().getValue());
             }
             @Override
             public void onFailure(Call<LocationModel> call, Throwable t) {}

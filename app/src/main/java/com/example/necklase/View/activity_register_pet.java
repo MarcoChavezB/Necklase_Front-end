@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,7 @@ public class activity_register_pet extends AppCompatActivity {
         setContentView(R.layout.activity_register_pet);
         VerificarToken.Verificar(this);
 
-        registrar = findViewById(R.id.botonregistrar);
+        registrar = findViewById(R.id.botonregistrarr);
         nombre = findViewById(R.id.nombreinfo);
         raza = findViewById(R.id.Razainfo);
         genero = findViewById(R.id.generoinfo);
@@ -78,19 +79,22 @@ public class activity_register_pet extends AppCompatActivity {
             }
         });
         ViewModelTokenIns modelTokenIns = ViewModelTokenIns.getinstance();
+        String id = modelTokenIns.getId();
+        Log.e("el id", id);
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nombre.getText().toString().length() <= 5){
-                    Toast.makeText(activity_register_pet.this, "the name must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                if(nombre.getText().toString().length() <= 4){
+                    Toast.makeText(activity_register_pet.this, "the name must be at least 5 characters", Toast.LENGTH_SHORT).show();
                 } else if (raza.getText().toString().length() <= 3){
                     Toast.makeText(activity_register_pet.this, "the bread must be at least 4 characters", Toast.LENGTH_SHORT).show();
                 } else if (genero.getSelectedItem().toString().equals(null) || genero.getSelectedItem().toString().equals("")){
                     Toast.makeText(activity_register_pet.this, "Select a genre", Toast.LENGTH_SHORT).show();
                 } else {
                     RegisterPetInteractor nv = new RegisterPetInteractor(activity_register_pet.this);
-                    nv.RegistrarPet(code, nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() ,modelTokenIns.getId());
+                    nv.RegistrarPet(nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() , "109", code);
+                    Log.e("regis",code + modelTokenIns);
                 }
             }
         });
