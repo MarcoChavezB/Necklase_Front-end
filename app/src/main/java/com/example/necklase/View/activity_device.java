@@ -99,6 +99,8 @@ public class activity_device extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_device_config);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+        cd = view.findViewById(R.id.sincronizar);
+
         cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

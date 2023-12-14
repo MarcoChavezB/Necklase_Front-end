@@ -27,6 +27,8 @@ import android.widget.TextView;
 
 import com.example.necklase.MVVM.Interactors.MapsInteractor;
 import com.example.necklase.R;
+import com.example.necklase.TokenValidator.VerificarToken;
+import com.example.necklase.ViewModel.GoogleMapsViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -60,7 +62,7 @@ public class activity_maps extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
+            mMap = googleMap;
             try {
                 boolean success = googleMap.setMapStyle(
                         MapStyleOptions.loadRawResourceStyle(
@@ -97,6 +99,7 @@ public class activity_maps extends Fragment {
 
     private MapsInteractor maps;
     private Handler handler = new Handler();
+    private GoogleMapsViewModel miview;
     private Runnable runnableCode;
     private ImageView img;
     private Marker miMarcador;
@@ -105,9 +108,10 @@ public class activity_maps extends Fragment {
 
     private boolean seguimientoActivo = false;
 
-    private TextView txt, txt2;
+    private TextView txt, txt2, cordenadas;
 
     private String code;
+    private String petname;
 
 
 
@@ -136,8 +140,8 @@ public class activity_maps extends Fragment {
             }
         });
 
-        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        code = codeDevice.getString("codigo", null);
+        SharedPreferences codeDevice = getActivity().getSharedPreferences("deviceInfo", getActivity().MODE_PRIVATE);
+        code = codeDevice.getString("deviceCode", null);
         miview.setDevicecode(code);
 
         miview.getDevicecode().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -151,7 +155,7 @@ public class activity_maps extends Fragment {
         runnableCode = new Runnable() {
             @Override
             public void run() {
-                maps.getLocation("dv0120");
+                maps.getLocation(code);
                 handler.postDelayed(this, 15000);
             }
         };
@@ -162,8 +166,8 @@ public class activity_maps extends Fragment {
             @Override
             public void onChanged(List<String> strings) {
                 String coordenadas = strings.get(1);
-                Log.e("cordenadas desde maps",coordenadas);
                 String[] partes = coordenadas.split(",");
+                miview.setLatitud(coordenadas);
 
                 if (partes.length >= 2) {
                     String latitud = partes[0];
@@ -177,11 +181,21 @@ public class activity_maps extends Fragment {
             }
         });
 
+        miview.getLatitud().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                cordenadas.setText(s);
+            }
+        });
+
         txt = view.findViewById(R.id.nombreperro);
         txt2 = view.findViewById(R.id.nombreperro2);
 
-        txt.setText(petName);
-        txt2.setText(petName);
+        SharedPreferences setName = getActivity().getSharedPreferences("tempName", MODE_PRIVATE);
+        String petname = setName.getString("tempName", null);
+
+        txt.setText(petname);
+        txt2.setText(petname);
 
         img = view.findViewById(R.id.luz);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.light_blur_big);
