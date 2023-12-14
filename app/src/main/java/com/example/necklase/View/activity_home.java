@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.necklase.MVVM.Interactors.HomeInteractor;
 import com.example.necklase.Model.CarruselModel;
 import com.example.necklase.Model.Get.FirstCollarManagment;
@@ -90,6 +92,17 @@ public class activity_home extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_activity_home, container, false);
 
+
+        SharedPreferences getCode = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
+        String codes = getCode.getString("codigo", null);
+
+        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
+        String idDevice = device.getString("id", null);
+
+        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
+        String code = codeDevice.getString("codigo", null);
+
+
         VerificarToken.Verificar(view.getContext());
 
         ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
@@ -156,13 +169,6 @@ public class activity_home extends Fragment {
         temp = view.findViewById(R.id.temp);
         ciudad = view.findViewById(R.id.ciudad);
         estado = view.findViewById(R.id.estado);
-
-        SharedPreferences device = getActivity().getSharedPreferences("deviceID", getActivity().MODE_PRIVATE);
-        String idDevice = device.getString("id", null);
-
-        SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
-        String code = codeDevice.getString("codigo", null);
-
 
 
         SharedPreferences dogId = getActivity().getSharedPreferences("infoDog", getActivity().MODE_PRIVATE);

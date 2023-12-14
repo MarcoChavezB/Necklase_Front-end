@@ -44,6 +44,7 @@ public class PersonalMenuInteractor {
             @Override
             public void onResponse(Call<PersonalDataPostModel> call, Response<PersonalDataPostModel> response) {
                 if(!response.isSuccessful()){
+                    return;
                 }
                 String name = response.body().getNombre();
                 String email = response.body().getEmail();
@@ -94,11 +95,15 @@ public class PersonalMenuInteractor {
                     removeCode.remove("code");
                     removeCode.apply();
 
+                    SharedPreferences.Editor removeCodeCollar = context.getSharedPreferences("collar", context.MODE_PRIVATE).edit();
+                    removeCodeCollar.remove("codigo");
+                    removeCodeCollar.apply();
+
                     Intent intent = new Intent(context, login_view.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }else{
-                    Toast.makeText(context, "respuesta no exitosa", Toast.LENGTH_SHORT).show();
+
                 }
             }
             @Override

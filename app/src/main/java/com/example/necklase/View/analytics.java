@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
 import com.example.necklase.Model.Get.tempPerHourModel;
 import com.example.necklase.R;
@@ -91,6 +93,7 @@ public class analytics extends Fragment {
 
         SharedPreferences codeDevice = getActivity().getSharedPreferences("collar", getActivity().MODE_PRIVATE);
         String code = codeDevice.getString("codigo", null);
+        Toast.makeText(getActivity(), "COllar iniciado " + code, Toast.LENGTH_SHORT).show();
 
         dogName = view.findViewById(R.id.dogName);
         malisimo = view.findViewById(R.id.malisimo);
@@ -125,8 +128,8 @@ public class analytics extends Fragment {
         graphResting.addSeries(series);
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
-        LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
 
+        LiveData<String> info = analiticsInteractor.getInfoDog(idDevice);
         info.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String newInfo) {
@@ -294,20 +297,18 @@ public class analytics extends Fragment {
     }
 
     private double findValueForHour(List<tempPerHourModel> models, double hour) {
+        try {
         for (tempPerHourModel model : models) {
-            try {
                 SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
                 Date date = sdfInput.parse(model.getCreated_at());
 
-                // Comparar solo las horas (ignorar minutos y segundos)
                 if (hour == date.getHours()) {
                     return Double.parseDouble(model.getValue());
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
         }
-        // Valor predeterminado si no se encuentra ninguna correspondencia
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return 0.0;
     }
 }

@@ -99,7 +99,6 @@ public class HomeInteractor {
                    editor.putString("genero", response.body().getGenero());
                    editor.apply();
                    dogLiveData.setValue(nameDog);
-                   Toast.makeText(context, "code" + response.code(), Toast.LENGTH_SHORT).show();
                }else {
                    Toast.makeText(context, "Error code1234" + response.code(), Toast.LENGTH_SHORT).show();
                }
