@@ -146,6 +146,7 @@ public class activity_maps extends Fragment {
             @Override
             public void onChanged(List<String> strings) {
                 String coordenadas = strings.get(1);
+                Log.e("cordenadas desde maps",coordenadas);
                 String[] partes = coordenadas.split(",");
 
                 if (partes.length >= 2) {

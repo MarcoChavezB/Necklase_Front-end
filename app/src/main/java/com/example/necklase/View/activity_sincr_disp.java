@@ -30,11 +30,6 @@ import java.util.List;
 
 public class activity_sincr_disp extends AppCompatActivity {
 
-    @SuppressLint("MissingSuperCall")
-    @Override
-    public void onBackPressed() {
-    }
-
     private static final int REQUEST_ENABLE_BT = 1;
     private RecyclerView recyclerView;
     private DeviceSync adapter;
