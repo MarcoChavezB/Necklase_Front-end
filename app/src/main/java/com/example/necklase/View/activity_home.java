@@ -157,7 +157,6 @@ public class activity_home extends Fragment {
         nombredeperro = view.findViewById(R.id.nombredeperro);
         cambiar = view.findViewById(R.id.cambiar);
         textViewEstadistica = view.findViewById(R.id.textViewEstadistica);
-        textViewEstadistica4 = view.findViewById(R.id.textViewEstadistica4);
         porcentaje = view.findViewById(R.id.porcentaje);
         feels = view.findViewById(R.id.feels);
         maxTemp = view.findViewById(R.id.maxTemp);
