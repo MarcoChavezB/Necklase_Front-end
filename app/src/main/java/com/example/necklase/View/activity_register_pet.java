@@ -93,7 +93,7 @@ public class activity_register_pet extends AppCompatActivity {
                     Toast.makeText(activity_register_pet.this, "Select a genre", Toast.LENGTH_SHORT).show();
                 } else {
                     RegisterPetInteractor nv = new RegisterPetInteractor(activity_register_pet.this);
-                    nv.RegistrarPet(nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() , "109", code);
+                    nv.RegistrarPet(nombre.getText().toString(), raza.getText().toString(), genero.getSelectedItem().toString() , id, code);
                     Log.e("regis",code + modelTokenIns);
                 }
             }

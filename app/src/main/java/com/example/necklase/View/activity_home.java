@@ -106,9 +106,6 @@ public class activity_home extends Fragment {
 
 
         VerificarToken.Verificar(view.getContext());
-
-        ViewModelTokenIns viewModelTokenIns = ViewModelTokenIns.getinstance();
-        viewModelTokenIns.settoken(view.getContext());
         HomeInteractor homeInteractor = new HomeInteractor(getActivity());
 
         ViewPager2 viewPager = view.findViewById(R.id.parte2);

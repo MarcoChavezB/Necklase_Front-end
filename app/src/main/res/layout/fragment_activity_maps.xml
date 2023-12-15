@@ -51,8 +51,6 @@
             >
         </TextView>
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="380dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -126,7 +124,21 @@
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginRight="60dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="100dp"
+                />
+
+            <Button
+                android:id="@+id/establecerzona"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#37FF0000"
+                android:text="zona segura"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="150dp"
                 android:layout_marginTop="100dp"
                 />
 

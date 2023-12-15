@@ -3,6 +3,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -13,12 +14,14 @@ import android.security.keystore.StrongBoxUnavailableException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.necklase.MVVM.Interactors.AnaliticsInteractor;
+import com.example.necklase.MVVM.Interactors.LedInteractor;
 import com.example.necklase.Model.Get.tempPerHourModel;
 import com.example.necklase.R;
 import com.jjoe64.graphview.GraphView;
@@ -74,6 +77,7 @@ public class analytics extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,8 @@ public class analytics extends Fragment {
     ImageView selectDevice, goDogInfo, triste, neutral, feliz;
     TextView dogName, temp, activeTime, test;
     LinearLayout malisimo, malo, regular, bueno, muyBueno;
+
+    Button btnbuzzer;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,10 +114,18 @@ public class analytics extends Fragment {
         triste = view.findViewById(R.id.triste);
         neutral = view.findViewById(R.id.neutral);
         feliz = view.findViewById(R.id.feliz);
-        test = view.findViewById(R.id.test);
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
         GraphView graphResting = (GraphView) view.findViewById(R.id.graphResting);
+        btnbuzzer = view.findViewById(R.id.buttonbuzzer);
 
+
+        btnbuzzer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LedInteractor ld = new LedInteractor(getContext());
+                    ld.setBuzzer("1");
+            }
+        });
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),
@@ -129,6 +143,10 @@ public class analytics extends Fragment {
                 new DataPoint(12, 13),
 
         });
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.WHITE);
+        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.WHITE);
+        graphResting.getGridLabelRenderer().setHorizontalLabelsColor(Color.WHITE);
+        graphResting.getGridLabelRenderer().setVerticalLabelsColor(Color.WHITE);
         graphResting.addSeries(series);
 
         AnaliticsInteractor analiticsInteractor = new AnaliticsInteractor(getActivity());
@@ -276,14 +294,6 @@ public class analytics extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction().replace(R.id.frame, new MyPet()).commit();
-            }
-        });
-
-        dogStatus = view.findViewById(R.id.dogStatus);
-        dogStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame,new dogStatus()).commit();
             }
         });
 

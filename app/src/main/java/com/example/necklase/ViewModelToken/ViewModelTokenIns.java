@@ -14,12 +14,17 @@ public class ViewModelTokenIns implements TokenProvider {
     private static ViewModelTokenIns viewModelTokenIns;
     private static String token;
     private static String userId;
+
+
+    private static String code;
     private static DecodedJWT decodedJWT;
     private ViewModelTokenIns() {
     }
 
     public static ViewModelTokenIns settoken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        SharedPreferences codeDevice = context.getSharedPreferences("deviceInfo",MODE_PRIVATE);
+        code = codeDevice.getString("deviceCode", null);
         token = prefs.getString("token", null);
         decodedJWT = JwtUtils.decode(token);
 
@@ -32,6 +37,10 @@ public class ViewModelTokenIns implements TokenProvider {
         return null;
     }
 
+
+    public String getCode() {
+        return code;
+    }
 
     public static synchronized ViewModelTokenIns getinstance() {
         if (viewModelTokenIns == null) {

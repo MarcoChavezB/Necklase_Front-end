@@ -161,7 +161,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Last update 1 min ago"
+                            android:text="Data is updated every 3 minutes"
                             android:textColor="@color/font_black"
                             android:textSize="15dp" />
                     </LinearLayout>
@@ -267,7 +267,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="start|center"
-                                        android:text="Active Time"
+                                        android:text="Active Buzzer"
                                         android:textColor="@color/font_black"
                                         android:textStyle="bold" />
 
@@ -278,10 +278,15 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.4">
 
-                                    <TextView
-                                        android:id="@+id/test"
+                                    <Button
+                                        android:id="@+id/buttonbuzzer"
+                                        android:text="ALERT"
+                                        android:background="#2508FF00"
+                                        android:textColor="@color/white"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"/>
+                                        android:layout_height="match_parent"
+                                        >
+                                    </Button>
 
                                 </LinearLayout>
                             </LinearLayout>
