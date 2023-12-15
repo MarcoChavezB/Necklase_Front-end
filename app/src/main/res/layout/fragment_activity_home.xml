@@ -187,178 +187,62 @@
                     >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="110dp"
+                        android:layout_width="match_parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_height="match_parent"
-                        tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/infoiz"
                         >
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="90dp"
-                            android:layout_height="45dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             app:cardCornerRadius="25dp"
                             app:cardBackgroundColor="@color/bkbt_br"
                             app:cardElevation="10dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_margin="20dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            >
-
-                            <ImageView
-                                android:layout_marginTop="5dp"
-                                android:layout_marginLeft="7dp"
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:contentDescription="IMG ESTADISTICA"
-                                android:src="@mipmap/humedity_foreground"
-                                />
-
-                            <TextView
-                                android:id="@+id/textViewEstadistica"
-                                android:layout_width="40dp"
-                                android:layout_height="20dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_marginLeft="45dp"
-                                android:textColor="@color/tx_y"
-                                android:textSize="15dp"
-                                android:fontFamily="@font/heebo_variablefont_wght"
-                                >
-
-                            </TextView>
-
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="90dp"
-                            android:layout_height="45dp"
-                            app:cardBackgroundColor="@color/bkbt_b"
-                            app:cardCornerRadius="25dp"
-                            app:cardElevation="10dp"
-                            android:layout_marginBottom="12dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
                             >
 
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginTop="5dp"
-                                android:contentDescription="IMG ESTADISTICA"
-                                android:src="@mipmap/dog_collar_foreground" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center">
+                                <ImageView
+                                    android:layout_weight="1"
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="IMG ESTADISTICA"
+                                    android:src="@mipmap/humedity_foreground"
+                                    />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/textViewEstadistica2"
-                                android:layout_width="40dp"
-                                android:layout_height="20dp"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="12dp"
+                                android:layout_weight="1"
+                                android:id="@+id/textViewEstadistica"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:textColor="@color/tx_y"
+                                android:text="20"
+                                android:textSize="25dp"
                                 android:fontFamily="@font/heebo_variablefont_wght"
-                                android:text="1.5h"
-                                android:textColor="@color/tx_b"
-                                android:textSize="15dp">
-
+                                >
                             </TextView>
+                        </LinearLayout>
 
 
                         </androidx.cardview.widget.CardView>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/infoder"
-                        android:layout_width="110dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        tools:ignore="MissingConstraints"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        >
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="110dp"
-                            android:layout_height="match_parent"
-                            tools:ignore="MissingConstraints"
-                            >
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="90dp"
-                                android:layout_height="45dp"
-                                app:cardCornerRadius="25dp"
-                                app:cardBackgroundColor="@color/bkbt_p"
-                                app:cardElevation="10dp"
-                                android:layout_marginTop="12dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <ImageView
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginLeft="7dp"
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:contentDescription="IMG ESTADISTICA"
-                                    android:src="@mipmap/dog_collar_foreground"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/textViewEstadistica3"
-                                    android:layout_width="40dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginTop="12dp"
-                                    android:layout_marginLeft="45dp"
-                                    android:textColor="@color/tx_r"
-                                    android:text="70km"
-                                    android:textSize="15dp"
-                                    android:fontFamily="@font/heebo_variablefont_wght"
-                                    >
-                                </TextView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="90dp"
-                                android:layout_height="45dp"
-                                app:cardBackgroundColor="@color/bkbt_g"
-                                app:cardCornerRadius="25dp"
-                                app:cardElevation="10dp"
-                                android:layout_marginBottom="12dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                >
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginLeft="7dp"
-                                    android:layout_marginTop="5dp"
-                                    android:contentDescription="IMG ESTADISTICA"
-                                    android:src="@mipmap/kalories_foreground" />
-
-                                <TextView
-                                    android:id="@+id/textViewEstadistica4"
-                                    android:layout_width="40dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="45dp"
-                                    android:layout_marginTop="12dp"
-                                    android:fontFamily="@font/heebo_variablefont_wght"
-                                    android:textColor="@color/tx_g"
-                                    android:textSize="15dp">
-
-                                </TextView>
-
-
-                            </androidx.cardview.widget.CardView>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

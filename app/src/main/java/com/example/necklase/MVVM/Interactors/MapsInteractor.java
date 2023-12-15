@@ -39,7 +39,6 @@ public class MapsInteractor {
             @Override
             public void onResponse(Call<LocationModel> call, Response<LocationModel> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(context, "error code " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<String> tempList = new ArrayList<>();
@@ -47,8 +46,6 @@ public class MapsInteractor {
                 tempList.add(response.body().getPlace());
                 tempList.add(response.body().getValue());
                 locationLiveData.setValue(tempList);
-
-                Toast.makeText(context, "code "+ response.code(), Toast.LENGTH_SHORT).show();
                 Log.e("codenas",response.body().getValue());
             }
             @Override
